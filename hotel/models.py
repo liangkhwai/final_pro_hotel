@@ -29,7 +29,7 @@ class RoomType(models.Model):
     
 class Rooms(models.Model):
     room_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)
-    type_id = models.ForeignKey(RoomType,on_delete=models.CASCADE)
+    type = models.ForeignKey(RoomType,on_delete=models.CASCADE)
     price = models.IntegerField()
     description = models.TextField()
     status = models.CharField(max_length=255)
