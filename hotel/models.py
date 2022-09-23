@@ -23,8 +23,8 @@ class Room(models.Model):
 
 class Booking(models.Model):
     booking_id = models.BigAutoField(auto_created=True,primary_key=True,serialize=False,verbose_name='booking Id')
-    guest_id = models.CharField(max_length=10)
-    room_id = models.CharField(max_length=10)
+    guest_id = models.ForeignKey(Guest,on_delete=models.CASCADE)
+    room_id = models.ForeignKey(Room, on_delete=models.CASCADE)
     booking_checkin = models.DateTimeField()
     booking_checkout = models.DateTimeField()
     booking_status = models.CharField(max_length=255)
