@@ -1,6 +1,3 @@
-
-from enum import auto
-from pyexpat import model
 from django.db import models
 
 # Create your models here.
@@ -18,7 +15,7 @@ class Customer(models.Model):
     age = models.CharField(max_length=255)
     gender = models.CharField(max_length=255)
     tel = models.CharField(max_length=255)
-    address = models.TextField(max_length=11)
+    address = models.TextField()
 
     
 
