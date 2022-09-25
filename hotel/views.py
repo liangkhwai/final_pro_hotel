@@ -1,5 +1,5 @@
 from hotel.models import Accounts, Customer, RoomType, Rooms
-from .forms import AccountClassForm, AccountForm, AddRoomsClassForm, AddRoomsTypeForm, CustomerClassForm, CustomerForm
+from .forms import *
 from django.urls import reverse
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
@@ -41,7 +41,24 @@ def register(req):
     cusForm = CustomerClassForm()
     accForm = AccountClassForm()
     context = {'cusForm':cusForm,'accForm':accForm}
-    return render(req,'register.html',context)
+    return render(req,'member/register.html',context)
+
+
+def editcustomer(req,pk):
+    customer = Customer.objects.get(cust_id=pk)
+    if req.method == 'POST':
+        form = UpdateCustomerForm(req.POST,instance=customer)
+        if form.is_valid():
+            form.save()    
+            print('HIHI')
+            return HttpResponseRedirect(reverse('home'))
+    
+    form = UpdateCustomerForm(instance=customer)
+    context = {
+        'form':form
+    }
+    print('FLASE')
+    return render(req,'member/editcustomer.html',context)
 
 
 def addrooms(req):
@@ -60,7 +77,7 @@ def addrooms(req):
         return HttpResponseRedirect(reverse('home'))
     roomForm = AddRoomsClassForm()
     context = {'roomForm':roomForm}
-    return render(req,'addrooms.html',context)
+    return render(req,'rooms/addrooms.html',context)
 
 def addtype(req):
     if req.method == 'POST':
@@ -75,5 +92,6 @@ def addtype(req):
         return HttpResponseRedirect(reverse('home'))
     typeForm = AddRoomsTypeForm()
     context = {'typeForm':typeForm}
-    return render(req,'addtype.html',context)
+    return render(req,'rooms/addtype.html',context)
     
+
