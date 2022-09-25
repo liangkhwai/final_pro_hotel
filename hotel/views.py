@@ -61,6 +61,21 @@ def editcustomer(req,pk):
     return render(req,'member/editcustomer.html',context)
 
 
+def editpassword(req,pk):
+    account = Accounts.objects.get(account_id = pk)
+    if req.method == 'POST':
+        form = AccountClassForm(req.POST,instance=account)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('home'))
+    form = AccountClassForm(instance=account)
+    context = {
+        'form':form
+    }
+    return render(req,'member/editpassword.html',context)    
+
+
+
 def addrooms(req):
     if req.method == 'POST':
         roomForm = AddRoomsClassForm(req.POST)
@@ -79,6 +94,20 @@ def addrooms(req):
     context = {'roomForm':roomForm}
     return render(req,'rooms/addrooms.html',context)
 
+def editrooms(req,pk):
+    rooms = Rooms.objects.get(room_id = pk)
+    if req.method == 'POST':
+        form = AddRoomsClassForm(req.POST,instance=rooms)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('home'))
+    form = AddRoomsClassForm(instance=rooms)
+    context = {
+        'form':form
+    }
+    return render(req,'rooms/editrooms.html',context)
+
+
 def addtype(req):
     if req.method == 'POST':
         typeForm = AddRoomsTypeForm(req.POST)
@@ -93,5 +122,17 @@ def addtype(req):
     typeForm = AddRoomsTypeForm()
     context = {'typeForm':typeForm}
     return render(req,'rooms/addtype.html',context)
-    
+
+def edittype(req,pk):
+    type = RoomType.objects.get(type_id = pk)
+    if req.method == 'POST':
+        form = AddRoomsTypeForm(req.POST,instance=type)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('home'))
+    form = AddRoomsTypeForm(instance=type)
+    context = {
+        'form':form
+    }
+    return render(req,'rooms/edittype.html',context)
 

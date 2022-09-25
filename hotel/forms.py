@@ -55,6 +55,7 @@ class AccountClassForm(forms.ModelForm):
         }
 
     
+    
 class AddRoomsClassForm(forms.ModelForm):
     class Meta:
         model = Rooms
