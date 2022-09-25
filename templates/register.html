@@ -1,0 +1,59 @@
+{% extends 'base.html'%}
+
+
+{% block title%}
+Register
+{% endblock%}
+
+{% block content%}
+
+<form action=" {% url 'register'%}" method="post">
+    {% csrf_token %}
+    <h1>Register Form</h1>
+
+    <div class="mb-5">
+        {{accForm.username.label_tag}}
+        {{accForm.username}}
+    </div>
+    <div class="mb-5">
+        {{accForm.password.label_tag}}
+        {{accForm.password}}
+    </div>
+    <div class="mb-5">
+        {{cusForm.name.label_tag}}
+        {{cusForm.name}}
+    </div>
+    <div class="mb-5">
+        {{cusForm.age.label_tag}}
+        {{cusForm.age}}
+    </div>
+    <div class="mb-5">
+        {{cusForm.gender.label_tag}}
+        {{cusForm.gender}}
+       
+    </div>
+    <div class="mb-5">
+        {{cusForm.tel.label_tag}}
+        {{cusForm.tel}}
+    </div>
+    <div class="mb-5">
+        {{cusForm.address.label_tag}}
+        {{cusForm.address}}
+    </div>
+    <div class="mb-5">
+        {{cusForm.accepted}}
+        {{cusForm.accepted.label_tag}}
+    </div>
+
+
+    <input type="submit" value="สมัครสมาชิก" name='submit' class="btn btn-primary">
+
+
+
+
+
+</form>
+
+
+
+{% endblock %}
