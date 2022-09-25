@@ -1,5 +1,5 @@
-from hotel.models import Accounts, Customer
-from .forms import AccountClassForm, AccountForm, CustomerClassForm, CustomerForm
+from hotel.models import Accounts, Customer, RoomType, Rooms
+from .forms import AccountClassForm, AccountForm, AddRoomsClassForm, AddRoomsTypeForm, CustomerClassForm, CustomerForm
 from django.urls import reverse
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
@@ -44,3 +44,36 @@ def register(req):
     return render(req,'register.html',context)
 
 
+def addrooms(req):
+    if req.method == 'POST':
+        roomForm = AddRoomsClassForm(req.POST)
+        if roomForm.is_valid():
+            data = roomForm.cleaned_data
+            room = Rooms()
+            room.price = data['price']
+            room.description = data['description']
+            room.status = data['status']
+            room.type = data['type']
+            room.save()      
+
+            print('success add rooms')
+        return HttpResponseRedirect(reverse('home'))
+    roomForm = AddRoomsClassForm()
+    context = {'roomForm':roomForm}
+    return render(req,'addrooms.html',context)
+
+def addtype(req):
+    if req.method == 'POST':
+        typeForm = AddRoomsTypeForm(req.POST)
+        if typeForm.is_valid():
+            data = typeForm.cleaned_data
+            type = RoomType()
+            type.name = data['name']
+            type.description = data['description']
+            type.save()
+            print('success add type')
+        return HttpResponseRedirect(reverse('home'))
+    typeForm = AddRoomsTypeForm()
+    context = {'typeForm':typeForm}
+    return render(req,'addtype.html',context)
+    

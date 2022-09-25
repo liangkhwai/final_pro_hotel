@@ -16,6 +16,7 @@ class Customer(models.Model):
     gender = models.CharField(max_length=255)
     tel = models.CharField(max_length=255)
     address = models.TextField()
+    
 
     
 
@@ -23,6 +24,9 @@ class RoomType(models.Model):
     type_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)
     name = models.CharField(max_length=255)
     description = models.TextField()
+    
+    def __str__(self):
+        return self.name
     
 class Rooms(models.Model):
     room_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)

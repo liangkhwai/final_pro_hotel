@@ -67,7 +67,26 @@ class AccountClassForm(forms.ModelForm):
 
     
 
-
-
-class RegisterClassForm(forms.ModelForm):
-    pass
+class AddRoomsClassForm(forms.ModelForm):
+    
+    
+    class Meta:
+        model = Rooms
+        fields = ('price','description','status','type')
+        labels = {
+            'price':'ราคา',
+            'description':'รายละเอียด',
+            'status':'สถานะ',
+            'type':'ประเภท'
+            
+        }
+    
+class AddRoomsTypeForm(forms.ModelForm):
+    class Meta:
+        model = RoomType
+        fields = ('name','description')
+        labels = {
+            'name':'ชื่อประเภท',
+            'description':'รายละเอียดประเภทห้อง'
+        }
+    
