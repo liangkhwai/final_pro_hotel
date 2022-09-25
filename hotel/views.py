@@ -1,4 +1,5 @@
-from .forms import RegisterClassForm
+from hotel.models import Accounts, Customer
+from .forms import AccountClassForm, AccountForm, CustomerClassForm, CustomerForm
 from django.urls import reverse
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
@@ -10,20 +11,36 @@ from django.http import HttpResponse,HttpResponseRedirect
 def home(req):
     return render(req,'home.html')
 
-def Register(req):
+def register(req):
     if req.method == 'POST':
-        form = RegisterClassForm(req.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            user = RegisterClassForm()
-            user.name = req.POST.get('name')
-            user.username = req.POST.get('username')
-            user.password = req.POST.get('password')
-            user.type = 'user'
-            user.age = req.POST.get('age')
-            user.gender = req.POST.get('gender')
-            user.tel = req.POST.get('tel')
-            user.address = req.POST.get('address')
-            return HttpResponseRedirect(reverse('base.html'))
+        cusForm = CustomerClassForm(req.POST)
+        accForm = AccountClassForm(req.POST)
+               
+        print(cusForm,accForm)
+        if cusForm.is_valid() and accForm.is_valid():
+            print('asdsdsdsdsdsdsdsd')
+            cusData = cusForm.cleaned_data
+            cusAcc = accForm.cleaned_data    
+            acc = Accounts()
+            cus = Customer()
+            acc.type = "user"
+            acc.username = cusAcc['username']
+            acc.password = cusAcc['password']
+            cus.name = cusData['name']
+            cus.age = cusData['age']
+            cus.gender = cusData['gender']
+            cus.tel = cusData['tel']
+            cus.address = cusData['address']
+
+            acc.save()
+            cus.account = acc
+            cus.save()
+            
+        print('nononono')
+        return HttpResponseRedirect(reverse('home'))
+    cusForm = CustomerClassForm()
+    accForm = AccountClassForm()
+    context = {'cusForm':cusForm,'accForm':accForm}
+    return render(req,'register.html',context)
 
 
