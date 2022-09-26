@@ -116,9 +116,10 @@ def addtype(req):
             type = RoomType()
             type.name = data['name']
             type.description = data['description']
+            type.price = data['price']
             type.save()
             print('success add type')
-        return HttpResponseRedirect(reverse('home'))
+        return HttpResponseRedirect(reverse('fetchrooms'))
     typeForm = AddRoomsTypeForm()
     context = {'typeForm':typeForm}
     return render(req,'rooms/addtype.html',context)
@@ -135,4 +136,12 @@ def edittype(req,pk):
         'form':form
     }
     return render(req,'rooms/edittype.html',context)
+
+
+def fetchrooms(req):
+    type = RoomType.objects.all()
+    context = {
+        'type':type,
+    }
+    return render(req,'rooms/fetchrooms.html',context)
 

@@ -1,0 +1,34 @@
+{% extends 'base.html'%}
+
+
+
+{%block title%}ADD ROOM {%endblock%}
+
+
+{% block content %}
+
+<form action="{% url 'addrooms'%}" method="post">
+    {% csrf_token %}
+<div class="mb-5">
+    {{roomForm.price.label_tag}}
+    {{roomForm.price}}    
+</div>
+<div class="mb-5">
+    {{roomForm.description.label_tag}}
+    {{roomForm.description}}
+</div>
+<div class="mb-5">
+    {{roomForm.status.label_tag}}
+    {{roomForm.status}}
+</div>
+<div class="mb-5">
+    {{roomForm.type.label_tag}}
+    {{roomForm.type}}
+</div>
+
+<input type="submit" name="submit" value="เพิ่มห้อง" class="btn btn-primary">
+
+</form>
+
+
+{% endblock %}

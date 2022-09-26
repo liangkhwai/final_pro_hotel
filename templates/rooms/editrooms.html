@@ -1,0 +1,27 @@
+{% extends 'base.html'%}
+
+
+
+{% block title%}EDIT ROOM{%endblock%}
+
+
+
+{% block content %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+
+
+    <input type="submit" value="แก้ไขห้อง" class="btn btn-primary" >
+
+
+
+</form>
+
+
+
+
+
+
+{% endblock %}

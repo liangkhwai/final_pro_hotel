@@ -1,0 +1,27 @@
+{% extends 'base.html'%} 
+{%block title%}ADD TYPE {%endblock%}
+ {% block content %}
+
+<form action="{% url 'addtype'%}" method="post">
+    {% csrf_token %}
+  <div class="mb-5">{{typeForm.name.label_tag}} {{typeForm.name}}</div>
+
+  <div class="mb-5">
+    {{typeForm.description.label_tag}} {{typeForm.description}}
+  </div>
+
+  <div class="mb-5">
+    {{typeForm.price.label_tag}}
+    {{typeForm.price}}
+  </div>
+
+  <input
+    type="submit" 
+    value="เพิ่มประเภทห้อง"
+    name="submit"
+    class="btn btn-primary"
+  />
+</form>
+
+
+{% endblock %}

@@ -22,6 +22,7 @@ class Customer(models.Model):
 
 class RoomType(models.Model):
     type_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)
+    price = models.IntegerField(blank=True,default=0)
     name = models.CharField(max_length=255)
     description = models.TextField()
     
@@ -31,7 +32,6 @@ class RoomType(models.Model):
 class Rooms(models.Model):
     room_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)
     type = models.ForeignKey(RoomType,on_delete=models.CASCADE)
-    price = models.IntegerField()
     description = models.TextField()
     status = models.CharField(max_length=255)
 
@@ -43,12 +43,13 @@ class Booking(models.Model):
     date_in = models.DateTimeField()
     date_out = models.DateTimeField()
     total_payment = models.CharField(max_length=255)
+    status = models.CharField(max_length=255,blank=True)
 
 
 class Payment(models.Model):
     pay_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)
     cust = models.ForeignKey(Customer,on_delete=models.CASCADE)
-    method = models.CharField(max_length=255)
+    method = models.CharField(max_length=255) #ประเภทการชำระเงิน เงินสด เงินโอน
     amount = models.FloatField()
     date = models.DateTimeField()
     

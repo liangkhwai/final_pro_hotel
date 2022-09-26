@@ -7,6 +7,14 @@ GENDER_CHOICEs= [
     ('female','หญิง'),
 ]
 
+STATUS_CHOICES= [
+    ('ว่าง','ว่าง'),
+    ('ไม่ว่าง','ไม่ว่าง')
+]
+
+
+
+
 
 class CustomerClassForm(forms.ModelForm):
     gender = forms.ChoiceField(
@@ -57,9 +65,14 @@ class AccountClassForm(forms.ModelForm):
     
     
 class AddRoomsClassForm(forms.ModelForm):
+    status = forms.ChoiceField(
+        required=True,
+        widget=forms.Select,
+        choices=STATUS_CHOICES,
+    )
     class Meta:
         model = Rooms
-        fields = ('price','description','status','type')
+        fields = ('description','status','type')
         labels = {
             'price':'ราคา',
             'description':'รายละเอียด',
@@ -71,9 +84,11 @@ class AddRoomsClassForm(forms.ModelForm):
 class AddRoomsTypeForm(forms.ModelForm):
     class Meta:
         model = RoomType
-        fields = ('name','description')
+        fields = ('name','description','price')
         labels = {
             'name':'ชื่อประเภท',
-            'description':'รายละเอียดประเภทห้อง'
+            'description':'รายละเอียดประเภทห้อง',
+            'price':'ราคา'
+
         }
     
