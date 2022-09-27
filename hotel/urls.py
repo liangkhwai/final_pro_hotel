@@ -12,6 +12,7 @@ urlpatterns = [
     path('editpassword/<int:pk>',views.editpassword,name='editpassword'),
     path('editrooms/<int:pk>',views.editrooms,name='editrooms'),
     path('edittype/<int:pk>',views.edittype,name='edittype'),
-    path('fetchrooms',views.fetchrooms,name='fetchrooms')
+    path('fetchrooms',views.fetchrooms,name='fetchrooms'),
+    path('roomdetail/<int:pk>',views.roomdetail,name='roomdetail')
     
 ]

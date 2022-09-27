@@ -22,6 +22,8 @@ class CustomerClassForm(forms.ModelForm):
         widget=forms.RadioSelect,
         choices=GENDER_CHOICEs,
     )
+    
+
     class Meta:
         model = Customer
         fields = ('name','age','gender','tel','address')
@@ -54,13 +56,20 @@ class UpdateCustomerForm(forms.ModelForm):
 
 class AccountClassForm(forms.ModelForm):
     password = forms.CharField(max_length=60, required=True, label='Password',widget=forms.PasswordInput())
+    confirm_password = forms.CharField(max_length=60, required=True, label='Confirm-password',widget=forms.PasswordInput())
     class Meta:
         model = Accounts
-        fields = ('username','password')
+        fields = ('username','password','confirm_password')
         labels = {
             'username':'Username',
             'password':'Password'
         }
+    def clean(self):
+        cleaned_data = super().clean()
+        valpwd = self.cleaned_data['password']
+        valrpwd = self.cleaned_data['confirm_password']
+        if valpwd != valrpwd:
+            raise forms.ValidationError('Password does not match')
 
     
     
@@ -74,7 +83,7 @@ class AddRoomsClassForm(forms.ModelForm):
         model = Rooms
         fields = ('description','status','type')
         labels = {
-            'price':'ราคา',
+
             'description':'รายละเอียด',
             'status':'สถานะ',
             'type':'ประเภท'

@@ -7,7 +7,7 @@ Register
 
 {% block content%}
 
-<form action=" {% url 'register'%}" method="post">
+<form action="" method="post">
     {% csrf_token %}
     <h1>Register Form</h1>
 
@@ -19,6 +19,14 @@ Register
         {{accForm.password.label_tag}}
         {{accForm.password}}
     </div>
+
+    <div class="mb-5">
+        {{accForm.confirm_password.label_tag}}
+        {{accForm.confirm_password}}
+        {{accForm.non_field_errors}}
+    </div>
+
+
     <div class="mb-5">
         {{cusForm.name.label_tag}}
         {{cusForm.name}}

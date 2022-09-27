@@ -22,7 +22,7 @@ def register(req):
             cusData = cusForm.cleaned_data
             cusAcc = accForm.cleaned_data    
             acc = Accounts()
-            cus = Customer()
+            cus = Customer()            
             acc.type = "user"
             acc.username = cusAcc['username']
             acc.password = cusAcc['password']
@@ -31,15 +31,13 @@ def register(req):
             cus.gender = cusData['gender']
             cus.tel = cusData['tel']
             cus.address = cusData['address']
-
             acc.save()
             cus.account = acc
             cus.save()
-            
-        print('nononono')
-        return HttpResponseRedirect(reverse('home'))
-    cusForm = CustomerClassForm()
-    accForm = AccountClassForm()
+            return HttpResponseRedirect(reverse('home'))        
+    else:
+        cusForm = CustomerClassForm()
+        accForm = AccountClassForm()
     context = {'cusForm':cusForm,'accForm':accForm}
     return render(req,'member/register.html',context)
 
@@ -68,7 +66,8 @@ def editpassword(req,pk):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('home'))
-    form = AccountClassForm(instance=account)
+    else:
+        form = AccountClassForm(instance=account)
     context = {
         'form':form
     }
@@ -82,7 +81,7 @@ def addrooms(req):
         if roomForm.is_valid():
             data = roomForm.cleaned_data
             room = Rooms()
-            room.price = data['price']
+            # room.price = data['price']
             room.description = data['description']
             room.status = data['status']
             room.type = data['type']
@@ -145,3 +144,11 @@ def fetchrooms(req):
     }
     return render(req,'rooms/fetchrooms.html',context)
 
+
+
+def roomdetail(req,pk):
+    type = RoomType.objects.get(type_id = pk)
+    context = {
+        'type':type,
+    }
+    return render(req,'rooms/roomdetail.html',context)
