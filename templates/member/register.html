@@ -30,6 +30,53 @@ Register
           </div>
         </div>
       </div>
+
+      <div class="form-group">
+        <label class="text-black" for="gender">Gender</label>
+        {{cusForm.gender}}
+    </div>
+
+    <div class="form-group">
+      <label class="text-black" for="email">Email address</label>
+      {{accForm.email}}
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="text-black" for="username">Username</label>
+            {{accForm.username}} 
+    </div>
+          </div>
+        </div>    
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="text-black" for="password">Password</label>
+            {{accForm.password}}
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-group">
+        <label class="text-black" for="password">Confirm Password</label>
+        {{accForm.confirm_password}}
+        {{accForm.non_field_errors}}
+    </div>
+
+    <div class="form-group">
+      <label class="text-black" for="address">Address</label>
+        {{cusForm.address}}
+        {{cusForm.accepted}}
+    </div>
+    <div class="col-md-6">
+        <input type="submit" value="สมัครสมาชิก" name='submit' class="btn btn-primary">
+        </div>
+      </div>
+  </form>
+
 <br>
       <div class="row">
           <div class="col-md-6">

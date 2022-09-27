@@ -25,6 +25,7 @@ def register(req):
             cus = Customer()            
             acc.type = "user"
             acc.username = cusAcc['username']
+            acc.email = cusAcc['email']
             acc.password = cusAcc['password']
             cus.name = cusData['name']
             cus.age = cusData['age']
@@ -78,6 +79,7 @@ def editpassword(req,pk):
 def addrooms(req):
     if req.method == 'POST':
         roomForm = AddRoomsClassForm(req.POST)
+        print(roomForm)
         if roomForm.is_valid():
             data = roomForm.cleaned_data
             room = Rooms()
@@ -146,9 +148,14 @@ def fetchrooms(req):
 
 
 
+
+
 def roomdetail(req,pk):
-    type = RoomType.objects.get(type_id = pk)
+    typeCheck = RoomType.objects.get(type_id = pk)
+    roomCheck = Rooms.objects.all().filter(type_id = pk,status = "ว่าง").count()
+    
     context = {
-        'type':type,
+        'type':typeCheck,
+        'count':roomCheck
     }
     return render(req,'rooms/roomdetail.html',context)

@@ -19,8 +19,8 @@ class CustomerClassForm(forms.ModelForm):
         choices=GENDER_CHOICEs,
         
     )
-    def __init__(self):
-        super().__init__()
+    def __init__(self,*args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.fields['name'].widget.attrs.update({'class':'form-control'})
         self.fields['age'].widget.attrs.update({'class':'form-control'})
         self.fields['gender'].widget.attrs.update({'class':''})
@@ -40,8 +40,8 @@ class CustomerClassForm(forms.ModelForm):
         }
         
 class UpdateCustomerForm(forms.ModelForm):
-    def __init__(self):
-        super().__init__()
+    def __init__(self,*args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.fields['name'].widget.attrs.update({'class':'form-control'})
         self.fields['age'].widget.attrs.update({'class':'form-control'})
         self.fields['gender'].widget.attrs.update({'class':''})
@@ -68,15 +68,16 @@ class UpdateCustomerForm(forms.ModelForm):
 class AccountClassForm(forms.ModelForm):
     password = forms.CharField(max_length=60, required=True, label='Password',widget=forms.PasswordInput(attrs={}))
     confirm_password = forms.CharField(max_length=60, required=True, label='Confirm-password',widget=forms.PasswordInput(attrs={}))
-    def __init__(self):
-        super().__init__()
+    def __init__(self,*args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.fields['username'].widget.attrs.update({'class':'form-control'})
         self.fields['password'].widget.attrs.update({'class':'form-control'})
         self.fields['confirm_password'].widget.attrs.update({'class':'form-control'})
+        self.fields['email'].widget.attrs.update({'class':'form-control'})
         
     class Meta:
         model = Accounts
-        fields = ('username','password','confirm_password')
+        fields = ('username','email','password','confirm_password')
         labels = {
             'username':'Username',
             'password':'Password'
@@ -91,13 +92,13 @@ class AccountClassForm(forms.ModelForm):
     
     
 class AddRoomsClassForm(forms.ModelForm):
-    def __init__(self):
-        super().__init__()
+    def __init__(self,*args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.fields['description'].widget.attrs.update({'class':'form-control'})
         self.fields['status'].widget.attrs.update({'class':'form-control'})
         self.fields['type'].widget.attrs.update({'class':'form-control'})
  
-    
+
     class Meta:
         model = Rooms
         fields = ('description','status','type')
@@ -111,8 +112,8 @@ class AddRoomsClassForm(forms.ModelForm):
         }
     
 class AddRoomsTypeForm(forms.ModelForm):
-    def __init__(self):
-        super().__init__()
+    def __init__(self,*args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.fields['name'].widget.attrs.update({'class':'form-control'})
         self.fields['description'].widget.attrs.update({'class':'form-control'})
         self.fields['price'].widget.attrs.update({'class':'form-control'})
