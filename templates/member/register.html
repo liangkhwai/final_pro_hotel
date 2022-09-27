@@ -6,154 +6,108 @@ Register
 {% block content%}
     <br>
 <div class = "container"> <!-- row-1 -->
-<div class="row"> <!-- row-2 -->
-<div class="col-6"> <!-- row-3 -->
+  <h1>HOTEL</h1>
+  <br>
+<div class="row col-12"> <!-- row-2 -->
 
-    <h1>HOTEL</h1>
-        <br>
-<form class="contact-form bg-white" action="" method="post">
-    {% csrf_token %}
-    <h3>Register Form</h3>
-    <br>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label class="text-black" for="fname">First Name</label>
-          {{cusForm.name}}
-        </div>
-      </div>        
-      <div class="col-md-6">
-        <div class="form-group">
-          <label class="text-black" for="lname">Last name</label>
-          <input type="text" class="form-control" id="lname">
-        </div>
-      </div>
-    </div>
-    <div class="row">
+  <div class="row col-6"> <!-- start form -->
+    <form class="contact-form bg-white" action="" method="post">
+      {% csrf_token %}
+      <h3>Register Form</h3>
+      <br>
+      
+      <div class="row">
         <div class="col-md-6">
           <div class="form-group">
-            <label class="text-black" for="birth">Year of birth</label>
-            {{cusForm.age}}
+            <label class="text-black" for="fname">First Name</label>
+            {{cusForm.name}}
           </div>
         </div>        
         <div class="col-md-6">
           <div class="form-group">
-            <label class="text-black" for="Tel">Tel</label>
-            {{cusForm.tel}}
+            <label class="text-black" for="lname">Last name</label>
+            <input type="text" class="form-control" id="lname">
           </div>
         </div>
       </div>
-
-      <div class="form-group">
-        <label class="text-black" for="gender">Gender</label>
-        {{cusForm.gender}}
-    </div>
-
-    <div class="form-group">
-      <label class="text-black" for="email">Email address</label>
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="text-black" for="username">Username</label>
-            {{accForm.username}} 
-    </div>
-          </div>
-        </div>    
-
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="text-black" for="password">Password</label>
-            {{accForm.password}}
-          </div>
-        </div>
-
-      </div>
-
-      <div class="form-group">
-        <label class="text-black" for="password">Confirm Password</label>
-        {{accForm.confirm_password}}
-        {{accForm.non_field_errors}}
-    </div>
-
-    <div class="form-group">
-      <label class="text-black" for="address">Address</label>
-        {{cusForm.address}}
-        {{cusForm.accepted}}
-    </div>
-    <div class="col-md-6">
-        <input type="submit" value="สมัครสมาชิก" name='submit' class="btn btn-primary">
-        </div>
-      </div>
-  </form>
-
 <br>
-
-<<<<<<< HEAD
-
-<!-- <form class="contact-form bg-white">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label class="text-black" for="fname">First  Name</label>
-          <input type="text" class="form-control" id="fname" >
-        </div>
-      </div>        
-      <div class="col-md-6">
-        <div class="form-group">
-          <label class="text-black" for="lname">Last name</label>
-          <input type="text" class="form-control" id="lname">
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-        <label class="text-black" for="email">Year of birth</label>
-        <input type="birth" class="form-control" id="birth">
-        <small id="emailHelp" class="form-text text-muted"> </small>
-      </div>
-    <div class="form-group">
-      <label class="text-black" for="email">Email address</label>
-      <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="text-black" for="username">Username</label>
-            <input type="text" class="form-control" id="username" >
-          </div>
-        </div>        
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="text-black" for="password">Password</label>
-            <input type="password" class="form-control" id="password">
+      <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              
+              <label class="text-black" for="birth">Year of birth</label>
+              {{cusForm.age}}
+            </div>
+          </div>        
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="text-black" for="Tel">Tel</label>
+              {{cusForm.tel}}
+            </div>
           </div>
         </div>
+  <br>
+        <div class="form-group">
+          <label class="text-black" for="gender">Gender</label>
+          {{cusForm.gender}}
       </div>
+  <br>
       <div class="form-group">
-        <label class="text-black" for="password">Confirm Password</label>
-        <input type="password" class="form-control" id="password" aria-describedby="emailHelp">
-=======
-    
-    <input type="submit" value="สมัครสมาชิก" name='submit' class="btn btn-primary">
+        <label class="text-black" for="email">Email address</label>
+        {{cusForm.email}}
+        <input type="email" class="form-control" id="email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <br>
+      <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="text-black" for="username">Username</label>
+              {{accForm.username}} 
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="text-black" for="password">Password</label>
+              {{accForm.password}}
+            </div>
+          </div>
+        </div> 
+        <br>
+        <div class="form-group">
+          <label class="text-black" for="password">Confirm Password</label>
+          {{accForm.confirm_password}}
+          {{accForm.non_field_errors}}
+      </div>
+      <br>
+      <div class="form-group">
+        <label class="text-black" for="address">Address</label>
+          {{cusForm.address}}
+          {{cusForm.accepted}}
+      </div>
+      <br>
+    </form>
+   </div> <!-- end form -->
 
+<div class="row col-6"> <!-- row-3 -->
+  Data brabrabrabrabrabrabrabrabra
 
+  
+</div>
 
+      <div class="col-md-6">
+        <br>
+          <input type="submit" value="สมัครสมาชิก" name='submit' class="btn btn-primary">
+      </div>
+        </div>
+<br>
+  </form> 
 
-
-</form>
->>>>>>> d09ad1c4ede53a3979a6d62116075dc6c5845b0a
-
-    <div class="form-group">
-      <label class="text-black" for="address">Address</label>
-      <textarea name="" class="form-control" id="aaddress" cols="30" rows="5"></textarea>
-    </div>
-  </form> -->
 
 </div> <!-- row-1 -->
+
 </div><!-- row-2 -->
+
 </div>  <!-- row-3 -->
 
 {% endblock %}

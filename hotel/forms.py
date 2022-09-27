@@ -12,7 +12,6 @@ STATUS_CHOICES= [
     ('ไม่ว่าง','ไม่ว่าง')
 ]
 
-
 class CustomerClassForm(forms.ModelForm):
     gender = forms.ChoiceField(
         required=True,
