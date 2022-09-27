@@ -17,7 +17,7 @@ class Customer(models.Model):
     lastname = models.CharField(max_length=255,blank=True)
     age = models.DateField()
     gender = models.CharField(max_length=255)
-    tel = models.CharField(max_length=255)
+    tel = models.CharField(max_length=10)
     address = models.TextField()
     
 

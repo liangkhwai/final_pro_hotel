@@ -12,8 +12,8 @@ STATUS_CHOICES= [
     ('ไม่ว่าง','ไม่ว่าง')
 ]
 
-class DateInput(forms.DateInput):
-    input_type = 'date'
+# class DateInput(forms.DateInput):
+#     input_type = 'date'
 
     
 
@@ -39,7 +39,13 @@ class CustomerClassForm(forms.ModelForm):
         model = Customer
         fields = ('firstname','lastname','age','gender','tel','address')
         widgets = {
-            'age':DateInput()
+            'age':forms.DateInput(
+        format=('%dd-%mm-%Y'),
+        attrs={'class': 'form-control', 
+               'placeholder': 'Select a date',
+               'type': 'date'
+              }),
+            
         }
         labels = {
             'firstname':'ชื่อ',
