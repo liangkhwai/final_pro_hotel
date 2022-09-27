@@ -12,6 +12,11 @@ STATUS_CHOICES= [
     ('ไม่ว่าง','ไม่ว่าง')
 ]
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+    
+
 
 class CustomerClassForm(forms.ModelForm):
     gender = forms.ChoiceField(
@@ -22,7 +27,8 @@ class CustomerClassForm(forms.ModelForm):
     )
     def __init__(self,*args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['name'].widget.attrs.update({'class':'form-control'})
+        self.fields['firstname'].widget.attrs.update({'class':'form-control'})
+        self.fields['lastname'].widget.attrs.update({'class':'form-control'})
         self.fields['age'].widget.attrs.update({'class':'form-control'})
         self.fields['gender'].widget.attrs.update({'class':''})
         self.fields['tel'].widget.attrs.update({'class':'form-control'})
@@ -31,9 +37,13 @@ class CustomerClassForm(forms.ModelForm):
    
     class Meta:
         model = Customer
-        fields = ('name','age','gender','tel','address')
+        fields = ('firstname','lastname','age','gender','tel','address')
+        widgets = {
+            'age':DateInput()
+        }
         labels = {
-            'name':'ชื่อ',
+            'firstname':'ชื่อ',
+            'lastname':'นามสกุล',
             'age':'อายุ',
             'gender':'เพศ',
             'tel':'เบอร์โทร',
@@ -43,7 +53,8 @@ class CustomerClassForm(forms.ModelForm):
 class UpdateCustomerForm(forms.ModelForm):
     def __init__(self,*args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['name'].widget.attrs.update({'class':'form-control'})
+        self.fields['firstname'].widget.attrs.update({'class':'form-control'})
+        self.fields['lastname'].widget.attrs.update({'class':'form-control'})
         self.fields['age'].widget.attrs.update({'class':'form-control'})
         self.fields['gender'].widget.attrs.update({'class':''})
         self.fields['tel'].widget.attrs.update({'class':'form-control'})
@@ -55,9 +66,10 @@ class UpdateCustomerForm(forms.ModelForm):
     )
     class Meta:
         model = Customer
-        fields = ('cust_id','name','age','gender','tel','address')
+        fields = ('cust_id','firstname','lastname','age','gender','tel','address')
         labels = {
-            'name':'ชื่อ',
+            'firstname':'ชื่อ',
+            'lastname':'นามสกุล',
             'age':'อายุ',
             'gender':'เพศ',
             'tel':'เบอร์โทร',
@@ -83,6 +95,7 @@ class AccountClassForm(forms.ModelForm):
             'username':'Username',
             'password':'Password'
         }
+        
     def clean(self):
         cleaned_data = super().clean()
         valpwd = self.cleaned_data['password']
