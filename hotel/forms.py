@@ -55,7 +55,7 @@ class UpdateCustomerForm(forms.ModelForm):
 
 
 class AccountClassForm(forms.ModelForm):
-    password = forms.CharField(max_length=60, required=True, label='Password',widget=forms.PasswordInput())
+    password = forms.CharField(max_length=60, required=True, label='Password',widget=forms.PasswordInput(attrs={"class":"form-control form-text", "id":"password"}))
     confirm_password = forms.CharField(max_length=60, required=True, label='Confirm-password',widget=forms.PasswordInput())
     class Meta:
         model = Accounts
