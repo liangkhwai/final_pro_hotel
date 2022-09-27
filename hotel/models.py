@@ -1,3 +1,4 @@
+from doctest import BLANKLINE_MARKER
 from django.db import models
 
 # Create your models here.
@@ -5,6 +6,7 @@ from django.db import models
 class Accounts(models.Model):
     account_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)
     type = models.CharField(max_length=255)
+    email = models.EmailField(max_length=255,blank=True)
     username = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
 
