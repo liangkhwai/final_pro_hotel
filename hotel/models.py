@@ -13,10 +13,11 @@ class Accounts(models.Model):
 class Customer(models.Model):
     cust_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)
     account = models.OneToOneField(Accounts,on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
+    firstname = models.CharField(max_length=255)
+    lastname = models.CharField(max_length=255,blank=True)
     age = models.DateField()
     gender = models.CharField(max_length=255)
-    tel = models.CharField(max_length=255)
+    tel = models.CharField(max_length=10)
     address = models.TextField()
     
 

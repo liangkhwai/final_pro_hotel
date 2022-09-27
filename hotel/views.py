@@ -3,8 +3,8 @@ from .forms import *
 from django.urls import reverse
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
+import datetime
 # Create your views here.
-
 
 
 
@@ -27,7 +27,8 @@ def register(req):
             acc.username = cusAcc['username']
             acc.email = cusAcc['email']
             acc.password = cusAcc['password']
-            cus.name = cusData['name']
+            cus.firstname = cusData['firstname']
+            cus.lastname = cusData['lastname']
             cus.age = cusData['age']
             cus.gender = cusData['gender']
             cus.tel = cusData['tel']
