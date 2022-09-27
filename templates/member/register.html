@@ -5,77 +5,29 @@ Register
 
 {% block content%}
     <br>
-<div class = "container"> <!-- row-1 -->
+<div class = "container" > <!-- row-1 -->
   <h1>HOTEL</h1>
   <br>
 <div class="row col-12"> <!-- row-2 -->
 
   <div class="row col-6"> <!-- start form -->
-    <form class="contact-form bg-white" action="" method="post">
-      {% csrf_token %}
-      <h3>Register Form</h3>
-      <br>
-      
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="text-black" for="fname">First Name</label>
-            {{cusForm.name}}
-          </div>
-        </div>        
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="text-black" for="lname">Last name</label>
-            <input type="text" class="form-control" id="lname">
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="text-black" for="gender">Gender</label>
-        {{cusForm.gender}}
-    </div>
-
-    <div class="form-group">
-      <label class="text-black" for="email">Email address</label>
-      {{accForm.email}}
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
 
     <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="text-black" for="username">Username</label>
-            {{accForm.username}} 
-    </div>
-          </div>
-        </div>    
-
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="text-black" for="password">Password</label>
-            {{accForm.password}}
-          </div>
-        </div>
-
-      </div>
-
-      <div class="form-group">
-        <label class="text-black" for="password">Confirm Password</label>
-        {{accForm.confirm_password}}
-        {{accForm.non_field_errors}}
-    </div>
-
-    <div class="form-group">
-      <label class="text-black" for="address">Address</label>
-        {{cusForm.address}}
-        {{cusForm.accepted}}
-    </div>
-    <div class="col-md-6">
-        <input type="submit" value="สมัครสมาชิก" name='submit' class="btn btn-primary">
+      <div class="col-md-6 ">
+        <div class="form-group">
+          <label class="text-black" for="username">First Name</label>
+          {{cusForm.firstname}} 
         </div>
       </div>
-  </form>
+      
+      <div class="col-md-6 ">
+        <div class="form-group">
+          <label class="text-black" for="password">Last Name</label>
+          {{cusForm.lastname}}
+        </div>
+      </div>
+    </div> 
+
 
 <br>
       <div class="row">
@@ -101,19 +53,19 @@ Register
   <br>
       <div class="form-group">
         <label class="text-black" for="email">Email address</label>
-        {{cusForm.email}}
-        <input type="email" class="form-control" id="email">
+        {{accForm.email}}
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
       </div>
       <br>
       <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 ">
             <div class="form-group">
               <label class="text-black" for="username">Username</label>
               {{accForm.username}} 
             </div>
           </div>
-          <div class="col-md-6">
+          
+          <div class="col-md-6 ">
             <div class="form-group">
               <label class="text-black" for="password">Password</label>
               {{accForm.password}}
@@ -136,15 +88,14 @@ Register
     </form>
    </div> <!-- end form -->
 
-<div class="row col-6"> <!-- row-3 -->
+<div class="row col-6 bg-dark"> <!-- row-3 -->
   Data brabrabrabrabrabrabrabrabra
-
-  
 </div>
 
       <div class="col-md-6">
         <br>
-          <input type="submit" value="สมัครสมาชิก" name='submit' class="btn btn-primary">
+          <input type="button" value="สมัครสมาชิก" name='submit' class="btn btn-primary" >
+        
       </div>
         </div>
 <br>
