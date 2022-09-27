@@ -1,6 +1,6 @@
+from re import L
 from django import forms
 from .models import *
-
 
 GENDER_CHOICEs= [
     ('male','ชาย'),
@@ -13,17 +13,22 @@ STATUS_CHOICES= [
 ]
 
 
-
-
-
 class CustomerClassForm(forms.ModelForm):
     gender = forms.ChoiceField(
         required=True,
-        widget=forms.RadioSelect,
+        widget=forms.RadioSelect(attrs={}),
         choices=GENDER_CHOICEs,
+        
     )
-    
-
+    def __init__(self):
+        super().__init__()
+        self.fields['name'].widget.attrs.update({'class':'form-control'})
+        self.fields['age'].widget.attrs.update({'class':'form-control'})
+        self.fields['gender'].widget.attrs.update({'class':''})
+        self.fields['tel'].widget.attrs.update({'class':'form-control'})
+        self.fields['address'].widget.attrs.update({'class':'form-control'})
+        
+   
     class Meta:
         model = Customer
         fields = ('name','age','gender','tel','address')
@@ -36,6 +41,13 @@ class CustomerClassForm(forms.ModelForm):
         }
         
 class UpdateCustomerForm(forms.ModelForm):
+    def __init__(self):
+        super().__init__()
+        self.fields['name'].widget.attrs.update({'class':'form-control'})
+        self.fields['age'].widget.attrs.update({'class':'form-control'})
+        self.fields['gender'].widget.attrs.update({'class':''})
+        self.fields['tel'].widget.attrs.update({'class':'form-control'})
+        self.fields['address'].widget.attrs.update({'class':'form-control'})
     gender = forms.ChoiceField(
         required=True,
         widget=forms.RadioSelect,
@@ -55,8 +67,15 @@ class UpdateCustomerForm(forms.ModelForm):
 
 
 class AccountClassForm(forms.ModelForm):
-    password = forms.CharField(max_length=60, required=True, label='Password',widget=forms.PasswordInput())
-    confirm_password = forms.CharField(max_length=60, required=True, label='Confirm-password',widget=forms.PasswordInput())
+    username = forms.CharField(required=True,label='Username',widget=forms.TextInput(attrs={}))
+    password = forms.CharField(max_length=60, required=True, label='Password',widget=forms.PasswordInput(attrs={}))
+    confirm_password = forms.CharField(max_length=60, required=True, label='Confirm-password',widget=forms.PasswordInput(attrs={}))
+    def __init__(self):
+        super().__init__()
+        self.fields['username'].widget.attrs.update({'class':'form-control'})
+        self.fields['password'].widget.attrs.update({'class':'form-control'})
+        self.fields['confirm_password'].widget.attrs.update({'class':'form-control'})
+        
     class Meta:
         model = Accounts
         fields = ('username','password','confirm_password')
@@ -74,14 +93,17 @@ class AccountClassForm(forms.ModelForm):
     
     
 class AddRoomsClassForm(forms.ModelForm):
-    status = forms.ChoiceField(
-        required=True,
-        widget=forms.Select,
-        choices=STATUS_CHOICES,
-    )
+    def __init__(self):
+        super().__init__()
+        self.fields['description'].widget.attrs.update({'class':'form-control'})
+        self.fields['status'].widget.attrs.update({'class':'form-control'})
+        self.fields['type'].widget.attrs.update({'class':'form-control'})
+ 
+    
     class Meta:
         model = Rooms
         fields = ('description','status','type')
+
         labels = {
 
             'description':'รายละเอียด',
@@ -91,6 +113,12 @@ class AddRoomsClassForm(forms.ModelForm):
         }
     
 class AddRoomsTypeForm(forms.ModelForm):
+    def __init__(self):
+        super().__init__()
+        self.fields['name'].widget.attrs.update({'class':'form-control'})
+        self.fields['description'].widget.attrs.update({'class':'form-control'})
+        self.fields['price'].widget.attrs.update({'class':'form-control'})
+        
     class Meta:
         model = RoomType
         fields = ('name','description','price')

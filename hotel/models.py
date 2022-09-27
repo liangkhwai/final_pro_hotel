@@ -12,7 +12,7 @@ class Customer(models.Model):
     cust_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)
     account = models.OneToOneField(Accounts,on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
-    age = models.CharField(max_length=255)
+    age = models.DateField()
     gender = models.CharField(max_length=255)
     tel = models.CharField(max_length=255)
     address = models.TextField()
@@ -34,6 +34,7 @@ class Rooms(models.Model):
     type = models.ForeignKey(RoomType,on_delete=models.CASCADE)
     description = models.TextField()
     status = models.CharField(max_length=255)
+    
 
 class Booking(models.Model):
     booking_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)
