@@ -67,11 +67,6 @@ class UpdateCustomerForm(forms.ModelForm):
 
 
 class AccountClassForm(forms.ModelForm):
-<<<<<<< HEAD
-    password = forms.CharField(max_length=60, required=True, label='Password',widget=forms.PasswordInput(attrs={"class":"form-control form-text", "id":"password"}))
-    confirm_password = forms.CharField(max_length=60, required=True, label='Confirm-password',widget=forms.PasswordInput())
-=======
-    username = forms.CharField(required=True,label='Username',widget=forms.TextInput(attrs={}))
     password = forms.CharField(max_length=60, required=True, label='Password',widget=forms.PasswordInput(attrs={}))
     confirm_password = forms.CharField(max_length=60, required=True, label='Confirm-password',widget=forms.PasswordInput(attrs={}))
     def __init__(self):
@@ -80,7 +75,6 @@ class AccountClassForm(forms.ModelForm):
         self.fields['password'].widget.attrs.update({'class':'form-control'})
         self.fields['confirm_password'].widget.attrs.update({'class':'form-control'})
         
->>>>>>> d09ad1c4ede53a3979a6d62116075dc6c5845b0a
     class Meta:
         model = Accounts
         fields = ('username','password','confirm_password')
