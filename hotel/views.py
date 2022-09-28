@@ -4,12 +4,7 @@ from django.contrib.auth import authenticate,logout,login as auth_login
 from .forms import *
 from django.urls import reverse
 from django.shortcuts import render
-<<<<<<< HEAD
 from django.http import HttpResponse,HttpResponseRedirect
-=======
-from django.http import HttpResponse,HttpResponseRedirect,HttpRequest
-import requests
->>>>>>> 3c829502fc023165d3b78c7bb8f4c72be7f5d47d
 from django.contrib import messages
 from django.template import RequestContext, Template
 # Create your views here.
@@ -65,7 +60,7 @@ def login_user(req):
 
 def logout_user(req):
     logout(req)
-    return HttpResponse("You've logged out<br><a href=""/"">Get back to login</a>")
+    return HttpResponseRedirect(reverse('home'))
 
 def editcustomer(req,pk):
     customer = Customer.objects.get(cust_id=pk)
@@ -120,15 +115,16 @@ def addrooms(req):
     return render(req,'rooms/addrooms.html',context)
 
 def editrooms(req,pk):
-    rooms = Rooms.objects.get(room_id = pk)
-    if req.method == 'POST':
-        form = AddRoomsClassForm(req.POST,instance=rooms)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('home'))
-    form = AddRoomsClassForm(instance=rooms)
+    rooms = Rooms.objects.all().filter(type_id = pk)
+
+    # if req.method == 'POST':
+    #     form = AddRoomsClassForm(req.POST,instance=rooms)
+    #     if form.is_valid():
+    #         form.save()
+    #         return HttpResponseRedirect(reverse('home'))
+    # form = AddRoomsClassForm(instance=rooms)
     context = {
-        'form':form
+        'rooms':rooms
     }
     return render(req,'rooms/editrooms.html',context)
 
@@ -155,7 +151,7 @@ def edittype(req,pk):
         form = AddRoomsTypeForm(req.POST,instance=type)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('home'))
+            return HttpResponseRedirect(reverse('fetchrooms'))
     form = AddRoomsTypeForm(instance=type)
     context = {
         'form':form
