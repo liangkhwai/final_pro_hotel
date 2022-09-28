@@ -1,3 +1,4 @@
+from dataclasses import field
 from django import forms
 from .models import *
 from django.contrib.auth.models import User
@@ -19,12 +20,8 @@ STATUS_CHOICES= [
 
 
 class CustomerClassForm(forms.ModelForm):
-    gender = forms.ChoiceField(
-        required=True,
-        widget=forms.RadioSelect(attrs={}),
-        choices=GENDER_CHOICEs,
-        
-    )
+    gender = forms.ChoiceField(required=True,widget=forms.RadioSelect(attrs={}),choices=GENDER_CHOICEs,)
+    
     def __init__(self,*args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['firstname'].widget.attrs.update({'class':'form-control'})
@@ -56,6 +53,9 @@ class CustomerClassForm(forms.ModelForm):
             'address':'ที่อยู่'
         }
 
+  
+
+
 
 class RegisterForm(UserCreationForm):
     def __init__(self,*args, **kwargs):
@@ -78,7 +78,7 @@ class UpdateCustomerForm(forms.ModelForm):
         self.fields['firstname'].widget.attrs.update({'class':'form-control'})
         self.fields['lastname'].widget.attrs.update({'class':'form-control'})
         self.fields['age'].widget.attrs.update({'class':'form-control'})
-        self.fields['gender'].widget.attrs.update({'class':''})
+        self.fields['gender'].widget.attrs.update({'class':'form-control'})
         self.fields['tel'].widget.attrs.update({'class':'form-control'})
         self.fields['address'].widget.attrs.update({'class':'form-control'})
     gender = forms.ChoiceField(
@@ -98,19 +98,19 @@ class UpdateCustomerForm(forms.ModelForm):
             'address':'ที่อยู่'
         }
 
-class Login(forms.ModelForm):
-    def __init__(self,*args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'class':'form-control'})
-        self.fields['password'].widget.attrs.update({'class':'form-control'})
+# class Login(forms.ModelForm):
+#     def __init__(self,*args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         self.fields['username'].widget.attrs.update({'class':'form-control'})
+#         self.fields['password'].widget.attrs.update({'class':'form-control'})
 
-    class Meta:
-        model = User
-        fields = ('username','password')
-        labels = {
-            'username':'Username',
-            'password':'Password'
-        }
+#     class Meta:
+#         model = User
+#         fields = ('username','password')
+#         labels = {
+#             'username':'Username',
+#             'password':'Password'
+#         }
 
 # class AccountClassForm(forms.ModelForm):
 #     password = forms.CharField(max_length=60, required=True, label='Password',widget=forms.PasswordInput(attrs={}))
@@ -175,4 +175,16 @@ class AddRoomsTypeForm(forms.ModelForm):
             'price':'ราคา'
 
         }
+    
+    
+class Addrooms(forms.ModelForm):
+    roomnum = forms.IntegerField(label='จำนวนห้อง')
+    class Meta:
+        model = Rooms
+        fields = ('description','status')
+        labels = {
+            
+        }
+        
+
     

@@ -8,8 +8,24 @@
 <div class="container">
     <div>
         <h1>HOTEL</h1>
+<<<<<<< HEAD
         <div>
 sdfsdfsdfsdf
+=======
+
+<a href="{%url 'logout'%}">LOGOUT</a>
+
+<div>Hello {{user}}</div>
+{{user.customer.firstname}}
+{{email}}
+{% if user.is_authenticated %}
+    <p>Welcome, {{ user.get_full_name }}. Thanks for logging in.</p>
+{% else %}
+    <p>Welcome, new user. Please log in.</p>
+{% endif %}
+
+
+>>>>>>> 3c829502fc023165d3b78c7bb8f4c72be7f5d47d
         </div>
     </div>
 </div>

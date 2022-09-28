@@ -1,10 +1,17 @@
 from hotel.models import Customer, RoomType, Rooms
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,logout,login as auth_login
 from .forms import *
 from django.urls import reverse
 from django.shortcuts import render
+<<<<<<< HEAD
 from django.http import HttpResponse,HttpResponseRedirect
+=======
+from django.http import HttpResponse,HttpResponseRedirect,HttpRequest
+import requests
+>>>>>>> 3c829502fc023165d3b78c7bb8f4c72be7f5d47d
 from django.contrib import messages
+from django.template import RequestContext, Template
 # Create your views here.
 
 
@@ -39,19 +46,26 @@ def register(req):
     return render(req,'member/register.html',context)
 
 
-def login(req):
+def login_user(req):
     if req.method == 'POST':
-        # account = Accounts.objects.get(username = user,password = pwd)
-        pass        
+        username = req.POST['username']
+        password = req.POST['password']
 
-
-    form = Login()
-    messages.add_message(req,50,'Hello Login')
-    context = {
-        'form':form,
+        user = authenticate(username=username,password=password)
         
-    }
-    return render(req,'member/login.html',context)
+        if user is not None:
+            auth_login(req,user)
+            
+            return HttpResponseRedirect(reverse('home'))
+        else:
+            return HttpResponseRedirect(reverse('home'))
+        
+    return render(req,'member/login.html')
+
+
+def logout_user(req):
+    logout(req)
+    return HttpResponse("You've logged out<br><a href=""/"">Get back to login</a>")
 
 def editcustomer(req,pk):
     customer = Customer.objects.get(cust_id=pk)
@@ -169,3 +183,13 @@ def roomdetail(req,pk):
         'count':roomCheck
     }
     return render(req,'rooms/roomdetail.html',context)
+
+
+
+def test(req):
+    form = Addrooms()
+    
+    context ={
+        'form':form
+    }
+    return render(req,'rooms/testroom.html',context)

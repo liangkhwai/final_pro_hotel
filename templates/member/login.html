@@ -7,7 +7,20 @@
 {% block content%}
 
 
-{{message}}
+<form action="" method="post">
+    {% csrf_token%}
+    <label for="username">Username : </label>
+    <input type="text" name="username" id="username">
+    <br><br>
+    <label for="password">Password : </label>
+    <input type="password" name="password" id="password">
+    <br>
+    <br>
+    <input type="submit" name="submit" id="" value="ล๊อคอิน" class="btn btn-primary">
+
+
+
+</form>
 
 
 
