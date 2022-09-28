@@ -4,9 +4,10 @@ from django.contrib.auth import authenticate,logout,login as auth_login
 from .forms import *
 from django.urls import reverse
 from django.shortcuts import render
-from django.http import HttpResponse,HttpResponseRedirect
+from django.http import HttpResponse,HttpResponseRedirect,HttpRequest
 import requests
 from django.contrib import messages
+from django.template import RequestContext, Template
 # Create your views here.
 
 
@@ -50,12 +51,17 @@ def login_user(req):
         
         if user is not None:
             auth_login(req,user)
-            fname = user.username
-            return render(req,'home.html',{'fname':fname})
+            
+            return HttpResponseRedirect(reverse('home'))
         else:
             return HttpResponseRedirect(reverse('home'))
         
     return render(req,'member/login.html')
+
+
+def logout_user(req):
+    logout(req)
+    return HttpResponse("You've logged out<br><a href=""/"">Get back to login</a>")
 
 def editcustomer(req,pk):
     customer = Customer.objects.get(cust_id=pk)
