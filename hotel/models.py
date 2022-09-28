@@ -1,27 +1,24 @@
 from doctest import BLANKLINE_MARKER
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 
-class Accounts(models.Model):
-    account_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)
-    type = models.CharField(max_length=255)
-    email = models.EmailField(max_length=255,blank=True)
-    username = models.CharField(max_length=255)
-    password = models.CharField(max_length=255)
+# class Accounts(models.Model):
+#     account_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)
+#     type = models.CharField(max_length=255)
+#     email = models.EmailField(max_length=255,blank=True)
+#     username = models.CharField(max_length=255)
+#     password = models.CharField(max_length=255)
 
 class Customer(models.Model):
     cust_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)
-    account = models.OneToOneField(Accounts,on_delete=models.CASCADE)
+    account = models.OneToOneField(User,on_delete=models.CASCADE)
     firstname = models.CharField(max_length=255)
     lastname = models.CharField(max_length=255,blank=True)
     age = models.DateField()
     gender = models.CharField(max_length=255)
     tel = models.CharField(max_length=10)
     address = models.TextField()
-    
-
-    
 
 class RoomType(models.Model):
     type_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)

@@ -52,6 +52,7 @@ Register
     <div class="form-group">
       <label class="text-black" for="email">Email address</label>
       {{accForm.email}}
+      {{accForm.email.errors}}
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
 
@@ -60,6 +61,7 @@ Register
           <div class="form-group">
             <label class="text-black" for="username">Username</label>
             {{accForm.username}} 
+            {{accForm.username.errors}}
     </div>
           </div>
         </div>    
@@ -67,7 +69,8 @@ Register
         <div class="col-md-6">
           <div class="form-group">
             <label class="text-black" for="password">Password</label>
-            {{accForm.password}}
+            {{accForm.password1}}
+            {{accForm.password1.errors}}
           </div>
         </div>
 
@@ -75,10 +78,10 @@ Register
 
       <div class="form-group">
         <label class="text-black" for="password">Confirm Password</label>
-        {{accForm.confirm_password}}
-        {{accForm.non_field_errors}}
-    </div>
+        {{accForm.password2}}
+        {{accForm.password2.errors}}
 
+    </div>
     <div class="form-group">
       <label class="text-black" for="address">Address</label>
         {{cusForm.address}}

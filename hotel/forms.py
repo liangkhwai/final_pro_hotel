@@ -1,7 +1,7 @@
-from re import L
 from django import forms
 from .models import *
-
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 GENDER_CHOICEs= [
     ('male','ชาย'),
     ('female','หญิง'),
@@ -55,6 +55,22 @@ class CustomerClassForm(forms.ModelForm):
             'tel':'เบอร์โทร',
             'address':'ที่อยู่'
         }
+
+
+class RegisterForm(UserCreationForm):
+    def __init__(self,*args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['email'].widget.attrs.update({'class':'form-control'})
+        self.fields['username'].widget.attrs.update({'class':'form-control'})
+        self.fields['password1'].widget.attrs.update({'class':'form-control'})
+        self.fields['password2'].widget.attrs.update({'class':'form-control'})
+
+    class Meta(UserCreationForm.Meta):
+        fields = UserCreationForm.Meta.fields + ("email",)
+       
+
+
+
         
 class UpdateCustomerForm(forms.ModelForm):
     def __init__(self,*args, **kwargs):
@@ -82,32 +98,44 @@ class UpdateCustomerForm(forms.ModelForm):
             'address':'ที่อยู่'
         }
 
-
-
-class AccountClassForm(forms.ModelForm):
-    password = forms.CharField(max_length=60, required=True, label='Password',widget=forms.PasswordInput(attrs={}))
-    confirm_password = forms.CharField(max_length=60, required=True, label='Confirm-password',widget=forms.PasswordInput(attrs={}))
+class Login(forms.ModelForm):
     def __init__(self,*args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['username'].widget.attrs.update({'class':'form-control'})
         self.fields['password'].widget.attrs.update({'class':'form-control'})
-        self.fields['confirm_password'].widget.attrs.update({'class':'form-control'})
-        self.fields['email'].widget.attrs.update({'class':'form-control'})
-        
+
     class Meta:
-        model = Accounts
-        fields = ('username','email','password','confirm_password')
+        model = User
+        fields = ('username','password')
         labels = {
             'username':'Username',
             'password':'Password'
         }
+
+# class AccountClassForm(forms.ModelForm):
+#     password = forms.CharField(max_length=60, required=True, label='Password',widget=forms.PasswordInput(attrs={}))
+#     confirm_password = forms.CharField(max_length=60, required=True, label='Confirm-password',widget=forms.PasswordInput(attrs={}))
+#     def __init__(self,*args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         self.fields['username'].widget.attrs.update({'class':'form-control'})
+#         self.fields['password'].widget.attrs.update({'class':'form-control'})
+#         self.fields['confirm_password'].widget.attrs.update({'class':'form-control'})
+#         self.fields['email'].widget.attrs.update({'class':'form-control'})
         
-    def clean(self):
-        cleaned_data = super().clean()
-        valpwd = self.cleaned_data['password']
-        valrpwd = self.cleaned_data['confirm_password']
-        if valpwd != valrpwd:
-            raise forms.ValidationError('Password does not match')
+#     class Meta:
+#         model = Accounts
+#         fields = ('username','email','password','confirm_password')
+#         labels = {
+#             'username':'Username',
+#             'password':'Password'
+#         }
+        
+#     def clean(self):
+#         cleaned_data = super().clean()
+#         valpwd = self.cleaned_data['password']
+#         valrpwd = self.cleaned_data['confirm_password']
+#         if valpwd != valrpwd:
+#             raise forms.ValidationError('Password does not match')
 
     
     

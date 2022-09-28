@@ -1,9 +1,11 @@
-from hotel.models import Accounts, Customer, RoomType, Rooms
+from hotel.models import Customer, RoomType, Rooms
+from django.contrib.auth.models import User
 from .forms import *
 from django.urls import reverse
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
-import datetime
+import requests
+from django.contrib import messages
 # Create your views here.
 
 
@@ -14,35 +16,43 @@ def home(req):
 def register(req):
     if req.method == 'POST':
         cusForm = CustomerClassForm(req.POST)
-        accForm = AccountClassForm(req.POST)
+        accForm = RegisterForm(req.POST)
                
         print(cusForm,accForm)
         if cusForm.is_valid() and accForm.is_valid():
             print('asdsdsdsdsdsdsdsd')
             cusData = cusForm.cleaned_data
-            cusAcc = accForm.cleaned_data    
-            acc = Accounts()
             cus = Customer()            
-            acc.type = "user"
-            acc.username = cusAcc['username']
-            acc.email = cusAcc['email']
-            acc.password = cusAcc['password']
+            account = accForm.save()
             cus.firstname = cusData['firstname']
             cus.lastname = cusData['lastname']
             cus.age = cusData['age']
             cus.gender = cusData['gender']
             cus.tel = cusData['tel']
             cus.address = cusData['address']
-            acc.save()
-            cus.account = acc
+            cus.account = account
             cus.save()
             return HttpResponseRedirect(reverse('home'))        
     else:
         cusForm = CustomerClassForm()
-        accForm = AccountClassForm()
+        accForm = RegisterForm()
     context = {'cusForm':cusForm,'accForm':accForm}
     return render(req,'member/register.html',context)
 
+
+def login(req):
+    if req.method == 'POST':
+        # account = Accounts.objects.get(username = user,password = pwd)
+        pass        
+
+
+    form = Login()
+    messages.add_message(req,50,'Hello Login')
+    context = {
+        'form':form,
+        
+    }
+    return render(req,'member/login.html',context)
 
 def editcustomer(req,pk):
     customer = Customer.objects.get(cust_id=pk)
@@ -62,14 +72,14 @@ def editcustomer(req,pk):
 
 
 def editpassword(req,pk):
-    account = Accounts.objects.get(account_id = pk)
+    account = User.objects.get(id = pk)
     if req.method == 'POST':
-        form = AccountClassForm(req.POST,instance=account)
+        form = RegisterForm(req.POST,instance=account)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('home'))
     else:
-        form = AccountClassForm(instance=account)
+        form = RegisterForm(instance=account)
     context = {
         'form':form
     }
