@@ -1,5 +1,6 @@
 from hotel.models import Customer, RoomType, Rooms
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,logout,login as auth_login
 from .forms import *
 from django.urls import reverse
 from django.shortcuts import render
@@ -40,19 +41,21 @@ def register(req):
     return render(req,'member/register.html',context)
 
 
-def login(req):
+def login_user(req):
     if req.method == 'POST':
-        # account = Accounts.objects.get(username = user,password = pwd)
-        pass        
+        username = req.POST['username']
+        password = req.POST['password']
 
-
-    form = Login()
-    messages.add_message(req,50,'Hello Login')
-    context = {
-        'form':form,
+        user = authenticate(username=username,password=password)
         
-    }
-    return render(req,'member/login.html',context)
+        if user is not None:
+            auth_login(req,user)
+            fname = user.username
+            return render(req,'home.html',{'fname':fname})
+        else:
+            return HttpResponseRedirect(reverse('home'))
+        
+    return render(req,'member/login.html')
 
 def editcustomer(req,pk):
     customer = Customer.objects.get(cust_id=pk)
@@ -170,3 +173,13 @@ def roomdetail(req,pk):
         'count':roomCheck
     }
     return render(req,'rooms/roomdetail.html',context)
+
+
+
+def test(req):
+    form = Addrooms()
+    
+    context ={
+        'form':form
+    }
+    return render(req,'rooms/testroom.html',context)

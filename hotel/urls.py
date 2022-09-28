@@ -14,5 +14,6 @@ urlpatterns = [
     path('edittype/<int:pk>',views.edittype,name='edittype'),
     path('fetchrooms',views.fetchrooms,name='fetchrooms'),
     path('roomdetail/<int:pk>',views.roomdetail,name='roomdetail'),
-    path('login',views.login,name='login')
+    path('login',views.login_user,name='login'),
+    path('test',views.test,name='test')
 ]
