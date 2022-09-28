@@ -4,17 +4,18 @@ Register
 {% endblock%}
 
 {% block content%}
-<br>
-<div class="container">
-    <!-- row-1 -->
-    <h1>HOTEL</h1>
-    <br>
-    <div class="row col-12">
-        <!-- row-2 -->
 
-        <div class="row col-6">
-            <!-- start form -->
-            <form action="" method="post">
+<div class="container shadow-lg ">
+    <!-- row-1 -->
+    
+    <br>
+    <br>
+    <div class="row col-12"><!-- row-2 -->
+
+        <H1 class="text-center">Register</H1>
+        <div class="row col-6 p-5"><!-- row-3 -->
+          
+        <form action="" method="post"> <!-- start form -->
                 {% csrf_token%}
                 <div class="row">
                     <div class="col-md-6 ">
@@ -31,6 +32,7 @@ Register
                         </div>
                     </div>
                 </div>
+                <br>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -45,12 +47,12 @@ Register
                         </div>
                     </div>
                 </div>
-
+<br>
                 <div class="form-group">
                     <label class="text-black" for="gender">Gender</label>
                     {{cusForm.gender}}
                 </div>
-
+<br>
                 <div class="form-group">
                     <label class="text-black" for="email">Email address</label>
                     {{accForm.email}}
@@ -58,7 +60,7 @@ Register
                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
                         else.</small>
                 </div>
-
+<br>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -67,8 +69,6 @@ Register
                             {{accForm.username.errors}}
                         </div>
                     </div>
-                </div>
-
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="text-black" for="password">Password</label>
@@ -76,8 +76,8 @@ Register
                         {{accForm.password1.errors}}
                     </div>
                 </div>
+            </div>
 
-        </div>
         <br>
         <div class="form-group">
             <label class="text-black" for="password">Confirm Password</label>
@@ -85,38 +85,31 @@ Register
             {{accForm.password2.errors}}
 
         </div>
+        <br>    
         <div class="form-group">
             <label class="text-black" for="address">Address</label>
             {{cusForm.address}}
             {{cusForm.accepted}}
-        </div>
-        <div class="col-md-6">
+        </div>  
+        <div class="row col-md-12 p-5">
             <input type="submit" value="สมัครสมาชิก" name='submit' class="btn btn-primary">
         </div>
+
+    </div>  <!-- row-3 -->
+    <br>
+</form><!-- end form -->
+
+    <div class="row col-6 rounded-4 p-5"> 
+        <br>
+        <br>
+       <div class="">
+        <br>
+        <img class="img-fluid rounded-5 shadow-lg p-1 mb-4 bg-body rounded" src="/static/register.png">
+       </div>   
     </div>
-    <br>
 
-</div> <!-- end form -->
-
-<div class="row col-6 bg-dark">
-    <!-- row-3 -->
-
-</div>
-
-<div class="col-md-6">
-    <br>
-    <input type="button" value="สมัครสมาชิก" name='submit' class="btn btn-primary">
-
-</div>
-</div>
-<br>
-</form>
-</div>
+</div>  <!-- row-2 -->
 
 </div> <!-- row-1 -->
-
-</div><!-- row-2 -->
-
-</div> <!-- row-3 -->
 
 {% endblock %}

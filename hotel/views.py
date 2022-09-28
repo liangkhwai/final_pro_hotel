@@ -4,7 +4,6 @@ from .forms import *
 from django.urls import reverse
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
-import requests
 from django.contrib import messages
 # Create your views here.
 

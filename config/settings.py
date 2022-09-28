@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'hotel.apps.HotelConfig',
     'django_bootstrap5',
     'fontawesomefree'
+    
 ]
 
 MIDDLEWARE = [
