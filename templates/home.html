@@ -11,6 +11,7 @@
     <br>
     <div class="row col-12"><!-- row-2 -->
 
+<<<<<<< HEAD
         <H1 class="text-center">Home</H1>
         <div class="row col-6 p-5"><!-- row-3 -->
 
@@ -18,15 +19,27 @@
             {{user.customer.firstname}}
             
 {{user}}
+=======
+<div class="container">
+    <div>
+        <h1>HOTEL</h1>
+
+>>>>>>> adffc5602d3da15c5a1881cb8d0fb4ba945eb80e
 {% if user.is_authenticated %}
-    <p>Welcome, {{ user.get_full_name }}. Thanks for logging in.</p>
+    <p>Welcome, {{ user }}. Thanks for logging in.</p>
 {% else %}
     <p>Welcome, new user. Please log in.</p>
 {% endif %}
 
             <a href="{%url 'logout'%}">LOGOUT</a>
 
+<<<<<<< HEAD
 </div>  <!-- row-2 -->
+=======
+        </div>
+    </div>
+</div>
+>>>>>>> adffc5602d3da15c5a1881cb8d0fb4ba945eb80e
 
 </div> <!-- row-1 -->
 
