@@ -1,26 +1,36 @@
 {% extends 'base.html'%}
 
-
 {% block title %}LOGIN{%endblock%}
-
 
 {% block content%}
 
-
-<form action="" method="post">
-    {% csrf_token%}
-    <label for="username">Username : </label>
-    <input type="text" name="username" id="username">
-    <br><br>
-    <label for="password">Password : </label>
-    <input type="password" name="password" id="password">
+<div class="container shadow-lg ">
+    <!-- row-1 -->
     <br>
     <br>
-    <input type="submit" name="submit" id="" value="ล๊อคอิน" class="btn btn-primary">
+    <div class="row col-12"><!-- row-2 -->
 
+        <H1 class="text-center">Login </H1>
+        <div class="row p-5"><!-- row-3 -->
+          
+            <form class="row p-5" action="" method="post">
+                {% csrf_token%}
+                <label for="username">Username : </label>
+                <input type="text" name="username" id="username">
+                    <br>
+                    <br>
+                <label for="password">Password : </label>
+                <input type="password" name="password" id="password">
+                    <br>
+                    <br>
+                <input type="submit" name="submit" id="" value="ล๊อคอิน" class="btn btn-primary">
+                <br>
+            </form>
+            
 
+</div>  <!-- row-2 -->
 
-</form>
+</div> <!-- row-1 -->
 
 
 

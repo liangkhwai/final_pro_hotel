@@ -4,12 +4,7 @@ from django.contrib.auth import authenticate,logout,login as auth_login
 from .forms import *
 from django.urls import reverse
 from django.shortcuts import render
-<<<<<<< HEAD
 from django.http import HttpResponse,HttpResponseRedirect
-=======
-from django.http import HttpResponse,HttpResponseRedirect,HttpRequest
-import requests
->>>>>>> 3c829502fc023165d3b78c7bb8f4c72be7f5d47d
 from django.contrib import messages
 from django.template import RequestContext, Template
 # Create your views here.
@@ -61,7 +56,6 @@ def login_user(req):
             return HttpResponseRedirect(reverse('home'))
         
     return render(req,'member/login.html')
-
 
 def logout_user(req):
     logout(req)

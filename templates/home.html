@@ -4,35 +4,31 @@
 
 
 {% block content %}
+<div class="container shadow-lg ">
+    <!-- row-1 -->
+    
+    <br>
+    <br>
+    <div class="row col-12"><!-- row-2 -->
 
-<div class="container">
-    <div>
-        <h1>HOTEL</h1>
-<<<<<<< HEAD
-        <div>
-sdfsdfsdfsdf
-=======
+        <H1 class="text-center">Home</H1>
+        <div class="row col-6 p-5"><!-- row-3 -->
 
-<a href="{%url 'logout'%}">LOGOUT</a>
-
-<div>Hello {{user}}</div>
-{{user.customer.firstname}}
-{{email}}
+            <div>Hello {{user}}</div>
+            {{user.customer.firstname}}
+            
+{{user}}
 {% if user.is_authenticated %}
     <p>Welcome, {{ user.get_full_name }}. Thanks for logging in.</p>
 {% else %}
     <p>Welcome, new user. Please log in.</p>
 {% endif %}
 
+            <a href="{%url 'logout'%}">LOGOUT</a>
 
->>>>>>> 3c829502fc023165d3b78c7bb8f4c72be7f5d47d
-        </div>
-    </div>
-</div>
+</div>  <!-- row-2 -->
 
-
-
-
-
+</div> <!-- row-1 -->
 
 {% endblock %}
+
