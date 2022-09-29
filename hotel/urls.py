@@ -15,6 +15,5 @@ urlpatterns = [
     path('fetchrooms',views.fetchrooms,name='fetchrooms'),
     path('roomdetail/<int:pk>',views.roomdetail,name='roomdetail'),
     path('login',views.login_user,name='login'),
-    path('test',views.test,name='test'),
-    path('logout',views.logout_user,name='logout')
+    path('logout',views.logout_user,name='logout'),
 ]

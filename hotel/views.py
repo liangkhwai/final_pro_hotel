@@ -14,6 +14,7 @@ from django.template import RequestContext, Template
 def home(req):
     return render(req,'home.html')
 
+
 def register(req):
     if req.method == 'POST':
         cusForm = CustomerClassForm(req.POST)
@@ -182,10 +183,5 @@ def roomdetail(req,pk):
 
 
 
-def test(req):
-    form = Addrooms()
-    
-    context ={
-        'form':form
-    }
-    return render(req,'rooms/testroom.html',context)
+
+
