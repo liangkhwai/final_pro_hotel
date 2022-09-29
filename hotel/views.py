@@ -116,18 +116,51 @@ def addrooms(req):
     return render(req,'rooms/addrooms.html',context)
 
 def editrooms(req,pk):
-    rooms = Rooms.objects.all().filter(type_id = pk)
-
-    # if req.method == 'POST':
-    #     form = AddRoomsClassForm(req.POST,instance=rooms)
-    #     if form.is_valid():
-    #         form.save()
-    #         return HttpResponseRedirect(reverse('home'))
-    # form = AddRoomsClassForm(instance=rooms)
+    rooms = Rooms.objects.all().filter(type_id = pk)     
+    type = RoomType.objects.get(type_id = pk)
+    if req.method == 'POST':
+        form = Addroom(req.POST)
+        print(form)
+        print('hiiiiiiiiiiiiiiii',pk)
+        if form.is_valid():
+            data = form.cleaned_data
+            room = Rooms() 
+            room.description = data['description']
+            room.status = data['status']
+            room.type = type
+            room.save()
+            return HttpResponseRedirect(reverse('fetchrooms'))
+    form = Addroom()
     context = {
+        'form':form,
         'rooms':rooms
     }
     return render(req,'rooms/editrooms.html',context)
+
+def editroom(req,pk,fk):
+    room = Rooms.objects.get(room_id = fk)
+    if req.method == 'POST':
+        form = AddRoomsClassForm(req.POST,instance=room)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fetchrooms'))
+    form = AddRoomsClassForm(instance=room)
+    context = {
+        'form':form,
+        'room':room
+    }
+    return render(req,'rooms/editroom.html',context)
+
+def deleteroom(req,pk):
+    room = Rooms.objects.get(room_id = pk)
+    room.delete()
+    return HttpResponseRedirect(reverse('fetchrooms'))
+
+
+def deletetype(req,pk):
+    type = RoomType.objects.get(type_id = pk)
+    type.delete()
+    return HttpResponseRedirect(reverse('fetchrooms'))
 
 
 def addtype(req):
@@ -162,8 +195,16 @@ def edittype(req,pk):
 
 def fetchrooms(req):
     type = RoomType.objects.all()
+    if req.method == 'POST':
+        form = AddRoomsTypeForm(req.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fetchrooms'))
+
+    form = AddRoomsTypeForm()
     context = {
         'type':type,
+        'form':form
     }
     return render(req,'rooms/fetchrooms.html',context)
 

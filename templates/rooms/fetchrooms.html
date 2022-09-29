@@ -2,6 +2,26 @@
 {% block title%} Fetchrooms {% endblock%}
 {% block content %}
 <div class="text-center">ห้องพัก</div>
+
+<p>
+    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+     เพิ่มประเภทห้อง
+    </a>
+   
+  </p>
+  <div class="collapse" id="collapseExample">
+    <div class="card card-body">
+    <form action="" method="post">
+        {% csrf_token %}
+     {{form.as_p}}
+     <input type="submit" name="submit" id="" value="เพิ่มประเภทห้อง" class="btn btn-success">
+    </form>
+    </div>
+  </div>
+
+
+
+
 <div class="container ">
     {% for room in type%}
     <div class="mb-3 border border-1 p-3">
@@ -18,10 +38,10 @@
             </div>
             <div class="col">
                 <div>
-                    <a href="editrooms/{{room.type_id}}"><button class="btn btn-primary">อัพเดตสถานะ</button></a>
+                    <a href="room/{{room.type_id}}"><button class="btn btn-primary">อัพเดตสถานะ</button></a>
 
                     <a href="edittype/{{room.type_id}}"><button class="btn btn-primary">แก้ไขประเภทห้อง</button></a>
-                    <a href="roomdetail/{{room.type_id}}"><button class="btn btn-primary">จองเลย</button></a>
+                    <a href="deletetype/{{room.type_id}}"><button class="btn btn-danger">ลบประเภทห้อง</button></a>
                 </div>
             </div>
         </div>

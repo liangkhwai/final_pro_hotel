@@ -12,7 +12,28 @@
 
 
 
-
+<p>
+    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+      เพิ่มห้อง
+    </a>
+    
+  </p>
+  <div class="collapse" id="collapseExample">
+    <div class="card card-body">
+    <form action="" method="post">
+        {% csrf_token %}
+        <p>
+        {{form.description.label_tag}}
+     {{form.description}}
+    </p>
+    <p>
+     {{form.status.label_tag}}
+     {{form.status}}
+    </p>
+     <input type="submit" name="submit" id="" value="เพิ่มห้อง" class="btn btn-success">
+    </form>
+    </div>
+  </div>
 
 
 
@@ -40,10 +61,9 @@
         </div>
         <div class="col">
             <div>
-                <a href="editrooms/{{room.type_id}}"><button class="btn btn-primary">แก้ไขห้อง</button></a>
-
-                <a href="edittype/{{room.type_id}}"><button class="btn btn-primary">แก้ไขประเภทห้อง</button></a>
-                <a href="roomdetail/{{room.type_id}}"><button class="btn btn-primary">จองเลย</button></a>
+                <a href="{{rooms.type_id}}/{{rooms.room_id}}"><button class="btn btn-primary">แก้ไขห้อง</button></a>
+                <a href="delete/{{rooms.room_id}}" class="btn btn-danger">ลบห้อง</a>
+               
             </div>
         </div>
     </div>

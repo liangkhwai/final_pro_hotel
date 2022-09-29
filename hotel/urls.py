@@ -10,10 +10,13 @@ urlpatterns = [
     path('addtype',views.addtype,name='addtype'),
     path('editcustomer/<int:pk>',views.editcustomer,name='editcustomer'),
     path('editpassword/<int:pk>',views.editpassword,name='editpassword'),
-    path('editrooms/<int:pk>',views.editrooms,name='editrooms'),
+    path('room/<int:pk>',views.editrooms,name='editrooms'),
+    path('room/<int:pk>/<int:fk>',views.editroom,name='editroom'),
     path('edittype/<int:pk>',views.edittype,name='edittype'),
-    path('fetchrooms',views.fetchrooms,name='fetchrooms'),
+    path('rooms',views.fetchrooms,name='fetchrooms'),
     path('roomdetail/<int:pk>',views.roomdetail,name='roomdetail'),
     path('login',views.login_user,name='login'),
     path('logout',views.logout_user,name='logout'),
+    path('room/delete/<int:pk>',views.deleteroom,name='deleteroom'),
+    path('deletetype/<int:pk>',views.deletetype,name='deletetype')
 ]
