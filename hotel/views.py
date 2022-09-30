@@ -183,11 +183,14 @@ def addtype(req):
 def edittype(req,pk):
     type = RoomType.objects.get(type_id = pk)
     if req.method == 'POST':
-        form = AddRoomsTypeForm(req.POST,instance=type)
+        form = AddRoomsTypeForm(req.POST,instance=type,files=req.FILES)
+        print(form)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('fetchrooms'))
-    form = AddRoomsTypeForm(instance=type)
+        
+    else:
+        form = AddRoomsTypeForm(instance=type)
     context = {
         'form':form
     }

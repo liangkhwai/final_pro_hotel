@@ -168,7 +168,7 @@ class AddRoomsTypeForm(forms.ModelForm):
         self.fields['name'].widget.attrs.update({'class':'form-control'})
         self.fields['description'].widget.attrs.update({'class':'form-control'})
         self.fields['price'].widget.attrs.update({'class':'form-control'})
-        
+        self.fields['img'].widget.attrs.update({'class':'form-control'})
     class Meta:
         model = RoomType
         fields = ('name','img','description','price')
