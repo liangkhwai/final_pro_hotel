@@ -42,10 +42,10 @@ class Booking(models.Model):
     cust = models.ForeignKey(Customer,on_delete=models.CASCADE)
     room = models.ForeignKey(Rooms,on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
-    date_in = models.DateTimeField()
-    date_out = models.DateTimeField()
+    date_in = models.DateField()
+    date_out = models.DateField()
     total_payment = models.CharField(max_length=255)
-    status = models.CharField(max_length=255,blank=True)
+    status = models.CharField(max_length=255,blank=True,default="ยังไม่ชำระเงิน")
 
 
 class Payment(models.Model):
@@ -53,7 +53,7 @@ class Payment(models.Model):
     cust = models.ForeignKey(Customer,on_delete=models.CASCADE)
     method = models.CharField(max_length=255) #ประเภทการชำระเงิน เงินสด เงินโอน
     amount = models.FloatField()
-    date = models.DateTimeField()
+    date = models.DateTimeField(auto_now_add=True)
     
 class Transaction(models.Model):
     trans_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)

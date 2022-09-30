@@ -28,7 +28,7 @@
                         ROOM
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        {% for rooms in rooms %}
+                        {% for rooms in roomname %}
                         <li><a class="dropdown-item" href="/roomdetail/{{rooms.type_id}}">{{ rooms.name }}</a></li>
 
                         {% endfor %}

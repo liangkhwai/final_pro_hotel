@@ -81,6 +81,9 @@ class UpdateCustomerForm(forms.ModelForm):
         self.fields['gender'].widget.attrs.update({'class':'form-control'})
         self.fields['tel'].widget.attrs.update({'class':'form-control'})
         self.fields['address'].widget.attrs.update({'class':'form-control'})
+        
+        
+        
     gender = forms.ChoiceField(
         required=True,
         widget=forms.RadioSelect,
@@ -198,3 +201,31 @@ class Addroom(forms.ModelForm):
             'description':'รายละเอียด',
             'status':'สถานะ',            
         }
+        
+        
+        
+class BookingForm(forms.ModelForm):
+    class Meta:
+        model = Booking
+        fields = ('date_in','date_out')
+        labels = {
+            'date_in':'วันที่เข้า',
+            'date_out':'วันที่ออก'
+        }
+        widgets = {
+            'date_in':forms.DateInput(
+        format=('%d-%mm-%YYYY'),
+        attrs={'class': 'form-control', 
+               'placeholder': '',
+               'type': 'date'
+              }),
+            'date_out':forms.DateInput(
+        format=('%d-%mm-%YYYYY'),
+        attrs={'class': 'form-control', 
+               'placeholder': 'Select a date',
+               'type': 'date'
+              }),
+            
+        }
+
+        

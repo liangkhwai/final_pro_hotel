@@ -43,26 +43,26 @@
 
 
 
-{% for rooms in rooms%}
+{% for room in rooms%}
 <div class="mb-3 border border-1 p-3">
     <div class="row">
 
         <div class="col-3">
-            <div>เลขห้อง : {{rooms.room_id}}</div>
+            <div>เลขห้อง : {{room.room_id}}</div>
         </div>
         <div class="col-4">
-            <div>รายละเอียด : {{rooms.description}}</div>
+            <div>รายละเอียด : {{room.description}}</div>
         </div>
         <div class="col">
-            <div>สถานะ : {{rooms.status}}</div>
+            <div>สถานะ : {{room.status}}</div>
         </div>
         <div class="col">
-            <div>ประเภท : {{rooms.type}}</div>
+            <div>ประเภท : {{room.type}}</div>
         </div>
         <div class="col">
             <div>
-                <a href="{{rooms.type_id}}/{{rooms.room_id}}"><button class="btn btn-primary">แก้ไขห้อง</button></a>
-                <a href="delete/{{rooms.room_id}}" class="btn btn-danger">ลบห้อง</a>
+                <a href="{{room.type_id}}/{{room.room_id}}"><button class="btn btn-primary">แก้ไขห้อง</button></a>
+                <a href="delete/{{room.room_id}}/{{room.type_id}}" class="btn btn-danger">ลบห้อง</a>
                
             </div>
         </div>
