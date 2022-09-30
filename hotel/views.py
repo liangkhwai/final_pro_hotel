@@ -121,7 +121,7 @@ def editrooms(req,pk):
     if req.method == 'POST':
         form = Addroom(req.POST)
         print(form)
-        print('hiiiiiiiiiiiiiiii',pk)
+        
         if form.is_valid():
             data = form.cleaned_data
             room = Rooms() 
@@ -130,7 +130,8 @@ def editrooms(req,pk):
             room.type = type
             room.save()
             return HttpResponseRedirect(reverse('fetchrooms'))
-    form = Addroom()
+    else:
+        form = Addroom()
     context = {
         'form':form,
         'rooms':rooms
@@ -196,7 +197,7 @@ def edittype(req,pk):
 def fetchrooms(req):
     type = RoomType.objects.all()
     if req.method == 'POST':
-        form = AddRoomsTypeForm(req.POST)
+        form = AddRoomsTypeForm(req.POST,req.FILES)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('fetchrooms'))

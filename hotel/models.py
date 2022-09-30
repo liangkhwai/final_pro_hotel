@@ -24,6 +24,7 @@ class RoomType(models.Model):
     type_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)
     price = models.IntegerField(blank=True,default=0)
     name = models.CharField(max_length=255)
+    img = models.ImageField(upload_to='upload/images/',height_field=None,width_field=None,max_length=100,blank=True,null=True)
     description = models.TextField()
     
     def __str__(self):

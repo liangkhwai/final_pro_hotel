@@ -1,6 +1,8 @@
 from urllib.parse import urlparse
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -20,3 +22,8 @@ urlpatterns = [
     path('room/delete/<int:pk>',views.deleteroom,name='deleteroom'),
     path('deletetype/<int:pk>',views.deletetype,name='deletetype')
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

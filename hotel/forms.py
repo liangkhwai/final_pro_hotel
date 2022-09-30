@@ -171,10 +171,11 @@ class AddRoomsTypeForm(forms.ModelForm):
         
     class Meta:
         model = RoomType
-        fields = ('name','description','price')
+        fields = ('name','img','description','price')
         labels = {
             'name':'ชื่อประเภท',
             'description':'รายละเอียดประเภทห้อง',
+            'img':'รูปภาพ',
             'price':'ราคา'
 
         }
