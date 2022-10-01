@@ -4,44 +4,33 @@
 
 
 {% block content %}
-<div class="container shadow-lg ">
+<div class="container shadow-lg text-light" style="background-color: #6998AB">
     <!-- row-1 -->
-    
-    <br>
-    <br>
-    <div class="row col-12"><!-- row-2 -->
 
-<<<<<<< HEAD
+    <br>
+    <br>
+    <div class="row col-12">
+        <!-- row-2 -->
+
         <H1 class="text-center">Home</H1>
-        <div class="row col-6 p-5"><!-- row-3 -->
+        <div class="row col-6 p-5">
+            <!-- row-3 -->
 
-            <div>Hello {{user}}</div>
-            {{user.customer.firstname}}
-            
-{{user}}
-=======
-<div class="container">
-    <div>
-        <h1>HOTEL</h1>
+            <div class="container">
+                <div>
+                    <h1>HOTEL</h1>
 
->>>>>>> adffc5602d3da15c5a1881cb8d0fb4ba945eb80e
-{% if user.is_authenticated %}
-    <p>Welcome, {{ user }}. Thanks for logging in.</p>
-{% else %}
-    <p>Welcome, new user. Please log in.</p>
-{% endif %}
+                    {% if user.is_authenticated %}
+                    <p>Welcome, {{ user }}. Thanks for logging in.</p>
+                    {% else %}
+                    <p>Welcome, new user. Please <a href="/login">log in.</a></p>
+                    {% endif %}
 
-            <a href="{%url 'logout'%}">LOGOUT</a>
-
-<<<<<<< HEAD
-</div>  <!-- row-2 -->
-=======
+                </div> <!-- row-2 -->
+            </div>
         </div>
     </div>
-</div>
->>>>>>> adffc5602d3da15c5a1881cb8d0fb4ba945eb80e
 
 </div> <!-- row-1 -->
 
 {% endblock %}
-

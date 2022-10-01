@@ -4,32 +4,41 @@
 
 {% block content%}
 
-<div class="container shadow-lg ">
+<div class="shadow-lg " style="background-color: #6998AB">
     <!-- row-1 -->
     <br>
     <br>
-    <div class="row col-12"><!-- row-2 -->
+    <br><br><br>
+    <H1 class="text-center text-light">Login </H1>
+    <br><br><br>
+    <div class="row">
 
-        <H1 class="text-center">Login </H1>
-        <div class="row p-5"><!-- row-3 -->
-          
-            <form class="row p-5" action="" method="post">
+        <!-- row-2 -->
+
+        <div class="col-md-10 mx-auto col-lg-5">
+            <!-- row-3 -->
+            <form class="shadow-lg rounded-5 row bg-light p-4" action="" method="post">
                 {% csrf_token%}
-                <label for="username">Username : </label>
-                <input type="text" name="username" id="username">
-                    <br>
-                    <br>
-                <label for="password">Password : </label>
-                <input type="password" name="password" id="password">
-                    <br>
-                    <br>
-                <input type="submit" name="submit" id="" value="ล๊อคอิน" class="btn btn-primary">
+                
+                <div class="pb-4 text-black ">
+                    <label for="username ">Username</label>
+                    <input class="form-control" type="text" name="username" id="username">
+                </div>
+                <div class="pb-4 text-black">
+                    <label for="password">Password</label>
+                    <input class="form-control" type="password" name="password" id="password">
+                </div>
+
+                <div class="row ">
+                    <input  type="submit" name="submit" id="" value="Login" class="btn btn-primary">
+                </div>
+                
                 <br>
             </form>
-            
 
-</div>  <!-- row-2 -->
-
+        </div> <!-- row-3 -->
+    </div> <!-- row-2 -->
+    <br><br><br><br><br><br><br>
 </div> <!-- row-1 -->
 
 

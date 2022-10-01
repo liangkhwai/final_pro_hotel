@@ -25,7 +25,7 @@ class CustomerClassForm(forms.ModelForm):
     def __init__(self,*args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['firstname'].widget.attrs.update({'class':'form-control'})
-        self.fields['lastname'].widget.attrs.update({'class':'form-control'})
+        self.fields['lastname'].widget.attrs.update({'class':'form-control' })
         self.fields['age'].widget.attrs.update({'class':'form-control'})
         self.fields['gender'].widget.attrs.update({'class':''})
         self.fields['tel'].widget.attrs.update({'class':'form-control'})
