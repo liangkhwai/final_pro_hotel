@@ -7,12 +7,15 @@ from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib import messages
 from django.template import RequestContext, Template
+from django.shortcuts import redirect
+from datetime import date
 # Create your views here.
 
 
 
 def home(req):
     return render(req,'home.html')
+
 
 def register(req):
     if req.method == 'POST':
@@ -49,8 +52,8 @@ def login_user(req):
         user = authenticate(username=username,password=password)
         
         if user is not None:
-            auth_login(req,user)
-            
+            check = auth_login(req,user)
+            req.session['user'] = user.id
             return HttpResponseRedirect(reverse('home'))
         else:
             return HttpResponseRedirect(reverse('home'))
@@ -114,18 +117,53 @@ def addrooms(req):
     return render(req,'rooms/addrooms.html',context)
 
 def editrooms(req,pk):
-    rooms = Rooms.objects.all().filter(type_id = pk)
-
-    # if req.method == 'POST':
-    #     form = AddRoomsClassForm(req.POST,instance=rooms)
-    #     if form.is_valid():
-    #         form.save()
-    #         return HttpResponseRedirect(reverse('home'))
-    # form = AddRoomsClassForm(instance=rooms)
+    rooms = Rooms.objects.all().filter(type_id = pk)     
+    type = RoomType.objects.get(type_id = pk)
+    if req.method == 'POST':
+        form = Addroom(req.POST)
+        print(form)
+        
+        if form.is_valid():
+            data = form.cleaned_data
+            room = Rooms() 
+            room.description = data['description']
+            room.status = data['status']
+            room.type = type
+            room.save()
+            return redirect('editrooms',pk=pk)
+    else:
+        form = Addroom()
     context = {
+        'form':form,
         'rooms':rooms
     }
     return render(req,'rooms/editrooms.html',context)
+
+def editroom(req,pk,fk):
+    room = Rooms.objects.get(room_id = fk)
+    if req.method == 'POST':
+        form = AddRoomsClassForm(req.POST,instance=room)
+        if form.is_valid():
+            form.save()
+            return redirect('editrooms',pk=pk)
+    form = AddRoomsClassForm(instance=room)
+    context = {
+        'form':form,
+        'room':room
+    }
+    return render(req,'rooms/editroom.html',context)
+
+def deleteroom(req,pk,fk):
+    room = Rooms.objects.get(room_id = pk)
+    room.delete()
+    # return HttpResponseRedirect(reverse('fetchrooms'))
+    return redirect('editrooms',pk=fk)
+
+
+def deletetype(req,pk):
+    type = RoomType.objects.get(type_id = pk)
+    type.delete()
+    return HttpResponseRedirect(reverse('fetchrooms'))
 
 
 def addtype(req):
@@ -147,11 +185,14 @@ def addtype(req):
 def edittype(req,pk):
     type = RoomType.objects.get(type_id = pk)
     if req.method == 'POST':
-        form = AddRoomsTypeForm(req.POST,instance=type)
+        form = AddRoomsTypeForm(req.POST,instance=type,files=req.FILES)
+        print(form)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('fetchrooms'))
-    form = AddRoomsTypeForm(instance=type)
+        
+    else:
+        form = AddRoomsTypeForm(instance=type)
     context = {
         'form':form
     }
@@ -160,8 +201,16 @@ def edittype(req,pk):
 
 def fetchrooms(req):
     type = RoomType.objects.all()
+    if req.method == 'POST':
+        form = AddRoomsTypeForm(req.POST,req.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fetchrooms'))
+
+    form = AddRoomsTypeForm()
     context = {
         'type':type,
+        'form':form
     }
     return render(req,'rooms/fetchrooms.html',context)
 
@@ -181,10 +230,34 @@ def roomdetail(req,pk):
 
 
 
-def test(req):
-    form = Addrooms()
-    
-    context ={
-        'form':form
+def booking(req,pk):
+    room_free = Rooms.objects.all().filter(type_id=pk,status = 'ว่าง').first()
+
+    user = Customer.objects.get(account_id = req.session['user'])
+
+
+    if req.method == 'POST':
+        form = BookingForm(req.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            book = Booking()
+            
+            book.date_in = data['date_in']
+            book.date_out = data['date_out']
+            book.total_payment = room_free.type.price * (data['date_out'].day - data['date_in'].day)
+            book.cust = user
+            book.room = room_free
+            book.save()
+            room_free.status = "ไม่ว่าง"
+            room_free.save()
+            
+    else:
+        form = BookingForm()    
+    context = {
+        'form':form,
+        'room_free':room_free
     }
-    return render(req,'rooms/testroom.html',context)
+    return render(req,'booking/booking.html',context)
+
+    
+

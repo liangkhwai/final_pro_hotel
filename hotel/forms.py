@@ -81,6 +81,9 @@ class UpdateCustomerForm(forms.ModelForm):
         self.fields['gender'].widget.attrs.update({'class':'form-control'})
         self.fields['tel'].widget.attrs.update({'class':'form-control'})
         self.fields['address'].widget.attrs.update({'class':'form-control'})
+        
+        
+        
     gender = forms.ChoiceField(
         required=True,
         widget=forms.RadioSelect,
@@ -140,13 +143,16 @@ class UpdateCustomerForm(forms.ModelForm):
     
     
 class AddRoomsClassForm(forms.ModelForm):
+    status = forms.ChoiceField(
+        required=True,
+        widget=forms.Select,
+        choices=STATUS_CHOICES,
+    )
     def __init__(self,*args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['description'].widget.attrs.update({'class':'form-control'})
         self.fields['status'].widget.attrs.update({'class':'form-control'})
         self.fields['type'].widget.attrs.update({'class':'form-control'})
-   
-
     class Meta:
         model = Rooms
         fields = ('description','status','type')
@@ -165,26 +171,61 @@ class AddRoomsTypeForm(forms.ModelForm):
         self.fields['name'].widget.attrs.update({'class':'form-control'})
         self.fields['description'].widget.attrs.update({'class':'form-control'})
         self.fields['price'].widget.attrs.update({'class':'form-control'})
-        
+        self.fields['img'].widget.attrs.update({'class':'form-control'})
     class Meta:
         model = RoomType
-        fields = ('name','description','price')
+        fields = ('name','img','description','price')
         labels = {
             'name':'ชื่อประเภท',
             'description':'รายละเอียดประเภทห้อง',
+            'img':'รูปภาพ',
             'price':'ราคา'
 
         }
     
     
-class Addrooms(forms.ModelForm):
-    roomnum = forms.IntegerField(label='จำนวนห้อง')
+class Addroom(forms.ModelForm):
+    status = forms.ChoiceField(
+        required=True,
+        widget=forms.Select,
+        choices=STATUS_CHOICES,
+    )
+    def __init__(self,*args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['description'].widget.attrs.update({'class':'form-control'})
+        self.fields['status'].widget.attrs.update({'class':'form-control'})
     class Meta:
         model = Rooms
         fields = ('description','status')
         labels = {
-            
+            'description':'รายละเอียด',
+            'status':'สถานะ',            
         }
         
+        
+        
+class BookingForm(forms.ModelForm):
+    class Meta:
+        model = Booking
+        fields = ('date_in','date_out')
+        labels = {
+            'date_in':'วันที่เข้า',
+            'date_out':'วันที่ออก'
+        }
+        widgets = {
+            'date_in':forms.DateInput(
+        format=('%d-%mm-%YYYY'),
+        attrs={'class': 'form-control', 
+               'placeholder': '',
+               'type': 'date'
+              }),
+            'date_out':forms.DateInput(
+        format=('%d-%mm-%YYYYY'),
+        attrs={'class': 'form-control', 
+               'placeholder': 'Select a date',
+               'type': 'date'
+              }),
+            
+        }
 
-    
+        

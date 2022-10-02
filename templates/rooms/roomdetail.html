@@ -6,10 +6,19 @@
 
 {% block content %}
 
+
+<h3>HOME/ROOM/{{type.name}}</h1>
+
+
 <div>
     ชื่อ : {{type.name}}
 
 </div>
+
+<div>
+    รูปภาพ : <img src="/media/{{type.img}}" alt="" width="400">
+</div>
+
 <div>
     รายละเอียด : {{type.description}}
 </div>
@@ -19,9 +28,14 @@
 </div>
 
 <div>
-    จำนวนห้อง : {{count}}
+    จำนวนห้อง : {% if count == 0%} จำนวนห้องเต็มแล้ว {%else %} {{count}} สุดท้าย!! {%endif%}
 
 </div>
+
+
+
+
+<a href="/booking/{{type.type_id}}" class="btn btn-primary">จองโลด</a>
 
 
 

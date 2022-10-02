@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-jkfhkj(5l$@tf#risf7o$_16qyf*8%64vb+a9#0#(4%v$d-+8u
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    
+]
 
 
 # Application definition
@@ -40,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'hotel.apps.HotelConfig',
     'django_bootstrap5',
-    'fontawesomefree'
+    'fontawesomefree',
+    
     
 ]
 
@@ -52,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    
     
 ]
 
@@ -65,7 +70,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                
+                'hotel.context_processor.extras',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -140,5 +145,9 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-
 LOGIN_REDIRECT_URL = "home"
+# Base url to serve media files
+MEDIA_URL = '/media/'
+
+# Path where media is stored
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
