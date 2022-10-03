@@ -58,3 +58,150 @@
           .fa-hotel {
             font-size: 15px;
           }
+
+          .hero {
+            padding: 7rem 0 10rem 0;
+            background: #6998AB;
+            margin-bottom: 100px; }
+            .hero.hero-inner {
+              padding: 9rem 0 7rem 0;
+              margin-bottom: auto;
+              background: #1A374D; }
+            .hero h1 {
+              color: #ffffff;
+              font-size: 60px; }
+              @media (max-width: 991.98px) {
+                .hero h1 {
+                  font-size: 45px; } }
+              .hero h1 .typed-words {
+                position: relative; }
+                .hero h1 .typed-words:before {
+                  position: absolute;
+                  height: 7px;
+                  background-color: #B1D0E0;
+                  bottom: 0;
+                  left: 0;
+                  right: 0;
+                  content: ""; }
+            .hero .intro-wrap {
+              position: relative;
+              z-index: 1; }
+            .hero .slides {
+              background: #ffffff;
+              max-width: 800px;
+              left: -100px;
+              z-index: 0;
+              position: relative;
+              border-radius: 200px;
+              -webkit-box-shadow: 0 25px 50px -10px rgba(26, 55, 77, 0.4);
+              box-shadow: 0 25px 50px -10px rgba(26, 55, 77, 0.4);
+              height: 608px;
+              margin-bottom: -200px; }
+              @media (max-width: 991.98px) {
+                .hero .slides {
+                  left: 0; } }
+              .hero .slides img {
+                position: absolute;
+                border-radius: 200px;
+                opacity: 0;
+                -webkit-transition: 4s opacity ease;
+                -o-transition: 4s opacity ease;
+                transition: 4s opacity ease;
+                background: #ffffff; }
+                .hero .slides img.active {
+                  opacity: 1;
+                  z-index: 1; }
+
+                  /* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
+body {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  color: #5a5a5a;
+}
+
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+  margin-bottom: 4rem;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  bottom: 3rem;
+  z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel-item {
+  height: 32rem;
+}
+.carousel-item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 32rem;
+}
+
+
+/* MARKETING CONTENT
+-------------------------------------------------- */
+
+/* Center align the text within the three columns below the carousel */
+.marketing .col-lg-4 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+.marketing h2 {
+  font-weight: 400;
+}
+/* rtl:begin:ignore */
+.marketing .col-lg-4 p {
+  margin-right: .75rem;
+  margin-left: .75rem;
+}
+/* rtl:end:ignore */
+
+
+/* Featurettes
+------------------------- */
+
+.featurette-divider {
+  margin: 5rem 0; /* Space out the Bootstrap <hr> more */
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  /* rtl:remove */
+  letter-spacing: -.05rem;
+}
+
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (min-width: 40em) {
+  /* Bump up size of carousel content */
+  .carousel-caption p {
+    margin-bottom: 1.25rem;
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+
+  .featurette-heading {
+    font-size: 50px;
+  }
+}
+
+@media (min-width: 62em) {
+  .featurette-heading {
+    margin-top: 7rem;
+  }
+}
