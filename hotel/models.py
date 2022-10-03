@@ -28,7 +28,7 @@ class RoomType(models.Model):
     description = models.TextField()
     
     def __str__(self):
-        return self.name
+         return self.name
     
 class Rooms(models.Model):
     room_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)
