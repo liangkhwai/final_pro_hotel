@@ -4,29 +4,27 @@
 
 
 {% block content %}
+
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
     
     <div class="row carousel-indicators">
         <form class="form">
             <div class="row mb-5">
                 <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
+                  <input type="date" class="form-control" name="daterange">
+                </div>
+                <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
+                    <input type="date" class="form-control" name="daterange">
+                </div>
+                <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4  ">
+                  <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
                     <select name="" id="" class="form-control custom-select">
-                        <option value="">Destination</option>
-                        <option value="">Peru</option>
-                        <option value="">Japan</option>
-                        <option value="">Thailand</option>
-                        <option value="">Brazil</option>
-                        <option value="">United States</option>
-                        <option value="">Israel</option>
-                        <option value="">China</option>
-                        <option value="">Russia</option>
+                        <option value="">1 คน</option>
+                        <option value="">2 คน</option>
+                        <option value="">4-5 คน</option>
+                      
                     </select>
                 </div>
-                <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-5">
-                    <input type="text" class="form-control" name="daterange">
-                </div>
-                <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-3">
-                    <input type="text" class="form-control" placeholder="# of People">
                 </div>
     
             </div>    
@@ -54,9 +52,9 @@
       </div>
       <div class="carousel-item">
         <img class="bd-placeholder-img " width="100%" height="100%" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false" src="/static/pexels-pixabay-164595.jpg">
-        
       </div>
     </div>
+    
     <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>
