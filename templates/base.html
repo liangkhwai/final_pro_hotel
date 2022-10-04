@@ -5,14 +5,15 @@
 {% bootstrap_messages%}
 {% bootstrap_css %}
 
-
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+  
+    <head class="">
         <title>{% block title%} {% endblock %}</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- <link href="/static/css/style.css" rel="stylesheet"> -->
+        <link href="/static/css/style.css" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,10 +33,16 @@
       }
     </style>
     {% include 'header.html'%}
-    <body style="background-color: #e9e9e9">
-        
+    <body class="" style="background-color:  #e9e9e9">
+    
         {% block content%}
         {% endblock %}
-    
+  
+
     </body>
+
+<footer>
+  
+    {% include 'footer.html'%}
+  </footer>
 </html>

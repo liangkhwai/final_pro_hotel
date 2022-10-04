@@ -4,25 +4,33 @@
 
 
 {% block content %}
+<div class="container shadow-lg text-light" style="background-color: #6998AB">
+    <!-- row-1 -->
 
-<div class="container">
-    <div>
-        <h1>HOTEL</h1>
+    <br>
+    <br>
+    <div class="row col-12">
+        <!-- row-2 -->
 
-{% if user.is_authenticated %}
-    <p>Welcome, {{ user }}. Thanks for logging in.</p>
-{% else %}
-    <p>Welcome, new user. Please log in.</p>
-{% endif %}
+        <H1 class="text-center">Home</H1>
+        <div class="row col-6 p-5">
+            <!-- row-3 -->
 
+            <div class="container">
+                <div>
+                    <h1>HOTEL</h1>
 
+                    {% if user.is_authenticated %}
+                    <p>Welcome, {{ user }}. Thanks for logging in.</p>
+                    {% else %}
+                    <p>Welcome, new user. Please <a href="/login">log in.</a></p>
+                    {% endif %}
+
+                </div> <!-- row-2 -->
+            </div>
         </div>
     </div>
-</div>
 
-
-
-
-
+</div> <!-- row-1 -->
 
 {% endblock %}

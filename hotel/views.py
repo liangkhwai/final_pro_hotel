@@ -13,6 +13,8 @@ from datetime import date
 
 
 
+
+
 def home(req):
     return render(req,'home.html')
 
@@ -59,7 +61,6 @@ def login_user(req):
             return HttpResponseRedirect(reverse('home'))
         
     return render(req,'member/login.html')
-
 
 def logout_user(req):
     logout(req)
@@ -195,7 +196,8 @@ def edittype(req,pk):
     else:
         form = AddRoomsTypeForm(instance=type)
     context = {
-        'form':form
+        'form':form,
+        'type':type
     }
     return render(req,'rooms/edittype.html',context)
 
