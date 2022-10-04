@@ -1,3 +1,4 @@
+from pydoc import resolve
 from hotel.models import Customer, RoomType, Rooms
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,logout,login as auth_login
@@ -9,6 +10,8 @@ from django.contrib import messages
 from django.template import RequestContext, Template
 from django.shortcuts import redirect
 from datetime import date
+from django.core import serializers
+from django.db.models import Q
 # Create your views here.
 
 
@@ -16,7 +19,30 @@ from datetime import date
 
 
 def home(req):
-    return render(req,'home.html')
+    if req.method == 'POST':
+        form = SearchForm(req.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            print(data['people'])
+            if data['people'] == '4':
+                rooms = RoomType.objects.all().filter(limit_people = 4)
+            else:
+                rooms = RoomType.objects.all().filter(~Q(limit_people = 4))
+            response = render(req,'rooms/user_rooms.html',{'roomss':rooms})
+            response.set_cookie('date_in',data['date_in']) 
+            response.set_cookie('date_out',data['date_out']) 
+            response.set_cookie('people',data['people'])
+            return response   
+    else:
+        form = SearchForm()
+    
+    
+    return render(req,'home.html',{'form':form})
+    
+    
+    
+    
+
 
 
 def register(req):
