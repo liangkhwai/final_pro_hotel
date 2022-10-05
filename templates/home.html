@@ -13,25 +13,37 @@
         <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
           วันที่เข้า : {{form.date_in}}
         </div>
-        <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-5">
+        <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
           <!-- <input type="text" class="form-control" name="daterange"> -->
-          วันที่จอง : {{form.date_out}}
+          วันที่ออก : {{form.date_out}}
 
         </div>
-        <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-3">
+        <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
           <!-- <input type="text" class="form-control" placeholder="# of People"> -->
           จำนวนคน : {{form.people}}
         </div>
       </div>
+      
+    
       <div class="row align-items-center">
         <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
           <input type="submit" class="btn btn-primary btn-block" value="Search">
         </div>
         <div class="col-lg-8">
-
+          {% if messages%}
+          <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                {{ message }}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
         </div>
       </div>
     </form>
+    
 
     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
       aria-label="Slide 1"></button>
