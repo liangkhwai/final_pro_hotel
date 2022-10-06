@@ -112,6 +112,22 @@
                   opacity: 1;
                   z-index: 1; }
 
+<<<<<<< HEAD
+=======
+                  /* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
+body {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  color: #5a5a5a;
+}
+
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+>>>>>>> parent of 6dcd0216 (add room detail and add validation date form)
 
 /* Carousel base class */
 /* .carousel {

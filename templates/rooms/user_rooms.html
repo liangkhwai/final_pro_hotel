@@ -1,37 +1,23 @@
 {% extends 'base.html'%}
-{% block title%} Rooms {% endblock %}
+
+
+{% block title%}
+Rooms
+{% endblock %}
+
+
 {% block content%}
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-2"></div>
-        <div class="col-8 border">
-            {%for i in roomss%}
 
-            <div class="w-auto border">
-                <div class="row ">
-                    <div class="col-3 h-100">
-                            <img src="media/{{i.img}}" alt="" class="img-fluid" width="400px" height="200px" />
 
-                    </div>
-                    <div class="col-9 h-100">
-                            <div class="border p-5 ">
-                                <div>ชื่อ : {{i.name}}</div>
-                                <div>รายละเอี่ยด : {{i.description}}</div>
-                                <div>ราคา : {{i.price}} บาท</div>
-                                <div>จำนวนคน : {{i.limit_people}} คน</div>
-                                <div class="d-flex justify-content-end">
-                                    <a href="roomdetail/{{i.type_id}}" class="btn btn-primary">จอง</a>
-                                </div>
-                            </div>
-                    </div>
-                </div>
-            </div>
 
-            {%endfor%}
-        </div>
-        <div class="col-2"></div>
-    </div>
-</div>
+{%for i in roomss%}
+{{i.name}}
+{%endfor%}
+
+
+
+
+
 
 {% endblock%}

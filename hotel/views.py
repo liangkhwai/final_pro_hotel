@@ -9,10 +9,9 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib import messages
 from django.template import RequestContext, Template
 from django.shortcuts import redirect
-from datetime import date, datetime
+from datetime import date
 from django.core import serializers
 from django.db.models import Q
-
 # Create your views here.
 
 
@@ -25,9 +24,6 @@ def home(req):
         if form.is_valid():
             data = form.cleaned_data
             print(data['people'])
-            if data['date_in'] > data['date_out']:
-                messages.add_message(req,messages.ERROR,'กรุณากรอกวันที่เข้าให้น้อยกว่าวันที่ออก')
-                return redirect('home')
             if data['people'] == '4':
                 rooms = RoomType.objects.all().filter(limit_people = 4)
             else:
@@ -267,14 +263,6 @@ def booking(req,pk):
     room_free = Rooms.objects.all().filter(type_id=pk,status = 'ว่าง').first()
 
     user = Customer.objects.get(account_id = req.session['user'])
-    detail = RoomType.objects.get(type_id = pk)
-
-    date_in = datetime.strptime(req.COOKIES['date_in'],'%Y-%m-%d').date()
-    date_out = datetime.strptime(req.COOKIES['date_out'],'%Y-%m-%d').date()
-    rental_day = date_out - date_in
-    print(type(date_in))
-    price = detail.price * rental_day.days
-    remain_day = rental_day.days
 
 
     if req.method == 'POST':
@@ -296,12 +284,7 @@ def booking(req,pk):
         form = BookingForm()    
     context = {
         'form':form,
-        'room_free':room_free,
-        'date_in':date_in,
-        'date_out':date_out,
-        'detail':detail,
-        'days':remain_day,
-        'price':price
+        'room_free':room_free
     }
     return render(req,'booking/booking.html',context)
 
