@@ -1,3 +1,4 @@
+from pydoc import resolve
 from hotel.models import Customer, RoomType, Rooms
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,logout,login as auth_login
@@ -8,13 +9,44 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib import messages
 from django.template import RequestContext, Template
 from django.shortcuts import redirect
-from datetime import date
+from datetime import date, datetime
+from django.core import serializers
+from django.db.models import Q
+
 # Create your views here.
 
 
 
+
+
 def home(req):
-    return render(req,'home.html')
+    if req.method == 'POST':
+        form = SearchForm(req.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            print(data['people'])
+            if data['date_in'] > data['date_out']:
+                messages.add_message(req,messages.ERROR,'กรุณากรอกวันที่เข้าให้น้อยกว่าวันที่ออก')
+                return redirect('home')
+            if data['people'] == '4':
+                rooms = RoomType.objects.all().filter(limit_people = 4)
+            else:
+                rooms = RoomType.objects.all().filter(~Q(limit_people = 4))
+            response = render(req,'rooms/user_rooms.html',{'roomss':rooms})
+            response.set_cookie('date_in',data['date_in']) 
+            response.set_cookie('date_out',data['date_out']) 
+            response.set_cookie('people',data['people'])
+            return response   
+    else:
+        form = SearchForm()
+    
+    
+    return render(req,'home.html',{'form':form})
+    
+    
+    
+    
+
 
 
 def register(req):
@@ -194,7 +226,8 @@ def edittype(req,pk):
     else:
         form = AddRoomsTypeForm(instance=type)
     context = {
-        'form':form
+        'form':form,
+        'type':type
     }
     return render(req,'rooms/edittype.html',context)
 
@@ -234,6 +267,14 @@ def booking(req,pk):
     room_free = Rooms.objects.all().filter(type_id=pk,status = 'ว่าง').first()
 
     user = Customer.objects.get(account_id = req.session['user'])
+    detail = RoomType.objects.get(type_id = pk)
+
+    date_in = datetime.strptime(req.COOKIES['date_in'],'%Y-%m-%d').date()
+    date_out = datetime.strptime(req.COOKIES['date_out'],'%Y-%m-%d').date()
+    rental_day = date_out - date_in
+    print(type(date_in))
+    price = detail.price * rental_day.days
+    remain_day = rental_day.days
 
 
     if req.method == 'POST':
@@ -255,7 +296,12 @@ def booking(req,pk):
         form = BookingForm()    
     context = {
         'form':form,
-        'room_free':room_free
+        'room_free':room_free,
+        'date_in':date_in,
+        'date_out':date_out,
+        'detail':detail,
+        'days':remain_day,
+        'price':price
     }
     return render(req,'booking/booking.html',context)
 

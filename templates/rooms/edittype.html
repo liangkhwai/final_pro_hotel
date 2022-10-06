@@ -10,10 +10,36 @@
 
 <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{form.as_p}}
+    {{form.name.label_tag}}
+    {{form.name}}
 
-    
-    <input type="submit" value="แก้ไขประเภทห้อง" class="btn btn-primary" >
+    <div class="d-flex justify-content-start">
+        <img src="/media/{{type.img}}" alt="" width="300px"> <br>
+        <div>
+            <div>
+                <div>
+                    {{form.img.label_tag}}
+                    {{form.img}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    {{form.description.label_tag}}
+    {{form.description}}
+    {{form.limit_people.label_tag}}
+    {{form.limit_people}}
+    {{form.price.label_tag}}
+    {{form.price}}
+
+
+
+
+    <input type="submit" value="แก้ไขประเภทห้อง" class="btn btn-primary">
 
 
 

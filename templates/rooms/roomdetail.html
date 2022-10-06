@@ -27,15 +27,16 @@
 </div>
 
 <div>
-    จำนวนห้อง : {% if count == 0%} จำนวนห้องเต็มแล้ว {%else %} {{count}} สุดท้าย!! {%endif%}
+    จำนวนห้อง : {% if count == 0%} จำนวนห้องเต็มแล้ว {%else %} {{count}} ห้องสุดท้าย!! {%endif%}
 
 </div>
 
 
+{% if count == 0%}
 
-
+{%else%}
 <a href="/booking/{{type.type_id}}" class="btn btn-primary">จองโลด</a>
-
+{% endif %}
 
 
 

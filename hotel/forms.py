@@ -13,6 +13,13 @@ STATUS_CHOICES= [
     ('ไม่ว่าง','ไม่ว่าง')
 ]
 
+PEOPLE_CHOICES = [
+    (1,'1 คน'),
+    (2,'2 คน'),
+    (4,'2-4 คน')
+]
+
+
 # class DateInput(forms.DateInput):
 #     input_type = 'date'
 
@@ -166,20 +173,24 @@ class AddRoomsClassForm(forms.ModelForm):
         }
     
 class AddRoomsTypeForm(forms.ModelForm):
+    limit_people = forms.ChoiceField(widget=forms.Select(attrs={'class':'form-control'}),choices=PEOPLE_CHOICES,label='จำนวนคนพัก')
+
     def __init__(self,*args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['name'].widget.attrs.update({'class':'form-control'})
         self.fields['description'].widget.attrs.update({'class':'form-control'})
         self.fields['price'].widget.attrs.update({'class':'form-control'})
         self.fields['img'].widget.attrs.update({'class':'form-control'})
+        self.fields['limit_people'].widget.attrs.update({'class':'form-control'})
     class Meta:
         model = RoomType
-        fields = ('name','img','description','price')
+        fields = ('name','img','description','limit_people','price')
         labels = {
             'name':'ชื่อประเภท',
             'description':'รายละเอียดประเภทห้อง',
             'img':'รูปภาพ',
-            'price':'ราคา'
+            'price':'ราคา',
+            'limit_people':'จำนวนคนพัก'
 
         }
     
@@ -228,4 +239,34 @@ class BookingForm(forms.ModelForm):
             
         }
 
-        
+
+class SearchForm(forms.ModelForm):
+    people = forms.ChoiceField(widget=forms.Select(attrs={'class':'form-control'}),choices=PEOPLE_CHOICES)
+    
+    def __init__(self,*args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['date_in'].widget.attrs.update({'class':'form-control'})
+        self.fields['date_out'].widget.attrs.update({'class':'form-control'})
+    class Meta:
+        model = Booking
+        fields = ('date_in','date_out','people')
+        labels = {
+            'date_in':'วันที่เข้า',
+            'date_out':'วันที่ออก',
+            
+        }
+        widgets = {
+            'date_in':forms.DateInput(
+        format=('%d-%mm-%YYYY'),
+        attrs={'class': 'form-control', 
+               'placeholder': '',
+               'type': 'date'
+              }),
+            'date_out':forms.DateInput(
+        format=('%d-%mm-%YYYYY'),
+        attrs={'class': 'form-control', 
+               'placeholder': 'Select a date',
+               'type': 'date'
+              }),
+            
+        }

@@ -1,4 +1,5 @@
 
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
@@ -26,9 +27,10 @@ class RoomType(models.Model):
     name = models.CharField(max_length=255)
     img = models.ImageField(upload_to='upload/images/',height_field=None,width_field=None,max_length=100,blank=True,null=True)
     description = models.TextField()
+    limit_people = models.IntegerField(default=0)
     
     def __str__(self):
-        return self.name
+         return self.name
     
 class Rooms(models.Model):
     room_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)
