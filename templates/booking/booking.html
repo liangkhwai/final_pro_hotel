@@ -9,11 +9,29 @@
 
 <form action="" method="post">
     {%csrf_token%}
-{{form.as_p}}
+
+    <div>ชื่อ : {{detail.name}}</div>
+    <div>รายละเอี่ยด : {{detail.description}}</div>
+    <div>
+        <img src="/media/{{detail.img}}" alt="" width="400px">
+    </div>
+    <div>วันที่เข้า : {{date_in}} </div>
+    <div>วันที่ออก : {{date_out}}</div>
+    <div>เช่าทั้งหมด : {{days}} คืน</div>
+    <div>ราคาทั้งหมด : {{price}} บาท</div>
+    <div></div>
+
+
+
+
+
 
 <input type="submit" name="submit" id="" class="btn btn-primary " value="ขั้นตอนต่อไป">
 
 </form>
+
+
+
 
 {{room_free.description}}
 
