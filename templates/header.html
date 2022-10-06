@@ -30,7 +30,7 @@
                 {%if user.is_superuser %}
                 <a href="/rooms" class="nav-link">ข้อมูลห้อง</a>
                 {%endif%}
-
+                
                 {% endif%}
 
                 <div class="nav-item dropdown">
@@ -57,30 +57,31 @@
 
 
 
-                {%if user.is_authenticated%}
-                <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-uppercase" href="#" id="navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-solid fa-user"></i> {{user}}
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                        {% if not user.is_superuser%}
-                        <li><a class="dropdown-item" href="/editcustomer/{{user.customer.cust_id}}">แก้ไขข้อมูลส่วนตัว</a></li>
-                                                
-                        {% endif %}
-                        <li><a class="dropdown-item" href="/logout">ออกจากระบบ</a></li>
-
-                        
-                    </ul>
-                </div>
-                {%endif%}
+              
 
 
 
             </div>
             </div>
         </div>
+        {%if user.is_authenticated%}
+        <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-uppercase" href="#" id="navbarDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-user"></i> {{user}}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                {% if not user.is_superuser%}
+                <li><a class="dropdown-item" href="/editcustomer/{{user.customer.cust_id}}">แก้ไขข้อมูลส่วนตัว</a></li>
+                                        
+                {% endif %}
+                <li><a class="dropdown-item" href="/logout">ออกจากระบบ</a></li>
+
+                
+            </ul>
+        </div>
+        {%endif%}
     </div>
     
 </nav>

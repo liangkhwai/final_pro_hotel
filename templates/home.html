@@ -8,35 +8,35 @@
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
     
     <div class="row carousel-indicators">
-        <form class="form">
-            <div class="row mb-5">
-                <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
-                  <input type="date" class="form-control" name="daterange">
-                </div>
-                <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
-                    <input type="date" class="form-control" name="daterange">
-                </div>
-                <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4  ">
-                  <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
-                    <select name="" id="" class="form-control custom-select">
-                        <option value="">1 คน</option>
-                        <option value="">2 คน</option>
-                        <option value="">4-5 คน</option>
-                      
-                    </select>
-                </div>
-                </div>
-    
-            </div>    
-            <div class="row align-items-center">
-                <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
-                    <input type="submit" class="btn btn-primary btn-block" value="Search">
-                </div>
-                <div class="col-lg-8">
-                    
-                </div>
+      <form class="form">
+        <div class="row mb-5">
+            <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
+              <span>Date in</span>
+              <input type="date" class="form-control" name="daterange">
             </div>
-        </form>
+         
+            <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
+              <span class="">Date out</span>
+                <input type="date" class="form-control" name="daterange">
+            </div>
+            <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4  ">
+              <div class="">
+                <span class="">????</span>
+                <select name="" id="" class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4 form-control custom-select">
+                    <option value="">1 คน</option>
+                    <option value="">2 คน</option>
+                  
+                </select>
+            </div>
+            </div>
+
+        </div>    
+        <div class="row align-items-center">
+            <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 ">
+                <input type="submit" class="btn btn-primary btn-block" value="Search">
+            </div>
+        </div>
+    </form>
         
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -83,12 +83,7 @@
     </div>
     <br>
     <br>
-
-    <div class="row col-12">  
-        <!-- row-2 -->
-
-    </div>
-
+   
 </div> <!-- row-1 -->
 {% endif %}
 {% endblock %}
