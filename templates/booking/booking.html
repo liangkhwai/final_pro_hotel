@@ -19,14 +19,18 @@
     <div>วันที่ออก : {{date_out}}</div>
     <div>เช่าทั้งหมด : {{days}} คืน</div>
     <div>ราคาทั้งหมด : {{price}} บาท</div>
-    <div></div>
-
+    
+    <input type="hidden" value="{{days}}" name="days">
+    <input type="hidden" value="{{price}}" name="sum_price">
+    <input type="hidden" value="{{detail.type_id}}" name="type_id">
+    <input type="hidden" value="{{room_free.room_id}}" name="room_id">
 
 
 
 
 
 <input type="submit" name="submit" id="" class="btn btn-primary " value="ขั้นตอนต่อไป">
+<a href="/" class="btn btn-danger">ยกเลิก</a>
 
 </form>
 

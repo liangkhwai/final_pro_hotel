@@ -31,7 +31,8 @@ def home(req):
             if data['people'] == '4':
                 rooms = RoomType.objects.all().filter(limit_people = 4)
             else:
-                rooms = RoomType.objects.all().filter(~Q(limit_people = 4))
+                rooms = RoomType.objects.all
+                # .filter(~Q(limit_people = 4))
             response = render(req,'rooms/user_rooms.html',{'roomss':rooms})
             response.set_cookie('date_in',data['date_in']) 
             response.set_cookie('date_out',data['date_out']) 
@@ -277,25 +278,47 @@ def booking(req,pk):
     remain_day = rental_day.days
 
 
+    # if req.method == 'POST':
+        
+        
+    #     print(req.POST)
+    #     # book = Booking()
+    #     # book.date_in = data['date_in']
+    #     # book.date_out = data['date_out']
+    #     # book.total_payment = room_free.type.price * (data['date_out'].day - data['date_in'].day)
+    #     # book.cust = user
+    #     # book.room = room_free
+    #     # book.save()
+    #     # room_free.status = "ไม่ว่าง"
+    #     # room_free.save()
+            
+    # else:
+    #     form = BookingForm()    
     if req.method == 'POST':
-        form = BookingForm(req.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            book = Booking()
-            
-            book.date_in = data['date_in']
-            book.date_out = data['date_out']
-            book.total_payment = room_free.type.price * (data['date_out'].day - data['date_in'].day)
-            book.cust = user
-            book.room = room_free
-            book.save()
-            room_free.status = "ไม่ว่าง"
-            room_free.save()
-            
-    else:
-        form = BookingForm()    
+        days = req.POST.get('days')
+        sum_price = req.POST.get('sum_price')
+        type_id = req.POST.get('type_id')
+        room_id = req.POST.get('room_id')
+        
+        book = Booking()
+        book.date_in = date_in
+        book.date_out = date_out
+        book.total_payment = sum_price
+        book.cust = user
+        book.room = room_free
+        book_id = book.save()
+        room_free.status = "ไม่ว่าง"
+        room_free.save()
+        
+        print('บันทึกสำเร็จ')
+        
+        context = {
+            'book_id':book_id
+        }
+        
+        return render(req,'payment/payment.html',context)
+        
     context = {
-        'form':form,
         'room_free':room_free,
         'date_in':date_in,
         'date_out':date_out,
@@ -305,4 +328,14 @@ def booking(req,pk):
     }
     return render(req,'booking/booking.html',context)
 
+    
+def payment(req):
+    if req.method == 'POST':
+        days = req.POST.get('days')
+        sum_price = req.POST.get('sum_price')
+        type_id = req.POST.get('type_id')
+        room_id = req.POST.get('room_id')
+        pass
+        
+                
     

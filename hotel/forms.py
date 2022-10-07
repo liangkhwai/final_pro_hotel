@@ -270,3 +270,9 @@ class SearchForm(forms.ModelForm):
               }),
             
         }
+        
+        
+class PaymentForm(forms.ModelForm):
+    class Meta:
+        model = Payment
+        fields = ('method','amount','date','')
