@@ -1,3 +1,4 @@
+from ast import Mult
 from dataclasses import field
 from django import forms
 from .models import *
@@ -275,4 +276,10 @@ class SearchForm(forms.ModelForm):
 class PaymentForm(forms.ModelForm):
     class Meta:
         model = Payment
-        fields = ('method','amount','date','')
+        fields = ('pay_number','pay_expiry','pay_code')
+        labels = {
+            'pay_number':'รหัสบัตร',
+            'pay_expiry':'วันหมดอายุ',
+            'pay_code':'รหัสความปลอดภัย'
+        }
+        

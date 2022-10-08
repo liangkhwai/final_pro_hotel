@@ -1,7 +1,8 @@
-
+from django.core.validators import FileExtensionValidator
 from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User
+from creditcards.models import CardNumberField,CardExpiryField,SecurityCodeField
 # Create your models here.
 
 # class Accounts(models.Model):
@@ -52,10 +53,11 @@ class Booking(models.Model):
 
 class Payment(models.Model):
     pay_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)
-    cust = models.ForeignKey(Customer,on_delete=models.CASCADE)
-    method = models.CharField(max_length=255) #ประเภทการชำระเงิน เงินสด เงินโอน
-    amount = models.FloatField()
-    date = models.DateTimeField(auto_now_add=True)
+    cust = models.ForeignKey(Customer,on_delete=models.CASCADE,null=True)
+    pay_number =CardNumberField(('card number'),null=True,max_length=16)    
+    pay_expiry =CardExpiryField(('expiration date'),null=True,max_length=4)    
+    pay_code =CardNumberField(('security code'),null=True,max_length=3)    
+    pay_amount = models.IntegerField(default=10000)
     
 class Transaction(models.Model):
     trans_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)
@@ -65,6 +67,11 @@ class Transaction(models.Model):
     booking = models.ForeignKey(Booking,on_delete=models.CASCADE)
 
 
+
+class MultiImage(models.Model):
+    image = models.FileField(upload_to='upload/images/',max_length=100,blank=True,null=True,validators=[FileExtensionValidator(allowed_extensions=["png","jpg","jpeg"])])
+    type = models.ForeignKey(RoomType,on_delete=models.CASCADE,null = True)
+    
 
 
 
