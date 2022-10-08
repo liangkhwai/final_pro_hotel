@@ -6,15 +6,48 @@
 
 {% block content %}
 
-<form action="" method="post">
-    {% csrf_token %}
 
-    {{form.as_p}}
+<div class="shadow-lg " style="background-color: #6998AB">
+    <!-- row-1 -->
+    <br>
+    <br>
+    <br><br><br>
+    <H1 class="text-center text-light">แก้ไขข้อมูลส่วนตัว </H1>
+    <br><br><br>
+    <div class="row">
+
+        <!-- row-2 -->
+
+        <div class="col-md-10 mx-auto col-lg-5">
+            <!-- row-3 -->
+            <form class="shadow-lg rounded-5 row bg-light p-4" action="" method="post">
+                {% csrf_token%}
+                
+                {% csrf_token %}
+                <div class="pb-4 text-black ">
+                {{form.as_p}}
+            </div>
+                <!-- <div class="pb-4 text-black ">
+                    <label for="username ">Username</label>
+                    <input class="form-control" type="text" name="username" id="username">
+                </div>
+                <div class="pb-4 text-black">
+                    <label for="password">Password</label>
+                    <input class="form-control" type="password" name="password" id="password">
+                </div> -->
+
+                <div class="row ">
+                    <input type="submit" name="submit" value="ยืนยันการแก้ไข" class="btn btn-primary">
+                </div>
+                
+                <br>
+            </form>
+
+        </div> <!-- row-3 -->
+    </div> <!-- row-2 -->
+    <br><br><br><br><br><br><br>
+</div> <!-- row-1 -->
 
 
-    <input type="submit" name="submit" value="ยืนยันการแก้ไข" class="btn btn-primary">
-
-
-</form>
 
 {% endblock %}
