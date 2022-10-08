@@ -2,7 +2,6 @@
 
 {% block title%}Home{% endblock %}
 
-
 {% block content %}
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
 
@@ -14,21 +13,23 @@
           วันที่เข้า : {{form.date_in}}
         </div>
         <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
-          <!-- <input type="text" class="form-control" name="daterange"> -->
+         
           วันที่ออก : {{form.date_out}}
 
         </div>
-        <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
-          <!-- <input type="text" class="form-control" placeholder="# of People"> -->
+        <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-2">
+      
           จำนวนคน : {{form.people}}
         </div>
+        
+      <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-2">
+        <br>
+        <input type="submit" class="btn btn-primary btn-block" value="Search">
       </div>
-      
-    
+
+      </div>
+
       <div class="row align-items-center">
-        <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
-          <input type="submit" class="btn btn-primary btn-block" value="Search">
-        </div>
         <div class="col-lg-8">
           {% if messages%}
           <ul class="messages">
@@ -44,7 +45,6 @@
       </div>
     </form>
     
-
     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
       aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -76,31 +76,20 @@
   </button>
 </div>
 
+
 <div class="container shadow-lg " style="background-color: #6998AB">
-
-  <!-- row-1 -->
-  <br>
-  <br>
   <div class="container text-light">
-
-    <div class="">
+    <div class="row">
       <h1>HOTEL</h1>
 
-      {% if user.is_authenticated %}
+      <!-- {% if user.is_authenticated %}
       <p>Welcome, {{ user }}. Thanks for logging in.</p>
       {% else %}
-      <p class="">Welcome, new user. Please <a class="text-light" href="/login ">Click log in.</a></p>
+      <p class="">Welcome, new user. Please <a class="text-light" href="/login ">Click log in.</a></p> -->
 
-    </div> <!-- row-2 -->
+    </div> 
   </div>
-  <br>
-  <br>
+</div> 
 
-  <div class="row col-12">
-    <!-- row-2 -->
-
-  </div>
-
-</div> <!-- row-1 -->
 {% endif %}
 {% endblock %}

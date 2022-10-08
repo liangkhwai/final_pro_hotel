@@ -22,6 +22,7 @@ urlpatterns = [
     path('room/delete/<int:pk>/<int:fk>',views.deleteroom,name='deleteroom'),
     path('deletetype/<int:pk>',views.deletetype,name='deletetype'),
     path('booking/<int:pk>',views.booking,name='booking'),
+    path('payment',views.payment,name='payment'),
 ]
 
 

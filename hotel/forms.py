@@ -16,7 +16,7 @@ STATUS_CHOICES= [
 PEOPLE_CHOICES = [
     (1,'1 คน'),
     (2,'2 คน'),
-    (4,'2-4 คน')
+    (4,'2-4 คน'),
 ]
 
 
@@ -270,3 +270,9 @@ class SearchForm(forms.ModelForm):
               }),
             
         }
+        
+        
+# class PaymentForm(forms.ModelForm):
+#     class Meta:
+#         model = Payment
+#         fields = ('method','amount','date','')
