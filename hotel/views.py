@@ -16,8 +16,6 @@ from django.db.models import Q
 
 
 
-
-
 def home(req):
     if req.method == 'POST':
         form = SearchForm(req.POST)

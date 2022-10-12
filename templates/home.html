@@ -13,38 +13,48 @@
           วันที่เข้า : {{form.date_in}}
         </div>
         <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
-         
+
           วันที่ออก : {{form.date_out}}
 
         </div>
         <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-2">
-      
+
           จำนวนคน : {{form.people}}
         </div>
-        
-      <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-2">
-        <br>
-        <input type="submit" class="btn btn-primary btn-block" value="Search">
-      </div>
+
+        <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-2">
+          <br>
+          <input type="submit" class="btn btn-primary btn-block" value="Search">
+        </div>
 
       </div>
 
       <div class="row align-items-center">
         <div class="col-lg-8">
-          {% if messages%}
+          <!-- {% if messages%}
           <ul class="messages">
-            {% for message in messages %}
-            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
-                {{ message }}
+            {% for message in messages %} -->
+            {%if messages %}
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script>
+        Swal.fire(
+          '{{ user }}',
+          ' {{ message }}',
+          'error'
+        )
+      </script>
+{% endif %}
+            <!-- <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+              {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+              {{ message }}
             </li>
             {% endfor %}
-        </ul>
-        {% endif %}
+          </ul>
+          {% endif %} -->
         </div>
       </div>
     </form>
-    
+
     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
       aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -81,15 +91,24 @@
   <div class="container text-light">
     <div class="row">
       <h1>HOTEL</h1>
+      <div class="row ">
 
-      <!-- {% if user.is_authenticated %}
-      <p>Welcome, {{ user }}. Thanks for logging in.</p>
+      </div>
+      {% if user.is_authenticated %}
+      <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script>
+        Swal.fire(
+          '{{ user }}',
+          ' Hi ',
+          'success'
+        )
+      </script> -->
       {% else %}
-      <p class="">Welcome, new user. Please <a class="text-light" href="/login ">Click log in.</a></p> -->
+      <p class="">Welcome, new user. Please <a class="text-light" href="/login " onclick="show">Click log in.</a></p>
 
-    </div> 
+    </div>
   </div>
-</div> 
+</div>
 
 {% endif %}
 {% endblock %}

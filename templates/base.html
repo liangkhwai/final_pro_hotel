@@ -8,13 +8,15 @@
 <!DOCTYPE html>
 <html lang="en">
   
-    <head class="">
+    <head>
         <title>{% block title%} {% endblock %}</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="/static/css/style.css" rel="stylesheet"> 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-        <link type="text/javascript" src="/static/js/alert.js">
+        <!-- <link type="text/javascript" src="/static/js/alert.js"> -->
+        
+        <!-- <link href="/node_modules/sweetalert2/dist/sweetalert2.css" rel="stylesheet"> -->
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,17 +34,15 @@
         font-size:  18px;
         font-weight: bold;
       }
-      
     </style>
-    
     
     {% include 'header.html'%}
     <body class="" style="background-color:  #e9e9e9">
-
+      <script href="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
         {% block content%}
+        <script href="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
         {% endblock %}
-  
-
+      
     </body>
 
 <footer>
