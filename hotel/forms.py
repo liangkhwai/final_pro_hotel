@@ -273,6 +273,16 @@ class SearchForm(forms.ModelForm):
         }
         
         
+class MultiImageForm(forms.ModelForm):
+    image = forms.ImageField(
+        label='MultiImage',
+        widget=forms.ClearableFileInput(attrs={"multiple":True}),
+    )
+    class Meta:
+        model = MultiImage
+        fields = ('image',)
+        
+        
 class PaymentForm(forms.ModelForm):
     class Meta:
         model = Payment

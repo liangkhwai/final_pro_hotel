@@ -69,8 +69,9 @@ class Transaction(models.Model):
 
 
 class MultiImage(models.Model):
-    image = models.FileField(upload_to='upload/images/',max_length=100,blank=True,null=True,validators=[FileExtensionValidator(allowed_extensions=["png","jpg","jpeg"])])
+    image = models.ImageField(null=True)
     type = models.ForeignKey(RoomType,on_delete=models.CASCADE,null = True)
+    
     
 
 
