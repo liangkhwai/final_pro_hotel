@@ -1,5 +1,4 @@
-from pydoc import resolve
-from hotel.models import Customer, RoomType, Rooms
+from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,logout,login as auth_login
 from .forms import *
@@ -217,40 +216,90 @@ def addtype(req):
 
 def edittype(req,pk):
     type = RoomType.objects.get(type_id = pk)
+    multiimg = MultiImage.objects.all().filter(type = pk)
+    
     if req.method == 'POST':
         form = AddRoomsTypeForm(req.POST,instance=type,files=req.FILES)
+        images = req.FILES.getlist('image')
         print(form)
         if form.is_valid():
-            form.save()
+            typeForm = form.save()
+            
+            for i in images:
+                obj_img = MultiImage()
+                obj_img.image = i
+                obj_img.type = typeForm 
+                obj_img.save()
+
             return HttpResponseRedirect(reverse('fetchrooms'))
         
     else:
         form = AddRoomsTypeForm(instance=type)
+        imgForm = MultiImageForm()
     context = {
+        'imgForm':imgForm,
+        'multiimg':multiimg,
         'form':form,
         'type':type
     }
     return render(req,'rooms/edittype.html',context)
 
+def delMultiImg(req,id,type):
+    img = MultiImage.objects.get(id = id)
+    img.delete()
+    
+    return redirect('edittype',pk=type)
+
+def addanotherimg(req):
+    if req.method == 'POST':
+        images = req.FILES.getlist('image')
+        type = req.POST.get('type')
+        room_type = RoomType.objects.get(type_id = type)
+        for i in images:
+            obj = MultiImage()
+            obj.image = i
+            obj.type = room_type
+            obj.save()
+    return redirect('edittype',pk=room_type.type_id)
+            
+    
+    
+    
+    
 
 def fetchrooms(req):
     type = RoomType.objects.all()
     if req.method == 'POST':
         form = AddRoomsTypeForm(req.POST,req.FILES)
-        imagess = req.FILES.getlist('images')
+        imagess = req.FILES.getlist('image')
+        print('file : ',req.FILES)
+        print('adsasdsa',imagess)
         if form.is_valid():
             data = form.cleaned_data
             print(data)
-            type_id =  form.save()
-            for image in imagess:
-                MultiImage.objects.create(image = image,type=type_id)
+            type_id = form.save()
+            print(type_id)
+            print(imagess)
+            print('ok')
+            for i in imagess:
+                print(i)
+                # MultiImage.objects.create(image = i,type=type_id)
+                obj_pro = MultiImage()
+                obj_pro.image = i
+                obj_pro.type = type_id
+                obj_pro.save()
+
+                print('upload success')
+                # MultiImage.objects.create(image = i,type=type_id)
 
             return HttpResponseRedirect(reverse('fetchrooms'))
 
     form = AddRoomsTypeForm()
+    imgForm = MultiImageForm()
     context = {
         'type':type,
         'form':form,
+        'imgForm':imgForm,
     }
     return render(req,'rooms/fetchrooms.html',context)
 
@@ -275,7 +324,7 @@ def booking(req,pk):
 
     user = Customer.objects.get(account_id = req.session['user'])
     detail = RoomType.objects.get(type_id = pk)
-
+    multiimg = MultiImage.objects.all().filter(type = pk)
     date_in = datetime.strptime(req.COOKIES['date_in'],'%Y-%m-%d').date()
     date_out = datetime.strptime(req.COOKIES['date_out'],'%Y-%m-%d').date()
     rental_day = date_out - date_in
@@ -320,6 +369,7 @@ def booking(req,pk):
             form = PaymentForm()
             print(booking)
             context = {
+                
                 'booking':booking,
                 'form':form,
                 'days':remain_day,
@@ -328,6 +378,7 @@ def booking(req,pk):
             return render(req,'payment/payment.html',context)
         
     context = {
+        'multiimg':multiimg,
         'room_free':room_free,
         'date_in':date_in,
         'date_out':date_out,

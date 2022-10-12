@@ -25,8 +25,31 @@
         </div>
     </div>
 
+   
 
 
+    <div class="row">
+        {% for i in multiimg%}
+
+        <div class="col-auto">
+            <div>
+                <img src="/media/{{i.image}}" alt="{{i.image}}" width="auto" height="200px" class="rounded">
+
+            </div>
+            <div class="text-center my-1">
+
+                <a href="/delimg/{{i.id}}/{{i.type.type_id}}" class="btn btn-danger">ลบรูปภาพนี้</a>
+            </div>
+
+        </div>
+        {%endfor%}
+    </div>
+
+
+
+
+
+    <br>
 
 
     {{form.description.label_tag}}
@@ -45,7 +68,16 @@
 
 </form>
 
+<form action="{% url 'addanotherimg'%}" method="post" enctype="multipart/form-data">
+    {% csrf_token%}
+    รูปภาพเพิ่มเติม:
+    {% for form in imgForm %}
+        {{ form }}
+    {% endfor %}
+    <input type="hidden" name="type" id="" value="{{type.type_id}}">
+    <input type="submit" name="submit" id="" value="เพิ่มรูป" class="btn btn-success">
 
+    </form>
 
 
 

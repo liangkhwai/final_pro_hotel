@@ -23,7 +23,10 @@ urlpatterns = [
     path('deletetype/<int:pk>',views.deletetype,name='deletetype'),
     path('booking/<int:pk>',views.booking,name='booking'),
     path('payment',views.payment,name='payment'),
-    path('bookdetail/<int:pk>',views.bookdetail,name='bookingdetail')
+    path('bookdetail/<int:pk>',views.bookdetail,name='bookingdetail'),
+    path('delimg/<int:id>/<int:type>',views.delMultiImg,name='delimg'),
+    path('addanotherimg',views.addanotherimg,name='addanotherimg'),
+    
 
 ]
 

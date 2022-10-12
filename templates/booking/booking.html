@@ -15,6 +15,14 @@
     <div>
         <img src="/media/{{detail.img}}" alt="" width="400px">
     </div>
+    <div>
+        รูปภาพเพิ่มเติม : 
+        {% for i in multiimg%}
+            <div class="d-inline">
+                <img src="/media/{{i.image}}" alt="" width="auto" height="200px">
+            </div>
+        {% endfor%}
+    </div>
     <div>วันที่เข้า : {{date_in}} </div>
     <div>วันที่ออก : {{date_out}}</div>
     <div>เช่าทั้งหมด : {{days}} คืน</div>
@@ -35,7 +43,7 @@
 
 
 <input type="submit" name="submit" id="" class="btn btn-primary " value="ขั้นตอนต่อไป">
-<a href="bookdetail">ขั้นตอนต่อไป</a>
+<a href="/" class="btn btn-warning">ยกเลิกการจอง</a>
 
 
 
