@@ -52,6 +52,33 @@
 </div>
 </div>
 
+<div>
+    รายละเอียด : {{type.description}}
+</div>
+<div>
+    ราคา : {{type.price}}
+
+</div>
+
+<div>
+    จำนวนห้อง : {% if count == 0%} จำนวนห้องเต็มแล้ว {%else %} {{count}} ห้องสุดท้าย!! {%endif%}
+
+</div>
+
+{%if user.is_authenticated%}
+
+{% if count == 0%}
+
+{%else%}
+<a href="/booking/{{type.type_id}}" class="btn btn-primary">จองโลด</a>
+{% endif %}
+
+{% else %}
+
+ <h3 class="text-danger"><b>**กรุณาเข้าสู่ระบบก่อนทำการจอง**</b></h3>
+ <a href="/login">คลิกที่นี่เพื่อเข้าสู่ระบบ ...</a>
+
+{% endif %}
 
 
 {% endblock %}
