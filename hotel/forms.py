@@ -276,7 +276,7 @@ class SearchForm(forms.ModelForm):
 class MultiImageForm(forms.ModelForm):
     image = forms.ImageField(
         label='MultiImage',
-        widget=forms.ClearableFileInput(attrs={"multiple":True}),
+        widget=forms.ClearableFileInput(attrs={"multiple":True,"class":"form-control"}),
     )
     class Meta:
         model = MultiImage
