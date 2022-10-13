@@ -9,26 +9,58 @@ Booking detail
 
 {% block content%}
 <div class="container">
-    <div>รูปภาพ : <img src="/media/{{booking.room.type.img}}" alt="" class="img-fluid" width="400px"></div>
-    <div>วันที่เข้า : {{booking.date_in}}</div>
-    <div>วันที่ออก : {{booking.date_out}}</div>
-    <div>ค้างคืน : {{remain_day}} วัน</div>
-    <div>ประเภท : {{booking.room.type}}</div>
-    <div>ราคา : {{booking.total_payment}}</div>
-    <div>สถานะ : {{booking.status}}</div>
+    <div class="col-12">
+        <div class="row">
+            <div class="col-6 p-5">
+                <div><img src="/media/{{booking.room.type.img}}" alt="" class="img-fluid rounded-5" height=""></div>
+            </div>
+            <div class="col-6 p-5">
+                <div class="form-group">
+                    <label class="text-black" for="password">ประเภท :</label>
+                    {{booking.room.type}}
+                </div>
 
-    <form action="{% url 'payment'%}" method="post">
-        {% csrf_token %}
-    {% if booking.status == "ยังไม่ชำระเงิน"%}
-    {{form.as_p}}
-    <input type="hidden" name="booking_id" id="" value="{{booking.booking_id}}">
-    <input type="submit" name="submit" id="" value="ชำระเงิน" class="btn btn-primary">
+                <div>
+                    วันที่เข้า : {{booking.date_in}}
+                </div>
+                <div>
+                    วันที่ออก : {{booking.date_out}}
+                </div>
+                <div>
+                    ค้างคืน : {{remain_day}} วัน
+                </div>
+                <div>
+                    ราคา : {{booking.total_payment}}
+                </div>
+                <div>
+                    สถานะ : {{booking.status}}
+                </div>
 
-    {% endif%}
-</form>
+                <form action="{% url 'payment'%}" method="post">
+                    {% csrf_token %}
+                    {% if booking.status == "ยังไม่ชำระเงิน"%}
+                    <div class="col-6">
+                        {{form.as_p}}
+                    </div>
 
+                    <div class="col-6">
+                        <input type="hidden" name="booking_id" id="" value="{{booking.booking_id}}">
+                        <input type="submit" name="submit" id="" value="ชำระเงิน" class="btn btn-primary">
+                    </div>
+
+            </div>
+            {% endif%}
+            </form>
+        </div>
+    </div>
 </div>
-
-
-
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 {% endblock %}
