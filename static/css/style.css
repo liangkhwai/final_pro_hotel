@@ -25,6 +25,16 @@
 
             border-color: #1643e8;
             background: #1643e8; }
+            .btn.btn-primary-fix {
+              padding-top: 2px;
+              font-size: 25px;
+              color: black;
+              background: #C4E6FA;
+              border-color: #C4E6FA; }
+              .btn.btn-primary-fix:hover {
+    
+                border-color: #80caf5;
+                background: #80caf5; }
     
     .btn.btn-outline-white {
       border: 2px solid #ffffff; }

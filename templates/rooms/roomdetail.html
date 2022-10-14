@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<div class="container">
+<!-- <div class="container">
     <span class="">HOME / ROOM / {{type.name}}</span>
 
     <div class="col-12 " style="background-color: #ffffff">
@@ -28,10 +28,10 @@
                     {% if count == 0%}
 
                     {%else%}
-                    
+
                     {% endif %}
                 </div>
-             
+                mlnjkhjklhjk
                 <form action="{% url 'payment'%}" method="post">
                     {% csrf_token %}
                     {% if booking.status == "ยังไม่ชำระเงิน"%}
@@ -42,7 +42,7 @@
 
             </div>
             {% endif%}
-            
+
             <div class="col-6">
                 <a href="/booking/{{type.type_id}}" class="btn btn-primary">จองโลด</a>
             </div>
@@ -50,35 +50,87 @@
         </div>
     </div>
 </div>
+</div> -->
+
+
+<div class="container pt-5">
+    <h3 class="text-uppercase mb-5"><a href="/" style="text-decoration: none; color: black;">HOME</a> / ROOM / {{type.name}}</h3>
+    <div class="row ">
+        <div class="col-md-6 ">
+            <img src="/media/{{type.img}}" alt="" class="w-100 rounded" style="height: 380px">
+        </div>
+        <div class="col-md-6">
+            <div class="px-5">
+                <h1>ห้อง {{type.name}}</h1>
+                <div class="row">
+                    <div class="pt-5"></div>
+                    <div class="col-md-3">
+                        <h3 class="text-center">8.7</h3>
+                    </div>
+                    <div class="col-md">
+                        <div class="">ดีเยี่ยม <br>ความสะดวกสบายและคุณภาพของห้องพัก</div>
+                        <br>
+                        <table class="table" style="border-collapse: separate; border-spacing:10px;">
+                            <tr class="">
+                                <td width="10%"><i class="fa-solid fa-bed"></i></td>
+                                <td>2 เตียงเดี่ยว</td>
+                                <td><i class="fa-solid fa-restroom"></i></td>
+                                <td>ห้องน้ำในตัว</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa-solid fa-maximize"></i></td>
+                                <td>ขนาด 25 ตรม.</td>
+                                <td><i class="fa-solid fa-tv"></i></td>
+                                <td>โทรทัศน์จอแบน</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa-solid fa-city"></i></td>
+                                <td>วิวเมือง</td>
+
+                                <td colspan="2" class="text-center "
+                                    style="border-top: 2px solid black; border-bottom:1px solid black;">
+                                    {% if count == 0%} จำนวนห้องเต็มแล้ว {%else %} <div class="text-danger fs-5"
+                                        style="margin:0;padding:0;"> {{count}} ห้องสุดท้าย!!</div> {%endif%}</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa-solid fa-snowflake"></i></td>
+                                <td>มีเครื่องปรับอากาศ</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="badge text-wrap py-2 fs-5 px-3" style="background-color: #FF0000;">SALE!! ลด 53%
+                                วันนี้</div>
+
+                        </div>
+                        <div class="col">
+                            <div class="text-end">
+
+                                <div>ต่อคืน <span class="fs-1">{{price}}$</span></div>
+                                <br>
+                                <div class="pb-5"><a href="/booking/{{type.type_id}}" class="form-control text-center btn btn-primary-fix">จอง</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
 </div>
 
-<div>
-    รายละเอียด : {{type.description}}
-</div>
-<div>
-    ราคา : {{type.price}}
+<script>
+    document.body.style.backgroundColor = "white";
 
-</div>
-
-<div>
-    จำนวนห้อง : {% if count == 0%} จำนวนห้องเต็มแล้ว {%else %} {{count}} ห้องสุดท้าย!! {%endif%}
-
-</div>
-
-{%if user.is_authenticated%}
-
-{% if count == 0%}
-
-{%else%}
-<a href="/booking/{{type.type_id}}" class="btn btn-primary">จองโลด</a>
-{% endif %}
-
-{% else %}
-
- <h3 class="text-danger"><b>**กรุณาเข้าสู่ระบบก่อนทำการจอง**</b></h3>
- <a href="/login">คลิกที่นี่เพื่อเข้าสู่ระบบ ...</a>
-
-{% endif %}
+</script>
 
 {% include 'footer.html'%}
 {% endblock %}

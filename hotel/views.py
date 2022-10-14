@@ -1,3 +1,4 @@
+from tkinter.messagebox import RETRY
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,logout,login as auth_login
@@ -43,7 +44,7 @@ def home(req):
     
     
     
-    
+
 
 
 
@@ -308,8 +309,9 @@ def fetchrooms(req):
 def roomdetail(req,pk):
     typeCheck = RoomType.objects.get(type_id = pk)
     roomCheck = Rooms.objects.all().filter(type_id = pk,status = "ว่าง").count()
-    
+    price = "{:,}".format(typeCheck.price)
     context = {
+        'price':price,
         'type':typeCheck,
         'count':roomCheck
     }
