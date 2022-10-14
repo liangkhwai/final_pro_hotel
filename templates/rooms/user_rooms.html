@@ -2,31 +2,31 @@
 {% block title%} Rooms {% endblock %}
 {% block content%}
 
-<div class="container-fluid">
+<!-- <div class="container-fluid">
     <div class="row">
-        
-        
+
+
         <div class="col-2"></div>
-        
-        <div class="col-8 border">
+
+        <div class="col-8 ">
             {%for i in roomss%}
 
-            <div class="w-auto border">
+            <div class="w-auto ">
                 <div class="row ">
                     <div class="col-3 h-100">
-                            <img src="media/{{i.img}}" alt="" class="img-fluid" width="400px" height="200px" />
+                        <img src="media/{{i.img}}" alt="" class="img-fluid" width="400px" height="200px" />
 
                     </div>
                     <div class="col-9 h-100">
-                            <div class="border p-5 ">
-                                <div>ชื่อ : {{i.name}}</div>
-                                <div>รายละเอี่ยด : {{i.description}}</div>
-                                <div>ราคา : {{i.price}} บาท</div>
-                                <div>จำนวนคน : {{i.limit_people}} คน</div>
-                                <div class="d-flex justify-content-end">
-                                    <a href="roomdetail/{{i.type_id}}" class="btn btn-primary">จอง</a>
-                                </div>
+                        <div class=" p-5 ">
+                            <div>ชื่อ : {{i.name}}</div>
+                            <div>รายละเอี่ยด : {{i.description}}</div>
+                            <div>ราคา : {{i.price}} บาท</div>
+                            <div>จำนวนคน : {{i.limit_people}} คน</div>
+                            <div class="d-flex justify-content-end">
+                                <a href="roomdetail/{{i.type_id}}" class="btn btn-primary">จอง</a>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -36,5 +36,53 @@
         <div class="col-2"></div>
     </div>
 </div>
+------------------------------------------------- -->
+<div class="container p-5">
+    <div class="row ">
+        <div class="col-md-12 ">
+            {%for i in roomss%}
+            <div class="p-4" style="background-color: white;">
+                <div class="row">
+                    <div class="col-md-7 ">
+                        <img src="media/{{i.img}}" alt="" class="" width="100%" height="400">
+                    </div>
+                    <div class="col-md-5 " style="color: black;">
+                        <!-- <div class="col-md-5 d-flex justify-content-between" style="color: black;"> -->
+                        <div class="row w-100 h-100">
+                            <div class="col-md-8">
+                                <div class="w-80 text-break">
+                                    <h3>ห้อง : {{i.name}}</h3>
+                                    <br>
+                                    <h4>รายละเอียด : </h2>
+                                        <textarea class="form-control h-auto" readonly disabled rows="12">{{i.description}}</textarea>
+                                        <!-- <div class="">{{i.description}}</div> -->
 
+                                </div>
+                            </div>
+                            <div class="col h-100">
+                                <div class="d-flex align-items-end flex-column h-100  w-100">
+                                    <div class="mt-auto  w-100">
+                                        <div>
+                                            <div class="text-center">จำนวนคน : {{i.limit_people}} คน</div>
+                                            <div class="text-center">ราคา : {{i.price}} บาท</div>
+                                            <br>
+                                                <a href="roomdetail/{{i.type_id}}"
+                                                    class="btn btn-primary-original form-control">จอง</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            {% endfor%}
+
+        </div>
+    </div>
+</div>
+{% include 'footer.html'%}
 {% endblock%}

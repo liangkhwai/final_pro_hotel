@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static%}
 
 {% block title%}Home{% endblock %}
 
@@ -34,17 +35,17 @@
           <!-- {% if messages%}
           <ul class="messages">
             {% for message in messages %} -->
-            {%if messages %}
-            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-      <script>
-        Swal.fire(
-          '{{ user }}',
-          ' {{ message }}',
-          'error'
-        )
-      </script>
-{% endif %}
-            <!-- <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+          {%if messages %}
+          <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+          <script>
+            Swal.fire(
+              '{{ user }}',
+              ' {{ message }}',
+              'error'
+            )
+          </script>
+          {% endif %}
+          <!-- <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
               {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
               {{ message }}
             </li>
@@ -87,7 +88,110 @@
 </div>
 
 
-<div class="container shadow-lg " style="background-color: #6998AB">
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="pt-5 px-5">
+        <h1 class="" style="margin-bottom: 0px;">
+          <p>Welcome to <br>Avania+ Riverside<br>KhonKaen Hotel</p>
+        </h1>
+        <!-- <div class="px-5"> -->
+        <hr class="" style="width: 60%; border: 1px solid #0000; border-radius: 5px; background-color: black;">
+        <!-- </div> -->
+        <h2>สิ่งอำนวยความสะดวก</h2><br>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="pt-5 ">
+        <div>
+          <h3><i class="fa-solid fa-tree"></i> ค้นพบหลากหลายแง่มุมของชีวิตที่อวาเนีย </h3>
+        </div>
+        <br>
+        <div class="lh-3  ">
+          <p>
+            “อวาเนีย” หมายถึง
+            “อวาเนีย” หมายถึง
+            “มนตร์เสน่ห์”ซึ่งสามารถอธิบายและสื่อสารได้อย่างชัดเจนจากภาพลักษณ์ของโรงแรมที่เต็มไปด้วยความสดชื่นสดใสร่มเย็นของต้นไม้ดอกไม้และยังรวมไปถึงปฏิกิริยาของลูกค้าเมื่อได้เดินทางมาถึงและตลอดระยะเวลาของการอยู่อาศัยการเข้าพักที่อวาเนียคือการเริ่มต้นการเดินทางที่น่าจดจำอย่างยิ่ง
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row pt-1">
+
+    <div class="col-md-6">
+      <div class="px-5">
+        <div class="">
+
+          <div class="container">
+            <table class="table table-hover" style="width:300px">
+              <tr>
+                <td><i class="fa-solid fa-wifi"></i></td>
+                <td>WIFI ฟรี</td>
+              </tr>
+              <tr>
+                <td><i class="fa-solid fa-person-swimming"></i></td>
+                <td>สระว่ายน้ำ</td>
+              </tr>
+              <tr>
+                <td><i class="fa-solid fa-utensils"></i></td>
+                <td>ห้องอาหาร</td>
+              </tr>
+              <tr>
+                <td><i class="fa-regular fa-handshake"></i></td>
+                <td>ห้องประชุม</td>
+              </tr>
+              <tr>
+                <td><i class="fa-solid fa-martini-glass"></i></td>
+                <td>บาร์</td>
+              </tr>
+              <tr>
+                <td><i class="fa-solid fa-dumbbell"></i></td>
+                <td>ยิม</td>
+              </tr>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="px-5">
+        <div class="row">
+
+          <div class="col-md col-sm" style="">
+
+            <img src="{% static 'hero-slider-2.jpg'%}" alt="" width="auto" class="rounded img-fluid">
+
+
+          </div>
+          <div class="col-md col-sm"> <img src="{% static 'hero-slider-3.jpg'%}" alt="" height="200px"
+              class="rounded img-fluid">
+          </div>
+          <div class="col-md col-sm"> <img src="{% static 'hero-slider-4.jpg'%}" alt="" width="auto"
+              class="rounded img-fluid">
+          </div>
+
+        </div>
+
+      </div>
+      <!-- <iframe
+        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15307.43537899137!2d102.86383369860818!3d16.431993785626663!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31228bda829566e7%3A0x24ca9da06e436ef3!2z4Lih4Lir4Liy4Lin4Li04LiX4Lii4Liy4Lil4Lix4Lii4LmA4LiX4LiE4LmC4LiZ4LmC4Lil4Lii4Li14Lij4Liy4LiK4Lih4LiH4LiE4Lil4Lit4Li14Liq4Liy4LiZIOC4p-C4tOC4l-C4ouC4suC5gOC4guC4leC4guC4reC4meC5geC4geC5iOC4mQ!5e0!3m2!1sth!2sth!4v1665685865204!5m2!1sth!2sth"
+        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade" class="overflow-hidden"></iframe> -->
+
+    </div>
+  </div>
+
+
+</div>
+<br>
+
+
+
+
+<!-- <div class="container shadow-lg " style="background-color: #6998AB">
   <div class="container text-light">
     <div class="row">
       <h1>HOTEL</h1>
@@ -104,10 +208,10 @@
         )
       </script> -->
 
-      <!-- <p class="">Welcome, new user. Please <a class="text-light" href="/login " onclick="show">Click log in.</a></p> -->
+<!-- <p class="">Welcome, new user. Please <a class="text-light" href="/login " onclick="show">Click log in.</a></p> -->
 
-    </div>
-  </div>
-</div>
-
+<!-- </div> -->
+<!-- </div>
+</div>  -->
+{% include 'footer.html'%}
 {% endblock %}

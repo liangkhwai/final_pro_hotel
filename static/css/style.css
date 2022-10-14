@@ -10,11 +10,22 @@
       -webkit-box-shadow: none;
       box-shadow: none; }
     .btn.btn-primary {
-      background: #1A374D;
-      border-color: #1A374D; }
+      background: #61494C;
+      border-color: #61494C; }
       .btn.btn-primary:hover {
-        border-color: #1f425c;
-        background: #1f425c; }
+        border-color: #543f41;
+        background: #543f41; }
+        .btn.btn-primary-original {
+          padding-top: 8px;
+          font-size: 20px;
+          color: white;
+          background: #3561FE;
+          border-color: #3561FE; }
+          .btn.btn-primary-original:hover {
+
+            border-color: #1643e8;
+            background: #1643e8; }
+    
     .btn.btn-outline-white {
       border: 2px solid #ffffff; }
       .btn.btn-outline-white:hover {
