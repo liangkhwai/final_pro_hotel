@@ -9,7 +9,7 @@
 
 <form action="" method="post">
     {%csrf_token%}
-
+<!-- 
     <div>ชื่อ : {{detail.name}}</div>
     <div>รายละเอี่ยด : {{detail.description}}</div>
     <div>
@@ -43,6 +43,36 @@
 
 
 <input type="submit" name="submit" id="" class="btn btn-primary " value="ขั้นตอนต่อไป">
+<a href="/" class="btn btn-warning">ยกเลิกการจอง</a> -->
+
+
+<div class="col-md-10 mx-auto col-lg-5">
+    <form class="shadow-lg rounded-5 row bg-light p-4" action="" method="post">
+        {%csrf_token%}
+        <div class="pb-4 text-black ">
+            <img src="/media/{{detail.img}}" alt="" class="img-fluid" width="400px">
+        </div>
+        รูปภาพเพิ่มเติม : 
+        {% for i in multiimg%}
+            <div class="d-inline">
+                <img src="/media/{{i.image}}" alt="" width="auto" height="200px">
+            </div>
+        {% endfor%}
+        
+        <div>วันที่เข้า : {{date_in}} </div>
+        <div>วันที่ออก : {{date_out}}</div>
+        <div>เช่าทั้งหมด : {{days}} คืน</div>
+        <div>ราคาทั้งหมด : {{price}} บาท</div>
+        <div class="row ">
+           
+        </div>
+        <br>
+    </form>
+    <input type="radio" name="pay" id="pay1" checked value="later">
+        <label for="pay1">จ่ายทีหลัง</label>
+        <input type="radio" name="pay" id="pay2" value="now">
+        <label for="pay2">จ่ายตอนนี้</label>
+    <input type="submit" name="submit" id="" class="btn btn-primary " value="ขั้นตอนต่อไป">
 <a href="/" class="btn btn-warning">ยกเลิกการจอง</a>
 
 

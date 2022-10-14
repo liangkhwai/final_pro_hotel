@@ -8,29 +8,51 @@ Payment
 {% block content%}
 
 <div class="container-fluid">
+<br>
+    <div class="col-md-10 mx-auto col-lg-5">
+        <form class="shadow-lg rounded-5 row bg-light p-4" action="" method="post">
+            {%csrf_token%}
+            <div class="pb-4 text-black ">
+                <img src="/media/{{booking.room.type.img}}" alt="" class="img-fluid" width="400px">
+            </div>
+            <div>วันที่เข้า : {{booking.date_in}}</div>
+            <div>วันที่ออก : {{booking.date_out}}</div>
+            <div>ค้างคืน : {{days}} วัน</div>
+            <div>ประเภท : {{booking.room.type}}</div>
+            <div>ราคา : {{booking.total_payment}}</div>
+            sdfsdf{{booking.booking_id}}
     
+            {{form.as_p}}
 
-<form action="{% url 'payment'%}" method="post">
-    {%csrf_token%}
-
-    <div>รูปภาพ : <img src="/media/{{booking.room.type.img}}" alt="" class="img-fluid" width="400px"></div>
-    <div>วันที่เข้า : {{booking.date_in}}</div>
-    <div>วันที่ออก : {{booking.date_out}}</div>
-    <div>ค้างคืน : {{days}} วัน</div>
-    <div>ประเภท : {{booking.room.type}}</div>
-    <div>ราคา : {{booking.total_payment}}</div>
-    sdfsdf{{booking.booking_id}}
-
-    {{form.as_p}}
-
-    <input type="hidden" name="booking_id" id="" value="{{booking.booking_id}}">
-    <input type="hidden" name="remain_day" id="" value="{{days}}">
+            <div class="row ">
+                <input type="submit" name="submit" id="" value="ยืนยันการชำระเงิน" class="btn btn-primary">
+            </div>
+            <br>
+            <input type="hidden" name="booking_id" id="" value="{{booking.booking_id}}">
+            <input type="hidden" name="remain_day" id="" value="{{days}}">
+        </form>
+    </div>
 
 
+    <!-- <form action="{% url 'payment'%}" method="post"> -->
+        <!-- {%csrf_token%}
 
-    <input type="submit" name="submit" id="" value="ยืนยันการชำระเงิน" class="btn btn-primary">
+        <div>รูปภาพ : <img src="/media/{{booking.room.type.img}}" alt="" class="img-fluid" width="400px"></div>
+        <div>วันที่เข้า : {{booking.date_in}}</div>
+        <div>วันที่ออก : {{booking.date_out}}</div>
+        <div>ค้างคืน : {{days}} วัน</div>
+        <div>ประเภท : {{booking.room.type}}</div>
+        <div>ราคา : {{booking.total_payment}}</div>
+        sdfsdf{{booking.booking_id}}
 
-</form>
+        {{form.as_p}} -->
+<!-- 
+        <input type="hidden" name="booking_id" id="" value="{{booking.booking_id}}">
+        <input type="hidden" name="remain_day" id="" value="{{days}}"> -->
+
+        <!-- <input type="submit" name="submit" id="" value="ยืนยันการชำระเงิน" class="btn btn-primary"> -->
+
+    <!-- </form> -->
 
 
 

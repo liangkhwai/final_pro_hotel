@@ -4,24 +4,29 @@
 
 
 <div class="container shadow-lg ">
-    <!-- row-1 -->
     <br>
     <br>
     <br><br><br>
     <H1 class="text-center text-black">ห้องพัก </H1>
     <br><br><br>
     <div class="row">
-
-        <!-- row-2 -->
-
+        <div class="col-4 p-5">
+           
+          </div>
+          <div class="col-4 p-5">
+            <div class="text-center">
+                <p>
+                    <a class="btn-center btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"aria-expanded="false" aria-controls="collapseExample">เพิ่มประเภทห้อง</a>
+                </p>
+            </div>
+          </div>
+          <div class="col-4 p-5">
+            
+          </div>
+       
+        
         <div class="col-md-10 mx-auto col-lg-5">
-            <!-- row-3 -->
-            <p>
-                <a class="btn-center btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
-                    aria-expanded="false" aria-controls="collapseExample">
-                    เพิ่มประเภทห้อง</a>
-            </p>
-
+           
             <div class="collapse" id="collapseExample">
                 <div class="card card-body">
                     <form action="" method="post" enctype="multipart/form-data">
@@ -42,7 +47,7 @@
                 {% for room in type%}
                 <div class="mb-3 border border-1 p-3">
                     <div>ชื่อห้อง : {{room.name}}</div>
-                    <div>รูปภาพ : <img src="media/{{room.img}}" alt="" width="400px"></div>
+                    <div><img src="media/{{room.img}}" alt="" width="400px" height="400xp"></div>
                     <div>รายละเอียด : {{room.description}}</div>
 
                     <div>ราคา : {{room.price}}</div>
@@ -50,7 +55,7 @@
                     <div>
                         <a href="room/{{room.type_id}}"><button class="btn btn-primary">อัพเดตสถานะ</button></a>
 
-                        <a href="edittype/{{room.type_id}}"><button class="btn btn-primary">แก้ไขประเภทห้อง</button></a>
+                        <a href="edittype/{{room.type_id}}"><button class="btn btn-warning text-light">แก้ไขประเภทห้อง</button></a>
                         <a href="deletetype/{{room.type_id}}"><button class="btn btn-danger">ลบประเภทห้อง</button></a>
                     </div>
                 </div>

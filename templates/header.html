@@ -39,7 +39,8 @@
           <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
 
           {%if user.is_authenticated%}
-                    <div class="navbar-nav dropdown">
+  
+                    <div class="navbar-nav dropdown ">
                         <a class=" nav-link dropdown-toggle text-uppercase" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa-solid fa-user"></i> {{user}}
@@ -56,12 +57,13 @@
                     {%endif%}
                     <div class="navbar-nav ">
                         {% if not user.is_authenticated %}
-                        <a class="nav-link px" href="/register">สมัครสมาชิก</a>
-                        <a class="nav-link px" href="/login">เข้าสู่ระบบ</a>
+                        <a class="btn btn-primary px-4" href="/register">สมัครสมาชิก</a>
+                        &nbsp;&nbsp;
+                        <a class="btn px-4" href="/login">เข้าสู่ระบบ</a>
                         {% else%}
                     </div>
                     {% endif%}
-
+           
           <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
         </form>
       </div>
