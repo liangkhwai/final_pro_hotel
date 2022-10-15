@@ -7,60 +7,75 @@ Payment
 
 {% block content%}
 
-<div class="container-fluid">
-<br>
-    <div class="col-md-10 mx-auto col-lg-5">
-        <form class="shadow-lg rounded-5 row bg-light p-4" action="" method="post">
-            {%csrf_token%}
-            <div class="pb-4 text-black ">
-                <img src="/media/{{booking.room.type.img}}" alt="" class="img-fluid" width="400px">
-            </div>
-            <div>วันที่เข้า : {{booking.date_in}}</div>
-            <div>วันที่ออก : {{booking.date_out}}</div>
-            <div>ค้างคืน : {{days}} วัน</div>
-            <div>ประเภท : {{booking.room.type}}</div>
-            <div>ราคา : {{booking.total_payment}}</div>
-            sdfsdf{{booking.booking_id}}
-    
-            {{form.as_p}}
 
-            <div class="row ">
-                <input type="submit" name="submit" id="" value="ยืนยันการชำระเงิน" class="btn btn-primary">
+<div class="container">
+    <h4 class="py-3 text-uppercase">{{booking.room.type.name}} / Enter your details</h4>
+    <div class="row">
+        <div class="col-xl-6 col-lg-12 col-md-12">
+            <div class="p-5">
+                <img src="/media/{{booking.room.type.img}}" alt="" class="rounded" width="100%" height="448px">
             </div>
-            <br>
-            <input type="hidden" name="booking_id" id="" value="{{booking.booking_id}}">
-            <input type="hidden" name="remain_day" id="" value="{{days}}">
-        </form>
+            <div class="row">
+
+                {% for i in multiimg%}
+                <div class="col-3 " style="height: 80px;">
+                    <img src="/media/{{i.image}}" alt="" class="rounded" width="100%" height="100%">
+                </div>
+                {% endfor%}
+
+            </div>
+        </div>
+        <div class="col-xl-6 col-lg-12 col-md-12 rounded rounded-4 " style="">
+            <div class="pb-5"></div>
+            <div class="container px-5  rounded rounded-4" style="background-color: white;">
+                <h5 class="text-center py-5 pb-2"><b><i class="fa-regular fa-calendar-days"></i> รายละเอียดการจอง</b>
+                </h5>
+                <b>
+                    <hr class="rounded-5 text-dark bg-dark"
+                        style=" color:black !important; background-color: black !important; height: 3px;"></b>
+                <div class="pb-5"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div>ประเภท : {{booking.room.type.name}}</div><br>
+                            <div>วันที่เข้า : {{booking.date_in}} </div><br>
+                            <div>วันที่ออก : {{booking.date_out}}</div><br>
+                            <div>คืน : {{days}} คืน</div><br>
+                            <div>สำหรับ : ผู้ใหญ่ {{request.COOKIES.people}} คน, 1 ห้อง</div><br>
+                            <div>ราคา : {{booking.total_payment}} บาท</div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="pb-2">
+                                <div class="text-center">รหัสบัตร</div>
+                                <div>{{form.pay_number}}</div>
+                            </div>
+                            <div class="pb-2">
+                                <div class="text-center">รหัสความปลอดภัย</div>
+                                <div>{{form.pay_code}}</div>
+                            </div>
+                            <div class="pb-5">
+                                <div class="text-center">วันหมดอายุ</div>
+                                <div>{{form.pay_expiry}}</div>
+                            </div>
+                            <form action="{% url 'payment'%}" method="post">
+                                {% csrf_token%}
+                                <div class="text-center pb-4">สถานะ : <b class="text-danger">ยังไม่ชำระเงิน</b></div>
+                                <input type="hidden" name="booking_id" id="" value="{{booking.booking_id}}">
+                                <input type="hidden" name="remain_day" id="" value="{{days}}">
+                                <div style="padding-bottom: 38px">
+                                    <input type="submit" name="submit" id="" value="ชำระเงิน"
+                                        class="btn btn-primary-booking form-control">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-
-    <!-- <form action="{% url 'payment'%}" method="post"> -->
-        <!-- {%csrf_token%}
-
-        <div>รูปภาพ : <img src="/media/{{booking.room.type.img}}" alt="" class="img-fluid" width="400px"></div>
-        <div>วันที่เข้า : {{booking.date_in}}</div>
-        <div>วันที่ออก : {{booking.date_out}}</div>
-        <div>ค้างคืน : {{days}} วัน</div>
-        <div>ประเภท : {{booking.room.type}}</div>
-        <div>ราคา : {{booking.total_payment}}</div>
-        sdfsdf{{booking.booking_id}}
-
-        {{form.as_p}} -->
-<!-- 
-        <input type="hidden" name="booking_id" id="" value="{{booking.booking_id}}">
-        <input type="hidden" name="remain_day" id="" value="{{days}}"> -->
-
-        <!-- <input type="submit" name="submit" id="" value="ยืนยันการชำระเงิน" class="btn btn-primary"> -->
-
-    <!-- </form> -->
-
-
-
-
-
 </div>
-
-
+<div class="pb-5"></div>
 
 
 {% include 'footer.html'%}

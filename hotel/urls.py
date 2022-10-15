@@ -26,6 +26,7 @@ urlpatterns = [
     path('bookdetail/<int:pk>',views.bookdetail,name='bookingdetail'),
     path('delimg/<int:id>/<int:type>',views.delMultiImg,name='delimg'),
     path('addanotherimg',views.addanotherimg,name='addanotherimg'),
+    path('alltype',views.alltype,name='alltype')
     
 
 ]

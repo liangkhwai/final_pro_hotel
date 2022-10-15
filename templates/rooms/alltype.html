@@ -1,0 +1,73 @@
+{% extends 'base.html'%}
+
+
+
+{%block title%}
+Rooms
+{% endblock%}
+
+
+
+{% block content%}
+
+<div style="width: 100%;height: 180px; background-color: white;">
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <div style="width: 150px;">
+                    <h1 class="pt-4">ห้องพัก</h1>
+                    <div class="pb-1"></div>
+                    <hr>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="pt-4">ห้องพักในพัทยาที่ให้คุณชมพระอาทิตย์ลับฟ้าจากระเบียงส่วนตัว
+                    คลายร้อนด้วยการอาบน้ำใต้ฝักบัวแบบเรนชาวเวอร์ และเอนกายลงบนเตียงนอนที่นุ่มสบาย
+                    ทุกห้องพักของเราได้รับการออกแบบเพื่อความสะดวกสบายและเป็นส่วนตัวสูงสุด
+                    เพื่อให้คุณได้สัมผัสบรรยากาศเงียบสงบริมทะเลและผ่อนคลายอย่างแท้จริง</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="pb-4"></div>
+<div class="d-flex justify-content-center">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <div class="row">
+                {% for i in alltype%}
+                <div class="col-6 pb-4">
+                    <div style="background-color: white;">
+                        <div style="width: 100%; ">
+                            <img src="/media/{{i.img}}" alt="" width="100%" height="300px" class="shadow-lg">
+                        </div>
+                        <div class="container">
+                            <h3 class="text-uppercase py-3">{{i.name}}</h3>
+                            <div><i class="fa-solid fa-house"></i> <b>ขนาดห้อง</b> : 30 m&#178;</div>
+                            <div><i class="fa-solid fa-user-group"></i> <b>จำนวนคน</b> : ผู้ใหญ่ {{i.limit_people}} คน
+                                หรือ
+                                ผู้ใหญ่ {{i.limit_people}} + เด็ก 1</div>
+                            <hr>
+                            <div>ราคา : {{i.price}} บาท</div>
+                            <div class="overflow-auto text-break">{{i.description}}</div>
+                            <div><i class="fa-solid fa-wifi"></i> ฟรีไวฟาย</div>
+                            <br>
+                            <div class="text-start pb-3">
+                                <a href="/" class="btn btn-primary">ข้อมูลเพิ่มเติม</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                {% endfor%}
+            </div>
+        </div>
+        <div class="col-3"></div>
+    </div>
+
+</div>
+
+
+
+
+{%endblock%}

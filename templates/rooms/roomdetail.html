@@ -54,7 +54,8 @@
 
 
 <div class="container pt-5">
-    <h3 class="text-uppercase mb-5"><a href="/" style="text-decoration: none; color: black;">HOME</a> / ROOM / {{type.name}}</h3>
+    <h3 class="text-uppercase mb-5"><a href="/" style="text-decoration: none; color: black;">หน้าแรก</a> / <a onclick="history.back()" style="text-decoration: none; color: black; cursor:pointer;">ห้อง</a> /
+        {{type.name}}</h3>
     <div class="row ">
         <div class="col-md-6 ">
             <img src="/media/{{type.img}}" alt="" class="w-100 rounded" style="height: 380px">
@@ -63,12 +64,15 @@
             <div class="px-5">
                 <h1>ห้อง {{type.name}}</h1>
                 <div class="row">
-                    <div class="pt-5"></div>
+                    <div class="pt-3"></div>
                     <div class="col-md-3">
-                        <h3 class="text-center">8.7</h3>
+                        <div class="text-center " style="background-color: #C4E6FA; width: 75px; height:75px; line-height: 70px;  border-radius: 50%;"><h3 style="padding-top:20px"><b>8.7</b></h3></div>
+
+                        
+
                     </div>
                     <div class="col-md">
-                        <div class="">ดีเยี่ยม <br>ความสะดวกสบายและคุณภาพของห้องพัก</div>
+                        <div class="" style="padding-top: 20px">ดีเยี่ยม <br>ความสะดวกสบายและคุณภาพของห้องพัก</div>
                         <br>
                         <table class="table" style="border-collapse: separate; border-spacing:10px;">
                             <tr class="">
@@ -88,9 +92,10 @@
                                 <td>วิวเมือง</td>
 
                                 <td colspan="2" class="text-center "
-                                    style="border-top: 2px solid black; border-bottom:1px solid black;">
-                                    {% if count == 0%} จำนวนห้องเต็มแล้ว {%else %} <div class="text-danger fs-5"
-                                        style="margin:0;padding:0;"> {{count}} ห้องสุดท้าย!!</div> {%endif%}</td>
+                                    style="border-top: 2px solid black; border-bottom:2px solid black;">
+                                    {% if count == 0%} <div class="text-danger">จำนวนห้องเต็มแล้ว</div> {%else %} <div
+                                        class="text-danger fs-5" style="margin:0;padding:0;"> {{count}} ห้องสุดท้าย!!
+                                    </div> {%endif%}</td>
                             </tr>
                             <tr>
                                 <td><i class="fa-solid fa-snowflake"></i></td>
@@ -111,8 +116,14 @@
 
                                 <div>ต่อคืน <span class="fs-1">{{price}}$</span></div>
                                 <br>
-                                <div class="pb-5"><a href="/booking/{{type.type_id}}" class="form-control text-center btn btn-primary-fix">จอง</a>
+                                {% if count == 0%}
+                               
+                                {%else%}
+                                <div class="pb-5"><a href="/booking/{{type.type_id}}"
+                                        class="form-control text-center btn btn-primary-fix">จอง</a>
                                 </div>
+                                {%endif%}
+
                             </div>
                         </div>
                     </div>
@@ -122,14 +133,17 @@
         </div>
     </div>
 
-
+{%if count == 0 %}
+<div class="text-end">
+    <div class="text-danger py-3 px-5 fs-3">ขออภัยห้อง {{type.name}} เต็มแล้ว <button class="btn btn-primary-original" onclick="history.back()">กลับ</button></div> 
+</div>
+{%endif%}
 
 
 </div>
 
 <script>
     document.body.style.backgroundColor = "white";
-
 </script>
 
 {% include 'footer.html'%}

@@ -7,8 +7,8 @@
 
 {% block content %}
 
-<form action="" method="post">
-    {%csrf_token%}
+<!-- <form action="" method="post">
+    {%csrf_token%} -->
 <!-- 
     <div>ชื่อ : {{detail.name}}</div>
     <div>รายละเอี่ยด : {{detail.description}}</div>
@@ -46,34 +46,97 @@
 <a href="/" class="btn btn-warning">ยกเลิกการจอง</a> -->
 
 
-<div class="col-md-10 mx-auto col-lg-5">
+<!-- <div class="col-md-10 mx-auto col-lg-5">
     <form class="shadow-lg rounded-5 row bg-light p-4" action="" method="post">
         {%csrf_token%}
         <div class="pb-4 text-black ">
             <img src="/media/{{detail.img}}" alt="" class="img-fluid" width="400px">
         </div>
-        รูปภาพเพิ่มเติม : 
+        รูปภาพเพิ่มเติม :
         {% for i in multiimg%}
-            <div class="d-inline">
-                <img src="/media/{{i.image}}" alt="" width="auto" height="200px">
-            </div>
+        <div class="d-inline">
+            <img src="/media/{{i.image}}" alt="" width="auto" height="200px">
+        </div>
         {% endfor%}
-        
+
         <div>วันที่เข้า : {{date_in}} </div>
         <div>วันที่ออก : {{date_out}}</div>
         <div>เช่าทั้งหมด : {{days}} คืน</div>
         <div>ราคาทั้งหมด : {{price}} บาท</div>
         <div class="row ">
-           
+
         </div>
         <br>
-    </form>
-    <input type="radio" name="pay" id="pay1" checked value="later">
+        <input type="radio" name="pay" id="pay1" checked value="later">
         <label for="pay1">จ่ายทีหลัง</label>
         <input type="radio" name="pay" id="pay2" value="now">
         <label for="pay2">จ่ายตอนนี้</label>
-    <input type="submit" name="submit" id="" class="btn btn-primary " value="ขั้นตอนต่อไป">
-<a href="/" class="btn btn-warning">ยกเลิกการจอง</a>
+        <input type="submit" name="submit" id="" class="btn btn-primary " value="ขั้นตอนต่อไป">
+        <a href="/" class="btn btn-warning">ยกเลิกการจอง</a>
+    </form>
+</div> -->
+
+
+<div class="container">
+    <h4 class="py-3 text-uppercase">{{detail.name}} / Enter your details</h4>
+    <div class="row">
+        <div class="col-md-6 ">
+            <div class="p-5">
+                <img src="/media/{{detail.img}}" alt="" class="rounded" width="100%" height="448px">
+            </div>
+            <div class="row ">
+                <div class="d-flex justify-content-between">
+                    {% for i in multiimg%}
+                    <div class="col-md-3 " style="width: 150px; height: 80px;">
+                        <div class="d-inline">
+                            <img src="/media/{{i.image}}" alt="" class="rounded " width="100%" height="100%">
+                        </div>
+                    </div>
+                    {% endfor%}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 rounded rounded-4 " style="">
+            <div class="pb-5"></div>
+            <div class="container px-5  rounded rounded-4" style="background-color: white;">
+                <h5 class="text-center py-5 pb-2"><b><i class="fa-regular fa-calendar-days"></i> รายละเอียดการจอง</b>
+                </h5>
+                <b>
+                    <hr class="rounded-5 text-dark bg-dark"
+                        style=" color:black !important; background-color: black !important; height: 3px;"></b>
+                <form action="" method="post">
+                    {%csrf_token%}
+                    <div class="text-center " style="padding-bottom: 31px">
+                        <div>ประเภท : {{detail.name}}</div><br>
+                        <div>วันที่เข้า : {{date_in}}</div><br>
+                        <div>วันที่ออก : {{date_out}}</div><br>
+                        <div>คืน : {{days}} คืน</div><br>
+                        <div>สำหรับ : ผู้ใหญ่ {{ request.COOKIES.people }} คน, 1 ห้อง</div><br>
+                        <div>ราคา : {{price}} บาท</div><br>
+                        <input type="radio" name="pay" id="pay1" checked value="later">
+                        <label for="pay1">จ่ายทีหลัง</label> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="pay" id="pay2" value="now">
+                        <label for="pay2">จ่ายตอนนี้</label>
+                        <br><br>
+                        <a href="/" class="btn btn-outline-danger">ยกเลิกการจอง</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="submit" name="submit" id="" class="btn btn-primary-booking " value="ยืนยันการจอง"
+                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                        <input type="hidden" value="{{days}}" name="days">
+                        <input type="hidden" value="{{price}}" name="sum_price">
+                        <input type="hidden" value="{{detail.type_id}}" name="type_id">
+                        <input type="hidden" value="{{room_free.room_id}}" name="room_id">
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="pb-5"></div>
+
+
 
 
 {% include 'footer.html'%}

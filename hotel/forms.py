@@ -284,6 +284,11 @@ class MultiImageForm(forms.ModelForm):
         
         
 class PaymentForm(forms.ModelForm):
+    def __init__(self,*args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['pay_number'].widget.attrs.update({'class':'form-control'})
+        self.fields['pay_expiry'].widget.attrs.update({'class':'form-control'})
+        self.fields['pay_code'].widget.attrs.update({'class':'form-control'})
     class Meta:
         model = Payment
         fields = ('pay_number','pay_expiry','pay_code')

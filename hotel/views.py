@@ -29,7 +29,7 @@ def home(req):
             if data['people'] == '4':
                 rooms = RoomType.objects.all().filter(limit_people = 4)
             else:
-                rooms = RoomType.objects.all
+                rooms = RoomType.objects.all()
                 # .filter(~Q(limit_people = 4))
             response = render(req,'rooms/user_rooms.html',{'roomss':rooms})
             response.set_cookie('date_in',data['date_in']) 
@@ -350,9 +350,6 @@ def booking(req,pk):
             room_free.save()
             return redirect('home')
         else:
-           
-            
-            
             book = Booking()
             book.date_in = date_in
             book.date_out = date_out
@@ -373,7 +370,8 @@ def booking(req,pk):
                 'booking':booking,
                 'form':form,
                 'days':remain_day,
-            }
+                'multiimg':multiimg,
+            }   
             
             return render(req,'payment/payment.html',context)
         
@@ -395,7 +393,6 @@ def payment(req):
         pay_expiry = req.POST.get('pay_expiry')
         pay_code = req.POST.get('pay_code')
         book_id = req.POST.get('booking_id')
-        print("booking_id : ",book_id)
         select_book = Booking.objects.get(booking_id = book_id)
             
         pay = Payment()
@@ -415,7 +412,7 @@ def payment(req):
         trans.save()
 
         print('ชำระเงินสำเร็จ')
-        return redirect('home')
+        return redirect('bookingdetail',pk=book_id)
 
         
         
@@ -430,11 +427,12 @@ def bookdetail(req,pk):
     date_out = booking.date_out
 
     form = PaymentForm()
-    
+    multiimg = MultiImage.objects.all().filter(type = booking.room.type.type_id)[:4]
     remain_day = date_out.day - date_in.day
     
     
     context = {
+        'multiimg':multiimg,
         'booking':booking,
         'remain_day':remain_day,
         'form':form
@@ -445,5 +443,11 @@ def bookdetail(req,pk):
     
         
         
-                
+def alltype(req):
+    alltype = RoomType.objects.all()
+    
+    context = {
+        'alltype':alltype
+    }
+    return render(req,'rooms/alltype.html',context)                
     
