@@ -54,21 +54,37 @@
 
 
 <div class="container pt-5">
-    <h3 class="text-uppercase mb-5"><a href="/" style="text-decoration: none; color: black;">หน้าแรก</a> / <a onclick="history.back()" style="text-decoration: none; color: black; cursor:pointer;">ห้อง</a> /
+    <h3 class="text-uppercase mb-5"><a href="/" style="text-decoration: none; color: black;">หน้าแรก</a> / <a
+            onclick="history.back()" style="text-decoration: none; color: black; cursor:pointer;">ห้อง</a> /
         {{type.name}}</h3>
     <div class="row ">
         <div class="col-md-6 ">
-            <img src="/media/{{type.img}}" alt="" class="w-100 rounded" style="height: 380px">
+            <div class="pb-5 px-5">
+                <img src="/media/{{type.img}}" alt="" class="w-100 rounded" style="height: 380px">
+            </div>
+            <div class="row">
+
+                {% for i in multiimg%}
+                <div class="col-3 " style="height: 80px;">
+                    <img src="/media/{{i.image}}" alt="" class="rounded" width="100%" height="100%">
+                </div>
+                {% endfor%}
+
+            </div>
         </div>
-        <div class="col-md-6">
+
+        <div class="col-md-6 ">
             <div class="px-5">
                 <h1>ห้อง {{type.name}}</h1>
                 <div class="row">
                     <div class="pt-3"></div>
                     <div class="col-md-3">
-                        <div class="text-center " style="background-color: #C4E6FA; width: 75px; height:75px; line-height: 70px;  border-radius: 50%;"><h3 style="padding-top:20px"><b>8.7</b></h3></div>
+                        <div class="text-center "
+                            style="background-color: #C4E6FA; width: 75px; height:75px; line-height: 70px;  border-radius: 50%;">
+                            <h3 style="padding-top:20px"><b>8.7</b></h3>
+                        </div>
 
-                        
+
 
                     </div>
                     <div class="col-md">
@@ -77,7 +93,7 @@
                         <table class="table" style="border-collapse: separate; border-spacing:10px;">
                             <tr class="">
                                 <td width="10%"><i class="fa-solid fa-bed"></i></td>
-                                <td>2 เตียงเดี่ยว</td>
+                                <td>{{type.bed}}</td>
                                 <td><i class="fa-solid fa-restroom"></i></td>
                                 <td>ห้องน้ำในตัว</td>
                             </tr>
@@ -104,40 +120,61 @@
                         </table>
                     </div>
                 </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="badge text-wrap py-2 fs-5 px-3" style="background-color: #FF0000;">SALE!! ลด 53%
-                                วันนี้</div>
 
-                        </div>
-                        <div class="col">
-                            <div class="text-end">
-
-                                <div>ต่อคืน <span class="fs-1">{{price}}$</span></div>
-                                <br>
-                                {% if count == 0%}
-                               
-                                {%else%}
-                                <div class="pb-5"><a href="/booking/{{type.type_id}}"
-                                        class="form-control text-center btn btn-primary-fix">จอง</a>
-                                </div>
-                                {%endif%}
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
         </div>
     </div>
 
-{%if count == 0 %}
-<div class="text-end">
-    <div class="text-danger py-3 px-5 fs-3">ขออภัยห้อง {{type.name}} เต็มแล้ว <button class="btn btn-primary-original" onclick="history.back()">กลับ</button></div> 
-</div>
-{%endif%}
+    <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="pb-3"></div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div
+                            class="badge text-wrap py-2 fs-5 px-3" style="background-color: #FF0000;">SALE!! ลด 53%
+                            วันนี้</div>
+
+
+                    </div>
+                    <div class="col">
+                        <div class="text-end">
+
+                            <div>ต่อคืน <span class="fs-1">{{price}}$</span></div>
+                            <div class="pb-2"></div>
+                            {% if count == 0%}
+
+                            {%else%}
+                            {% if not user.is_authenticated%}
+                            <div class="pb-5"></div>
+                            <!-- <div class="pb-5 text-danger"><a href="/login" class="btn btn-primary-original">คลิกที่นี่เพื่อเข้าสู่ระบบ</a>    </div> -->
+                            {% elif not request.COOKIES.people%}
+                            <div class="pb-5 text-danger"><a href="/" class="btn btn-primary-original">กรุณาเลือกวันที่จอง</a></div>
+                            {% else %}
+                            <div class="pb-5"><a href="/booking/{{type.type_id}}"
+                                    class="form-control text-center btn btn-primary-fix">จอง</a>
+                            </div>
+                            {% endif %}
+                            {% endif%}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    {%if count == 0 %}
+    <div class="text-end">
+        <div class="text-danger py-3 px-5 fs-3">ขออภัยห้อง {{type.name}} เต็มแล้ว <button
+                class="btn btn-primary-original" onclick="history.back()">กลับ</button></div>
+    </div>
+    {%endif%}
 
 
 </div>

@@ -20,6 +20,10 @@ PEOPLE_CHOICES = [
     (4,'2-4 คน'),
 ]
 
+BED_CHOICES = [
+    ('1 เตียงเดี่ยว','1 เตียงเดี่ยว'),
+    ('2 เตียงคู่','2 เตียงคู่')
+]
 
 # class DateInput(forms.DateInput):
 #     input_type = 'date'
@@ -174,6 +178,12 @@ class AddRoomsClassForm(forms.ModelForm):
         }
     
 class AddRoomsTypeForm(forms.ModelForm):
+    bed = forms.ChoiceField(
+        required=True,
+        widget=forms.Select,
+        choices=BED_CHOICES,
+        label="จำนวนเตียง",
+    )
     limit_people = forms.ChoiceField(widget=forms.Select(attrs={'class':'form-control'}),choices=PEOPLE_CHOICES,label='จำนวนคนพัก')
 
     def __init__(self,*args, **kwargs):
@@ -183,15 +193,17 @@ class AddRoomsTypeForm(forms.ModelForm):
         self.fields['price'].widget.attrs.update({'class':'form-control'})
         self.fields['img'].widget.attrs.update({'class':'form-control'})
         self.fields['limit_people'].widget.attrs.update({'class':'form-control'})
+        self.fields['bed'].widget.attrs.update({'class':'form-control'})
     class Meta:
         model = RoomType
-        fields = ('name','img','description','limit_people','price')
+        fields = ('name','img','description','limit_people','price','bed')
         labels = {
             'name':'ชื่อประเภท',
             'description':'รายละเอียดประเภทห้อง',
             'img':'รูปภาพ',
             'price':'ราคา',
-            'limit_people':'จำนวนคนพัก'
+            'limit_people':'จำนวนคนพัก',
+            'bed':'จำนวนเตียง',
 
         }
     

@@ -54,7 +54,34 @@
                                     <h3>ห้อง : {{i.name}}</h3>
                                     <br>
                                     <h4>รายละเอียด : </h2>
-                                        <textarea class="form-control h-auto" readonly disabled rows="12">{{i.description}}</textarea>
+                                        <table class="" style="border-collapse: separate; border-spacing:20px; height: 296px;">
+                                            <tr class="">
+                                                <td width="10%"><i class="fa-solid fa-bed"></i></td>
+                                                <td>{{i.bed}}</td>
+                                                <td><i class="fa-solid fa-restroom"></i></td>
+                                                <td>ห้องน้ำในตัว</td>
+                                            </tr>
+                                            <tr>
+                                                <td><i class="fa-solid fa-maximize"></i></td>
+                                                <td>ขนาด 25 ตรม.</td>
+                                                <td><i class="fa-solid fa-tv"></i></td>
+                                                <td>โทรทัศน์จอแบน</td>
+                                            </tr>
+                                            <tr>
+                                                <td><i class="fa-solid fa-city"></i></td>
+                                                <td>วิวเมือง</td>
+                
+                                                <!-- <td colspan="2" class="text-center "
+                                                    style="border-top: 2px solid black; border-bottom:2px solid black;">
+                                                    {% if count == 0%} <div class="text-danger">จำนวนห้องเต็มแล้ว</div> {%else %} <div
+                                                        class="text-danger fs-5" style="margin:0;padding:0;"> {{count}} ห้องสุดท้าย!!
+                                                    </div> {%endif%}</td> -->
+                                                    <td><i class="fa-solid fa-snowflake"></i></td>
+                                                <td>มีเครื่องปรับอากาศ</td>
+                                            </tr>
+                                           
+                                        </table>
+                                        <!-- <textarea class="form-control h-auto" readonly disabled rows="12">{{i.description}}</textarea> -->
                                         <!-- <div class="">{{i.description}}</div> -->
 
                                 </div>
@@ -70,8 +97,9 @@
                                                     class="btn btn-primary-original form-control">จอง</a>
                                         </div>
                                     </div>
-                                </div>
+                                    <div class="" style=""></div>
 
+                                </div>
 
                             </div>
                         </div>

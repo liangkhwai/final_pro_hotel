@@ -93,7 +93,11 @@ def login_user(req):
 
 def logout_user(req):
     logout(req)
-    return HttpResponseRedirect(reverse('home'))
+    response = redirect('home')
+    response.delete_cookie('people')
+    response.delete_cookie('date_in')
+    response.delete_cookie('date_out')
+    return response
 
 def editcustomer(req,pk):
     customer = Customer.objects.get(cust_id=pk)
@@ -309,8 +313,10 @@ def fetchrooms(req):
 def roomdetail(req,pk):
     typeCheck = RoomType.objects.get(type_id = pk)
     roomCheck = Rooms.objects.all().filter(type_id = pk,status = "ว่าง").count()
+    multiimg = MultiImage.objects.all().filter(type = typeCheck)[:4]
     price = "{:,}".format(typeCheck.price)
     context = {
+        'multiimg':multiimg,
         'price':price,
         'type':typeCheck,
         'count':roomCheck
