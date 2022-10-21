@@ -46,6 +46,8 @@ Payment
 
                         </div>
                         <div class="col-md-6">
+                            <form action="{% url 'payment'%}" method="post">
+                                {% csrf_token%}
                             <div class="pb-2">
                                 <div class="text-center">รหัสบัตร</div>
                                 <div>{{form.pay_number}}</div>
@@ -58,8 +60,6 @@ Payment
                                 <div class="text-center">วันหมดอายุ</div>
                                 <div>{{form.pay_expiry}}</div>
                             </div>
-                            <form action="{% url 'payment'%}" method="post">
-                                {% csrf_token%}
                                 <div class="text-center pb-4">สถานะ : <b class="text-danger">ยังไม่ชำระเงิน</b></div>
                                 <input type="hidden" name="booking_id" id="" value="{{booking.booking_id}}">
                                 <input type="hidden" name="room_free" id="" value="{{room_free.room_id}}">

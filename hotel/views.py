@@ -395,15 +395,6 @@ def booking(req,pk):
             room_free.save()
             return redirect('home')
         else:
-            book = Booking()
-            book.date_in = date_in
-            book.date_out = date_out
-            book.total_payment = sum_price
-            book.cust = user
-            book.room = room_free
-            book.save()
-            room_free.status = "ไม่ว่าง"
-            room_free.save()
             trans = Transaction()
             trans.cust = user.account.username
             trans.room_id = room_id
@@ -411,6 +402,16 @@ def booking(req,pk):
             trans.status = "ยังไม่ชำระเงิน"
             trans.total = sum_price
             trans.save()
+            book = Booking()
+            book.date_in = date_in
+            book.date_out = date_out
+            book.total_payment = sum_price
+            book.cust = user
+            book.room = room_free
+            book.transection = trans
+            book.save()
+            room_free.status = "ไม่ว่าง"
+            room_free.save()
             
             booking = Booking.objects.get(room_id = room_id)
             
@@ -447,8 +448,8 @@ def payment(req):
         book_id = req.POST.get('booking_id')
         room_id = req.POST.get('room_free')
         select_book = Booking.objects.get(booking_id = book_id)
-        print("sdfsdfddddddddddddddd: ",room_id)
-        transection = Transaction.objects.get(room_id = room_id)
+        print("trannnnnnnnnnnnn : ",select_book.transection.trans_id)
+        transection = Transaction.objects.get(trans_id = select_book.transection.trans_id)
         
         pay = Payment()
         pay.pay_code = pay_code

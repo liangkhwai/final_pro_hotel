@@ -73,7 +73,7 @@ Booking detail
 
                         </div>
                         <div class="text-end">
-                            <a href="/cancle/{{booking.booking_id}}" class="btn btn-secondary">ยกเลิกการจอง</a>
+                            <a href="#" onclick="cancle('{{booking.booking_id}}')" class="btn btn-secondary">ยกเลิกการจอง</a>
                             <input type="button" onclick="confirmedit()" name="" id="" value="ชำระเงิน"
                                 class="btn btn-primary-booking">
                         </div>
@@ -131,5 +131,32 @@ Booking detail
             }
         })
     }
+
+    function cancle(book){
+        Swal.fire({
+            title: 'ยกเลิกการจอง',
+            text: "การกระทำต่อไปนี้ ไม่สามารถย้อนคืนได้",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                try{
+                    document.location.href = "/cancle/"+book
+                    }
+                catch(error)
+                    {
+                Swal.fire({
+                      icon: 'error',
+                      text: 'เกิดข้อผิดพลาด',
+                    });
+                    }
+            }
+        })
+    }
+
 </script>
 {% endblock %}
