@@ -62,6 +62,7 @@ Payment
                                 {% csrf_token%}
                                 <div class="text-center pb-4">สถานะ : <b class="text-danger">ยังไม่ชำระเงิน</b></div>
                                 <input type="hidden" name="booking_id" id="" value="{{booking.booking_id}}">
+                                <input type="hidden" name="room_free" id="" value="{{room_free.room_id}}">
                                 <input type="hidden" name="remain_day" id="" value="{{days}}">
                                 <div style="padding-bottom: 38px">
                                     <input type="submit" name="submit" id="" value="ชำระเงิน"

@@ -5,6 +5,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
+handler404 = 'hotel.views.notFound'
+
 urlpatterns = [
     path('',views.home,name='home'),
     path('register',views.register,name='register'),
@@ -26,7 +28,10 @@ urlpatterns = [
     path('bookdetail/<int:pk>',views.bookdetail,name='bookingdetail'),
     path('delimg/<int:id>/<int:type>',views.delMultiImg,name='delimg'),
     path('addanotherimg',views.addanotherimg,name='addanotherimg'),
-    path('alltype',views.alltype,name='alltype')
+    path('alltype',views.alltype,name='alltype'),
+    path('contact',views.contact,name='contact'),
+    path('transection',views.transection,name='transecton'),
+    path('cancle/<int:pk>',views.cancle,name='cancle')
     
 
 ]

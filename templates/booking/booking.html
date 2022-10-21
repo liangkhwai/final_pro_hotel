@@ -104,7 +104,7 @@
                 <b>
                     <hr class="rounded-5 text-dark bg-dark"
                         style=" color:black !important; background-color: black !important; height: 3px;"></b>
-                <form action="" method="post">
+                <form action="" method="post" name="formform" id="formform">
                     {%csrf_token%}
                     <div class="text-center " style="padding-bottom: 31px">
                         <div>ประเภท : {{detail.name}}</div><br>
@@ -120,7 +120,8 @@
                         <br><br>
                         <a href="/" class="btn btn-outline-danger">ยกเลิกการจอง</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="submit" name="submit" id="" class="btn btn-primary-booking " value="ยืนยันการจอง"
+                        <input type="button" onclick="confirmedit()" name="" id=""
+                            class="btn btn-primary-booking " value="ยืนยันการจอง"
                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                         <input type="hidden" value="{{days}}" name="days">
                         <input type="hidden" value="{{price}}" name="sum_price">
@@ -140,4 +141,30 @@
 
 
 {% include 'footer.html'%}
+<script>
+    function confirmedit() {
+        Swal.fire({
+            title: 'ยืนยันการจอง',
+            text: "การกระทำต่อไปนี้ ไม่สามารถย้อนคืนได้",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                try {
+                    console.log('debgu')
+                    document.getElementById("formform").submit();
+                } catch (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'เกิดข้อผิดพลาด',
+                    });
+                }
+            }
+        })
+    }
+</script>
 {% endblock %}

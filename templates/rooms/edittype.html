@@ -1,18 +1,107 @@
 {% extends 'base.html'%}
-
-
-
 {% block title%}EDIT TYPE{%endblock%}
-
-
-
 {% block content %}
+<div class="bg-primary p-5">
+    <h1 class="text-center " style="color:white;">แก้ไขประเภทห้อง</h1>
+</div>
+<form action="" method="post" name="formform" id="formform" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="container" style="background-color: white;">
+        <div style="background-color: white;" >
+            <div class="pt-5"></div>
+            <div class="row" style="">
+                <div class="col-md-6" style="">
+                    <div class="container px-5">
+                        <div class="text-center">
+                            <h5>รูปภาพปัจจุบัน</h5>
+                        </div>
+                        <div class="text-center">
+                            <img src="/media/{{type.img}}" alt="" width="100%" height="300px">
+                        </div>
+                        <div class="text-center py-4">
+                            <h5>เปลี่ยนรูป</h5>
+                        </div>
+                        <div class="text-center ">
+                            {{form.img}}
+                        </div>
+                        <div class="text-center py-4">
+                            <h5>รูปภาพเพิ่มเติม</h5>
+                        </div>
+                        <div class="row" style="height: 150px">
+                            {% for i in multiimg%}
+                            <div class="col-3" style="">
+                                <img src="/media/{{i.image}}" alt="{{i.image}}" width="100%" height="80px"
+                                    class="rounded ">
 
-<form action="" method="post" enctype="multipart/form-data">
+                                <div class="text-center py-3">
+                                    <a href="#" onclick="confirmedDelete('{{i.id}}','{{i.type.type_id}}')" class="ez1 btn-outline-dan">ลบ</a>
+                                </div>
+
+                            </div>
+                            {%endfor%}
+                        </div>
+
+                        <div class="text-center py-4">
+                            <h5>เพิ่มรูปภาพเพิ่มเติม</h5>
+                        </div>
+                        <div class="">
+                            {{imgForm.image}}
+                        </div>
+                        <!-- <div class="d-flex" id="box"></div> -->
+                        <!-- <div class="py-4">
+                            <a onclick="clearimg()" class="btn btn-outline-secondary">Clear</a>
+                        </div> -->
+
+                    </div>
+                </div>
+                <div class="col-md-6 px-5 my-auto" style="height:100%;">
+
+                    <div class="pb-4">
+                        <div>{{form.name.label_tag}}</div>
+                        <div style="" class="">{{form.name}}</div>
+                    </div>
+                    <div class="py-4">
+                        <div>{{form.limit_people.label_tag}}</div>
+                        <div>{{form.limit_people}}</div>
+                    </div>
+                    <div class="py-4">
+                        <div>{{form.description.label_tag}}</div>
+                        <div>{{form.description}}</div>
+
+                    </div>
+                    <div class="py-4">
+
+                        <div>{{form.bed.label_tag}}</div>
+                        <div>{{form.bed}}</div>
+                    </div>
+                    <div class="py-4">
+
+                        <div>{{form.price.label_tag}}</div>
+                        <div>{{form.price}}</div>
+                    </div>
+                    <!-- <div class="text-end mt-auto">
+                        <div class="mt-auto">
+                            <a href="/" class="btn btn-outline-danger">ยกเลิก</a>
+                            <input type="submit" value="แก้ไขประเภทห้อง" class="btn btn-outline-success">
+                        </div>
+                    </div> -->
+                </div>
+
+            </div>
+            <div class="text-center p-5">
+                <a href="/" class="btn btn-outline-danger">ยกเลิก</a>
+                <input type="button" value="แก้ไขประเภทห้อง" onclick="confirmedit()" class="btn btn-outline-success">
+            </div>
+        </div>
+    </div>
+    </div>
+</form>
+
+
+<!-- <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{form.name.label_tag}}
     {{form.name}}
-
     <div class="d-flex justify-content-start">
         <img src="/media/{{type.img}}" alt="" width="300px"> <br>
         <div>
@@ -24,34 +113,19 @@
             </div>
         </div>
     </div>
-
-   
-
-
     <div class="row">
         {% for i in multiimg%}
-
         <div class="col-auto">
             <div>
                 <img src="/media/{{i.image}}" alt="{{i.image}}" width="auto" height="200px" class="rounded">
-
             </div>
             <div class="text-center my-1">
-
                 <a href="/delimg/{{i.id}}/{{i.type.type_id}}" class="btn btn-danger">ลบรูปภาพนี้</a>
             </div>
-
         </div>
         {%endfor%}
     </div>
-
-
-
-
-
     <br>
-
-
     {{form.description.label_tag}}
     {{form.description}}
     {{form.bed.label_tag}}
@@ -60,28 +134,96 @@
     {{form.limit_people}}
     {{form.price.label_tag}}
     {{form.price}}
-
-
-
-
+    <div class="d-flex" id="box">
+    </div>
+    <a onclick="clearimg()" class="btn btn-outline-secondary">Clear</a>
+    {{imgForm.as_p}}
     <input type="submit" value="แก้ไขประเภทห้อง" class="btn btn-primary">
+</form> -->
+<!-- <script>
+    fileElem = document.getElementById("imagex")
+    box = document.getElementById("box")
+    fileElem.addEventListener("change", handleFiles, false);
 
+    function clearimg() {
+        var child = box.lastElementChild;
+        while (child) {
+            box.removeChild(child);
+            child = box.lastElementChild;
+        }
+        fileElem.value = null
+        console.log(fileElem.innerHTML)
+    }
 
+    function handleFiles() {
+        if (!this.files.length) {
+            clearimg()
+        } else {
+            for (let i = 0; i < this.files.length; i++) {
+                const img = document.createElement("img");
+                img.src = URL.createObjectURL(this.files[i]);
+                img.height = 200;
+                img.width = 200
+                img.onload = () => {
+                    URL.revokeObjectURL(img.src);
+                }
+                box.appendChild(img);
+            }
+        }
+    }
+</script> -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmedDelete(id,room){
+        Swal.fire({
+            title: 'ยืนยันลบ',
+            text: "การกระทำต่อไปนี้ ไม่สามารถย้อนคืนได้",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                try{
+                    document.location.href = "/delimg/"+id+"/"+room
+                    }
+                catch(error)
+                    {
+                Swal.fire({
+                      icon: 'error',
+                      text: 'เกิดข้อผิดพลาด',
+                    });
+                    }
+            }
+        })
+    }
+   function confirmedit(){
+       Swal.fire({
+           title: 'ยืนยันการแก้ไข',
+           text: "การกระทำต่อไปนี้ ไม่สามารถย้อนคืนได้",
+           icon: 'warning',
+           showCancelButton: true,
+           confirmButtonColor: '#3085d6',
+           cancelButtonColor: '#d33',
+           confirmButtonText: 'ยืนยัน',
+           cancelButtonText: 'ยกเลิก'
+       }).then((result) => {
+           if (result.isConfirmed) {
+               try{
+                document.formform.submit();
+            }
+               catch(error)
+                   {
+               Swal.fire({
+                     icon: 'error',
+                     text: 'เกิดข้อผิดพลาด',
+                   });
+                   }
+           }
+       })
+   }
 
-</form>
-
-<form action="{% url 'addanotherimg'%}" method="post" enctype="multipart/form-data">
-    {% csrf_token%}
-    รูปภาพเพิ่มเติม:
-    {% for form in imgForm %}
-        {{ form }}
-    {% endfor %}
-    <input type="hidden" name="type" id="" value="{{type.type_id}}">
-    <input type="submit" name="submit" id="" value="เพิ่มรูป" class="btn btn-success">
-
-    </form>
-
-
-
-
+</script>
 {% endblock %}

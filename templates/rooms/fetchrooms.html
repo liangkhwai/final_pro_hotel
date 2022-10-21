@@ -3,71 +3,278 @@
 {% block content %}
 
 
-<div class="container shadow-lg ">
-    <br>
-    <br>
-    <br><br><br>
-    <H1 class="text-center text-black">ห้องพัก </H1>
-    <br><br><br>
-    <div class="row">
-        <div class="col-4 p-5">
-           
-          </div>
-          <div class="col-4 p-5">
-            <div class="text-center">
-                <p>
-                    <a class="btn-center btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"aria-expanded="false" aria-controls="collapseExample">เพิ่มประเภทห้อง</a>
-                </p>
+<div class="bg-primary p-5">
+    <h1 class="text-center" style="color:white;">จัดการห้องพัก</h1>
+</div>
+
+<div class="container" style="background-color: white;">
+    {% if type%}
+    <div class="row border p-5">
+        {% for room in type%}
+        <div class="col-lg-6 col-md-12" style="">
+            <div style="width: 100%" class="container ">
+                <h1 class="pb-2 px-4">{{room.name}}</h1>
+                <div class="text-center">
+                    <img src="/media/{{room.img}}" alt="" width="90%" height="300px" class="">
+                </div>
+                <div class="text-center py-4  w-100">
+
+                    <a href="room/{{room.type_id}}"><button
+                            class="ez1 btn-outline-suc"><b>อัพเดตสถานะ</b></button></a>
+                    <a href="edittype/{{room.type_id}}"><button
+                            class="ez1 btn-outline-pri  "><b>แก้ไขประเภทห้อง</b></button></a>
+                    <a href="#" id="deltype"><button
+                            class="ez1 btn-outline-dan  " onclick="confirmedDelete('{{room.type_id}}')"><b>ลบประเภทห้อง</b></button></a>
+                </div>
             </div>
-          </div>
-          <div class="col-4 p-5">
-            
-          </div>
-       
-        
-        <div class="col-md-10 mx-auto col-lg-5">
-           
-            <div class="collapse" id="collapseExample">
-                <div class="card card-body">
+        </div>
+        {% endfor %}
+        <div class="text-end">
+            <!-- <a class="btn-center btn btn-primary-original p-4 fs-5" data-bs-toggle="collapse" href="#collapseExample"
+                role="button" aria-expanded="false" aria-controls="collapseExample"><b>เพิ่มประเภทห้อง</b></a> -->
+            <button type="button" class="btn btn-primary-original" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">
+                เพิ่มประเภทห้อง
+            </button>
+        </div>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <label for="multi">รูปภาพเพิ่มเติม</label>
+                    {% for form in imgForm %}
+                    {{ form }}
+                    {% endfor %}
+
+                    <input type="submit" name="submit" id="" value="เพิ่มประเภทห้อง" class="btn btn-success">
+                </form>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLabel"><b>เพิ่มประเภทห้อง</b></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{form.as_p}}
+                            <label for="multi">รูปภาพเพิ่มเติม</label>
+                            {% for form in imgForm %}
+                            {{ form }}
+                            {% endfor %}
+
+                            <!-- <input type="submit" name="submit" id="" value="เพิ่มประเภทห้อง" class="btn btn-success"> -->
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                        <input type="submit" name="submit" id="" value="บันทึก" class="btn btn-primary">
+                        </form>
+                        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+    {%else%}
+    <div class="text-center"><h1 class="" style="padding-top:250px;">ไม่มีห้องพักในขณะนี้</h1></div>
+    <div class="text-center">
+        <!-- <a class="btn-center btn btn-primary-original p-4 fs-5" data-bs-toggle="collapse" href="#collapseExample"
+            role="button" aria-expanded="false" aria-controls="collapseExample"><b>เพิ่มประเภทห้อง</b></a> -->
+        <button type="button" class="btn btn-primary-original" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
+            เพิ่มประเภทห้อง
+        </button>
+    </div>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.as_p}}
+                <label for="multi">รูปภาพเพิ่มเติม</label>
+                {% for form in imgForm %}
+                {{ form }}
+                {% endfor %}
+
+                <input type="submit" name="submit" id="" value="เพิ่มประเภทห้อง" class="btn btn-success">
+            </form>
+        </div>
+
+    </div>
+
+
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel"><b>เพิ่มประเภทห้อง</b></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
                     <form action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{form.as_p}}
                         <label for="multi">รูปภาพเพิ่มเติม</label>
                         {% for form in imgForm %}
                         {{ form }}
-                           {% endfor %}
-      
-                        <input type="submit" name="submit" id="" value="เพิ่มประเภทห้อง" class="btn btn-success">
+                        {% endfor %}
+
+                        <!-- <input type="submit" name="submit" id="" value="เพิ่มประเภทห้อง" class="btn btn-success"> -->
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                    <input type="submit" name="submit" id="" value="บันทึก" class="btn btn-primary">
                     </form>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="" style="padding-bottom: 250px;"></div>
+    {%endif%}
 
 
-            <div class="container ">
-                {% for room in type%}
-                <div class="mb-3 border border-1 p-3">
-                    <div>ชื่อห้อง : {{room.name}}</div>
-                    <div><img src="media/{{room.img}}" alt="" width="400px" height="400xp"></div>
-                    <div>รายละเอียด : {{room.description}}</div>
+</div>
 
-                    <div>ราคา : {{room.price}}</div>
 
-                    <div>
-                        <a href="room/{{room.type_id}}"><button class="btn btn-primary">อัพเดตสถานะ</button></a>
 
-                        <a href="edittype/{{room.type_id}}"><button class="btn btn-warning text-light">แก้ไขประเภทห้อง</button></a>
-                        <a href="deletetype/{{room.type_id}}"><button class="btn btn-danger">ลบประเภทห้อง</button></a>
+
+
+
+
+
+
+<!-- 
+
+<div class="container" style="background-color: white;">
+    <div class="container px-5">
+        <div class="d-flex justify-content-end">
+            <div class="py-3">
+                <a class="btn-center btn btn-primary-original p-4 fs-5" data-bs-toggle="collapse"
+                    href="#collapseExample" role="button" aria-expanded="false"
+                    aria-controls="collapseExample"><b>เพิ่มประเภทห้อง</b></a>
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{form.as_p}}
+                            <label for="multi">รูปภาพเพิ่มเติม</label>
+                            {% for form in imgForm %}
+                            {{ form }}
+                            {% endfor %}
+
+                            <input type="submit" name="submit" id="" value="เพิ่มประเภทห้อง" class="btn btn-success">
+                        </form>
                     </div>
                 </div>
-
-
-                {% endfor %}
             </div>
+        </div> -->
 
-        </div> <!-- row-3 -->
-    </div> <!-- row-2 -->
-    <br><br><br><br><br><br><br>
-</div> <!-- row-1 -->
+<!-- <div style="background-color: white;">
+
+            {% for room in type%}
+            <div class="row">
+                <div class="col-md-6">
+                    <h1 class="pb-2">{{room.name}}</h1>
+                    <div><img src="media/{{room.img}}" alt="" width="90%" height="400px" class=""></div>
+
+                </div>
+                <div class="col-md-6 ">
+
+                    <div class="container" style="width: 100%; height: 100%;">
+                        <div class="d-flex flex-column " style="width: 100%; height: 100%;">
+                            <br>
+                            <div style="padding-top: 160px;">
+                                <h3>รายละเอียด : {{room.description}}</h2>
+                                    <br>
+                                    <h3 class="">ราคา : {{room.price}} บาท</h2>
+                                        <br>
+                            </div>
+                            <div class="mt-auto">
+                                <div class="d-flex justify-content-between">
+                                    <a href="room/{{room.type_id}}"><button
+                                            class="btn btn-outline-success fs-5"><b>อัพเดตสถานะ</b></button></a>
+
+                                    <a href="edittype/{{room.type_id}}"><button
+                                            class="btn btn-outline-primary fs-5"><b>แก้ไขประเภทห้อง</b></button></a>
+                                    <a href="deletetype/{{room.type_id}}"><button
+                                            class="btn btn-outline-danger fs-5"><b>ลบประเภทห้อง</b></button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <div class="py-5"></div>
+            {%endfor%}
+
+
+
+
+        </div>
+
+    </div>
+
+
+
+
+</div>
+ -->
+
+ <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+ <script>
+    function confirmedDelete(pk){
+        console.log(pk)
+        Swal.fire({
+            title: 'ยืนยันลบ',
+            text: "การกระทำต่อไปนี้ ไม่สามารถย้อนคืนได้",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                try{
+                    document.location.href="/deletetype/"+pk
+                    }
+                catch(error)
+                    {
+                Swal.fire({
+                      icon: 'error',
+                      text: 'เกิดข้อผิดพลาด',
+                    });
+                    }
+            }
+        })
+    }
+
+</script>
+
+
+
 
 
 {% endblock%}

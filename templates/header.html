@@ -18,6 +18,13 @@
         <a class="nav-link px-5" aria-current="page" href="/alltype">ห้องพัก</a>
 
         {% if user.is_authenticated%}
+
+        <a class="nav-link px-5" aria-current="page" href="/transection">ประวัติการจอง</a>
+        
+
+
+
+          {% if not booking_count == 0%}
         <div class="nav-item dropdown px-5">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
@@ -31,8 +38,11 @@
             {% endfor %}
 
         </div>
+        {% else %}
+
+        {%endif%}
         {% endif%}
-        <a class="nav-link px-5" href="/templates/contract.html">ติดต่อเรา</a>
+        <a class="nav-link px-5" href="/contact">ติดต่อเรา</a>
 
       </ul>
       <form class="d-flex">

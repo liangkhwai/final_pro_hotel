@@ -7,7 +7,7 @@
 {% block content %}
 
 
-<div class="shadow-lg " style="background-color: #6998AB">
+<div class="shadow-lg " style="background-color: #61494C">
     <!-- row-1 -->
     <br>
     <br>
@@ -22,24 +22,101 @@
             <!-- row-3 -->
             <form class="shadow-lg rounded-5 row bg-light p-4" action="" method="post">
                 {% csrf_token%}
-                
-                {% csrf_token %}
-                <div class="pb-4 text-black ">
-                {{form.as_p}}
-            </div>
-                <!-- <div class="pb-4 text-black ">
-                    <label for="username ">Username</label>
-                    <input class="form-control" type="text" name="username" id="username">
-                </div>
+
                 <div class="pb-4 text-black">
-                    <label for="password">Password</label>
-                    <input class="form-control" type="password" name="password" id="password">
-                </div> -->
+                    <div class="p-2">
+                        <label for="firstname">ชื่อ : </label>
+                        <input type="text" name="firstname" id="lastname" value="{{customer.firstname}}"
+                            class="form-control">
+                    </div>
+                    <div class="p-2">
+                        <label for="lastname">นามสกุล :</label>
+                        <input type="text" name="lastname" id="lastname" value="{{customer.lastname}}"
+                            class="form-control">
+                    </div>
+                    <input type="hidden" value="{{customer.gender}}" name="" id="genderkey">
+                    <div class="p-2">
+                        เพศ
+                        <div class="d-flex ">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="male" value="male">
+                                <label class="form-check-label" for="male">
+                                    ชาย
+                                </label>
+                            </div>
+                            <div class="px-2"></div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                                <label class="form-check-label" for="female">
+                                    หญิง
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-2">
+                        <label for="age">วันเกิด</label>
+                        <input type="date" name="age" id="" value="{{cusDate}}" class="form-control">
+                    </div>
+                    <div class="p-2">
+                        <label for="tel">เบอร์โทร : </label>
+                        <input type="tel" name="tel" id="tel" value="{{customer.tel}}" maxlength="10"
+                            class="form-control">
+                    </div>
+                    <div class="p-2">
+                        <label for="address">ที่อยู่ : </label>
+                        <textarea name="address" id="address" cols="30" rows="10"
+                            class="form-control">{{customer.address}}</textarea>
+                    </div>
+
+                </div>
+
+
+
+                <!-- <div class="pb-4 text-black ">
+                    <div>
+                        {{form.firstname.label_tag}}
+                        {{form.firstname}}
+
+                    </div>
+
+                    <div>
+                        {{form.lastname.label_tag}}
+                        {{form.lastname}}
+
+                    </div>
+                    
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="male" value="male">
+                        <label class="form-check-label" for="male">
+                            ชาย
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                        <label class="form-check-label" for="female">
+                            หญิง
+                        </label>
+                    </div>
+
+
+
+
+                    <br>
+                    {{form.age.label_tag}}
+                    {{form.age}}
+                    {{form.tel.label_tag}}
+                    {{form.tel}}
+                    {{form.address.label_tag}}
+                    {{form.address}}
+                    <input type="hidden" value="{{customer.gender}}" name="" id="genderkey">
+                </div>
+ -->
 
                 <div class="row ">
                     <input type="submit" name="submit" value="ยืนยันการแก้ไข" class="btn btn-primary">
                 </div>
-                
+
                 <br>
             </form>
 
@@ -47,5 +124,19 @@
     </div> <!-- row-2 -->
     <br><br><br><br><br><br><br>
 </div> <!-- row-1 -->
+
+
+
+<script>
+    key = document.getElementById("genderkey").value
+    male = document.getElementById("male")
+    female = document.getElementById("female")
+
+    if (key == "male") {
+        male.checked = true
+    } else {
+        female.checked = true
+    }
+</script>
 
 {% endblock %}

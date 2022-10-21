@@ -5,14 +5,14 @@ Register
 
 {% block content%}
 
-<div class="shadow-lg" style="background-color: #6998AB">
+<div class="shadow-lg" style="background-color: #61494C">
 
     <br>
     <br>
     <br><br><br>
 
     <div class="container">
-        <H1 class="text-center text-light">Register </H1>
+        <H1 class="text-center text-light">สมัครสมาชิก</H1>
         <br><br><br>
         <div class="row px-5 rounded-5 shadow-lg" style="background-color: #ffffff">
             <!-- <H1 class="text-center text-light">Register </H1> -->
@@ -23,14 +23,14 @@ Register
                     <div class="row">
                         <div class="col-md-6 ">
                             <div class="form-group">
-                                <label class="text-black " for="fname">First Name</label>
+                                <label class="text-black " for="fname">ชื่อ</label>
                                 {{cusForm.firstname}}
                             </div>
                         </div>
 
                         <div class="col-md-6 ">
                             <div class="form-group">
-                                <label class="text-Black " for="lname">Last name</label>
+                                <label class="text-Black " for="lname">นามสกุล</label>
                                 {{cusForm.lastname}}
                             </div>
                         </div>
@@ -39,42 +39,41 @@ Register
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="text-black" for="birth">Year of birth</label>
+                                <label class="text-black" for="birth">วันเกิด</label>
                                 {{cusForm.age}}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="text-black" for="Tel">Tel</label>
+                                <label class="text-black" for="Tel">เบอร์โทร</label>
                                 {{cusForm.tel}}
                             </div>
                         </div>
                     </div>
                     <br>
                     <div class="form-group">
-                        <label class="text-black" for="gender">Gender</label>
+                        <label class="text-black" for="gender">เพศ</label>
                         {{cusForm.gender}}
                     </div>
                     <br>
                     <div class="form-group">
-                        <label class="text-black" for="email">Email address</label>
+                        <label class="text-black" for="email">อีเมลล์</label>
                         {{accForm.email}}
                         {{accForm.email.errors}}
-                        <small id="emailHelp" class="form-text text-mude">We'll never share your email with anyone
-                            else.</small>
+                        <small id="emailHelp" class="form-text text-mude">เราจะไม่เผยแพร่อีเมลล์กับผู้อื่น.</small>
                     </div>
                     <br>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="text-black " for="username">Username</label>
+                                <label class="text-black " for="username">ชื่อผู้ใช้</label>
                                 {{accForm.username}}
                                 {{accForm.username.errors}}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="text-black" for="password">Password</label>
+                                <label class="text-black" for="password">รหัสผ่าน</label>
                                 {{accForm.password1}}
                                 {{accForm.password1.errors}}
                             </div>
@@ -83,14 +82,14 @@ Register
 
                     <br>
                     <div class="form-group">
-                        <label class="text-black" for="password">Confirm Password</label>
+                        <label class="text-black" for="password">ยืนยันรหัสผ่าน</label>
                         {{accForm.password2}}
                         {{accForm.password2.errors}}
 
                     </div>
                     <br>
                     <div class="form-group">
-                        <label class="text-black" for="address">Address</label>
+                        <label class="text-black" for="address">ที่อยู่</label>
                         {{cusForm.address}}
                         {{cusForm.accepted}}
                     </div>
@@ -164,5 +163,9 @@ Register
 
 
 </div>
+
+<script>
+    
+</script>
 
 {% endblock %}

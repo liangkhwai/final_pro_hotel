@@ -90,7 +90,6 @@ class UpdateCustomerForm(forms.ModelForm):
         self.fields['firstname'].widget.attrs.update({'class':'form-control'})
         self.fields['lastname'].widget.attrs.update({'class':'form-control'})
         self.fields['age'].widget.attrs.update({'class':'form-control'})
-        self.fields['gender'].widget.attrs.update({'class':'form-control'})
         self.fields['tel'].widget.attrs.update({'class':'form-control'})
         self.fields['address'].widget.attrs.update({'class':'form-control'})
         
@@ -103,7 +102,7 @@ class UpdateCustomerForm(forms.ModelForm):
     )
     class Meta:
         model = Customer
-        fields = ('cust_id','firstname','lastname','age','gender','tel','address')
+        fields = ('cust_id','firstname','lastname','age','tel','address')
         labels = {
             'firstname':'ชื่อ',
             'lastname':'นามสกุล',
@@ -185,7 +184,7 @@ class AddRoomsTypeForm(forms.ModelForm):
         label="จำนวนเตียง",
     )
     limit_people = forms.ChoiceField(widget=forms.Select(attrs={'class':'form-control'}),choices=PEOPLE_CHOICES,label='จำนวนคนพัก')
-
+    img = forms.ImageField(widget=forms.FileInput)
     def __init__(self,*args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['name'].widget.attrs.update({'class':'form-control'})
@@ -280,20 +279,20 @@ class SearchForm(forms.ModelForm):
         attrs={'class': 'form-control', 
                'placeholder': 'Select a date',
                'type': 'date'
-              }),
-            
+              }),            
         }
-        
         
 class MultiImageForm(forms.ModelForm):
     image = forms.ImageField(
-        label='MultiImage',
-        widget=forms.ClearableFileInput(attrs={"multiple":True,"class":"form-control"}),
+        label='รูปภาพเพิ่มเติม',
+        widget=forms.ClearableFileInput(attrs={"multiple":True,"class":"form-control","id":"imagex"}),
     )
+    def __init__(self,*args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['image'].required = False
     class Meta:
         model = MultiImage
-        fields = ('image',)
-        
+        fields = ('image',)        
         
 class PaymentForm(forms.ModelForm):
     def __init__(self,*args, **kwargs):

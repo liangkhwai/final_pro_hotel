@@ -1,0 +1,37 @@
+{% extends 'base.html'%}
+{% block title%}
+Transection
+{%endblock%}
+
+{%block content%}
+<div class="pt-5"></div>
+<div class="container border" style="color: white; background-color: white;">
+    <table class="table table-hover">
+        <thead class="" style="line-height: 50px;">
+            <th>เลขที่ข้อมูล</th>
+            <th>เวลา</th>
+            <th>ประเภท</th>
+            <th>ชื่อผู้ใช้</th>
+            <th>เลขที่ห้อง</th>
+            <th>จำนวนเงิน (บาท)</th>
+            <th>สถานะ</th>
+        </thead>
+        <tbody>
+            {% for i in info%}
+            <tr class="">
+                <td style="line-height: 50px;">{{i.trans_id}}</td>
+                <td style="line-height: 50px;">{{i.tran_date}}</td>
+                <td style="line-height: 50px;">{{i.roomtype}}</td>
+                <td style="line-height: 50px;">{{i.cust}}</td>
+                <td style="line-height: 50px;">{{i.room_id}}</td>
+                <td style="line-height: 50px;">{{i.total}}</td>
+                <td style="line-height: 50px;">{{i.status}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+
+
+</div>
+
+{%endblock%}

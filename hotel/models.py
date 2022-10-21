@@ -26,7 +26,7 @@ class RoomType(models.Model):
     type_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)
     bed = models.CharField(max_length=255,blank=True,null=True)
     price = models.IntegerField(blank=True,default=0)
-    name = models.CharField(max_length=255,blank=True,null=True)
+    name = models.CharField(max_length=255)
     img = models.ImageField(upload_to='upload/images/',height_field=None,width_field=None,max_length=100,blank=True,null=True)
     description = models.TextField()
     limit_people = models.IntegerField(default=0)
@@ -36,10 +36,18 @@ class RoomType(models.Model):
     
 class Rooms(models.Model):
     room_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)
-    type = models.ForeignKey(RoomType,on_delete=models.CASCADE)
+    type = models.ForeignKey(RoomType,on_delete=models.SET_NULL,null=True)
     description = models.TextField()
     status = models.CharField(max_length=255)
     
+class Transaction(models.Model):
+    trans_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)
+    tran_date = models.DateTimeField(auto_now_add=True)
+    cust = models.CharField(max_length = 255,null=True)
+    roomtype = models.CharField(max_length = 255,null=True)
+    room_id = models.CharField(max_length = 255,null=True)
+    total = models.IntegerField(null=True)
+    status = models.CharField(max_length = 255,null=True)
 
 class Booking(models.Model):
     booking_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)
@@ -50,6 +58,7 @@ class Booking(models.Model):
     date_out = models.DateField()
     total_payment = models.CharField(max_length=255)
     status = models.CharField(max_length=255,blank=True,default="ยังไม่ชำระเงิน")
+    transection = models.OneToOneField(Transaction,on_delete=models.SET_NULL,null=True)
 
 
 class Payment(models.Model):
@@ -60,14 +69,7 @@ class Payment(models.Model):
     pay_code =CardNumberField(('security code'),null=True,max_length=3)    
     pay_amount = models.IntegerField(default=10000)
     
-class Transaction(models.Model):
-    trans_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)
-    tran_date = models.DateTimeField(auto_now_add=True)
-    cust = models.ForeignKey(Customer,on_delete=models.CASCADE)
-    pay = models.OneToOneField(Payment,on_delete=models.CASCADE)
-    booking = models.ForeignKey(Booking,on_delete=models.CASCADE)
-
-
+    
 
 class MultiImage(models.Model):
     image = models.ImageField(null=True)

@@ -1,10 +1,10 @@
-from tkinter.messagebox import RETRY
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,logout,login as auth_login
 from .forms import *
 from django.urls import reverse
 from django.shortcuts import render
+from django.shortcuts import *
 from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib import messages
 from django.template import RequestContext, Template
@@ -24,8 +24,10 @@ def home(req):
             data = form.cleaned_data
             print(data['people'])
             if data['date_in'] >= data['date_out']:
-                messages.add_message(req,messages.ERROR,'กรุณากรอกวันที่เข้าให้น้อยกว่าวันที่ออก')
+                # messages.add_message(req,messages.ERROR,'กรุณากรอกวันที่เข้าให้น้อยกว่าวันที่ออก')
+                messages.error(req,"กรุณากรอกวันที่เข้าให้น้อยกว่าวันที่ออก")
                 return redirect('home')
+
             if data['people'] == '4':
                 rooms = RoomType.objects.all().filter(limit_people = 4)
             else:
@@ -74,6 +76,11 @@ def register(req):
     context = {'cusForm':cusForm,'accForm':accForm}
     return render(req,'member/register.html',context)
 
+def contact(req):
+    
+    return render(req,'contact.html')
+
+
 
 def login_user(req):
     if req.method == 'POST':
@@ -101,16 +108,35 @@ def logout_user(req):
 
 def editcustomer(req,pk):
     customer = Customer.objects.get(cust_id=pk)
+    user = User.objects.get(id = req.session['user'])
+    print(req.session['user'])    
+    # user = User.objects.get(id = customer.)
     if req.method == 'POST':
-        form = UpdateCustomerForm(req.POST,instance=customer)
-        if form.is_valid():
-            form.save()    
-            print('HIHI')
-            return HttpResponseRedirect(reverse('home'))
+        print(req.POST)
+        # form = UpdateCustomerForm(req.POST,instance=customer)
+        # if form.is_valid():
+        #     cus = Customer()
+        #     cus.gender = req.POST.get('gender')
+        #     cus.account = customer.account
+        #     cus.save()
+        #     form.save()    
+        #     print('HIHI')
+        #     return HttpResponseRedirect(reverse('home'))
+        customer.firstname = req.POST.get('firstname')
+        customer.lastname = req.POST.get('lastname')
+        customer.age = req.POST.get('age')
+        customer.gender = req.POST.get('gender')
+        customer.tel = req.POST.get('tel')
+        customer.address = req.POST.get('address')
+        customer.account = user
+        customer.save()
+        return redirect('home')
     
-    form = UpdateCustomerForm(instance=customer)
+    # form = UpdateCustomerForm(instance=customer)
     context = {
-        'form':form
+        # 'form':form,
+        'customer':customer,
+        'cusDate':str(customer.age),
     }
     print('FLASE')
     return render(req,'member/editcustomer.html',context)
@@ -177,11 +203,13 @@ def editrooms(req,pk):
 def editroom(req,pk,fk):
     room = Rooms.objects.get(room_id = fk)
     if req.method == 'POST':
-        form = AddRoomsClassForm(req.POST,instance=room)
+        form = Addroom(req.POST,instance=room)
+        # form = AddRoomsClassForm(req.POST,instance=room)
         if form.is_valid():
             form.save()
             return redirect('editrooms',pk=pk)
-    form = AddRoomsClassForm(instance=room)
+    form = Addroom(instance=room)
+    # form = AddRoomsClassForm(instance=room)
     context = {
         'form':form,
         'room':room
@@ -198,6 +226,8 @@ def deleteroom(req,pk,fk):
 def deletetype(req,pk):
     type = RoomType.objects.get(type_id = pk)
     type.delete()
+    rooms = Rooms.objects.all().filter(type_id = type)
+    rooms.delete()
     return HttpResponseRedirect(reverse('fetchrooms'))
 
 
@@ -224,6 +254,8 @@ def edittype(req,pk):
     if req.method == 'POST':
         form = AddRoomsTypeForm(req.POST,instance=type,files=req.FILES)
         images = req.FILES.getlist('image')
+        # imgg = req.FILES.getlist('imggg')
+        # print(imgg)
         print(form)
         if form.is_valid():
             typeForm = form.save()
@@ -327,7 +359,6 @@ def roomdetail(req,pk):
 
 def booking(req,pk):
     room_free = Rooms.objects.all().filter(type_id=pk,status = 'ว่าง').first()
-
     user = Customer.objects.get(account_id = req.session['user'])
     detail = RoomType.objects.get(type_id = pk)
     multiimg = MultiImage.objects.all().filter(type = pk)
@@ -345,12 +376,20 @@ def booking(req,pk):
         room_id = req.POST.get('room_id')
          
         if req.POST.get('pay') == "later":
+            trans = Transaction()
+            trans.cust = user.account.username
+            trans.room_id = room_id
+            trans.roomtype = detail.name
+            trans.status = "ยังไม่ชำระเงิน"
+            trans.total = sum_price
+            trans.save()
             book = Booking()
             book.date_in = date_in
             book.date_out = date_out
             book.total_payment = sum_price
             book.cust = user
             book.room = room_free
+            book.transection = trans
             book_id = book.save()
             room_free.status = "ไม่ว่าง"
             room_free.save()
@@ -365,6 +404,13 @@ def booking(req,pk):
             book.save()
             room_free.status = "ไม่ว่าง"
             room_free.save()
+            trans = Transaction()
+            trans.cust = user.account.username
+            trans.room_id = room_id
+            trans.roomtype = detail.name
+            trans.status = "ยังไม่ชำระเงิน"
+            trans.total = sum_price
+            trans.save()
             
             booking = Booking.objects.get(room_id = room_id)
             
@@ -372,7 +418,7 @@ def booking(req,pk):
             form = PaymentForm()
             print(booking)
             context = {
-                
+                'room_free':room_free,
                 'booking':booking,
                 'form':form,
                 'days':remain_day,
@@ -399,8 +445,11 @@ def payment(req):
         pay_expiry = req.POST.get('pay_expiry')
         pay_code = req.POST.get('pay_code')
         book_id = req.POST.get('booking_id')
+        room_id = req.POST.get('room_free')
         select_book = Booking.objects.get(booking_id = book_id)
-            
+        print("sdfsdfddddddddddddddd: ",room_id)
+        transection = Transaction.objects.get(room_id = room_id)
+        
         pay = Payment()
         pay.pay_code = pay_code
         pay.pay_number = pay_number
@@ -411,11 +460,13 @@ def payment(req):
         select_book.status = "ชำระเงินเรียบร้อย"
         select_book.save()
         
-        trans = Transaction()
-        trans.booking = select_book
-        trans.pay = pay
-        trans.cust = user
-        trans.save()
+        transection.status = "ชำระเงินเรียบร้อย"
+        transection.save()
+        # trans = Transaction()
+        # trans.booking = select_book
+        # trans.pay = pay
+        # trans.cust = user
+        # trans.save()
 
         print('ชำระเงินสำเร็จ')
         return redirect('bookingdetail',pk=book_id)
@@ -456,4 +507,39 @@ def alltype(req):
         'alltype':alltype
     }
     return render(req,'rooms/alltype.html',context)                
+
+
+def notFound(req,exception):
+    response = render(req,'404page.html')
+    response.status_code = 404
+    return response
+    
+def transection(req):
+    info = Transaction.objects.all()
+    
+    
+    context = {
+        'info':info,
+        
+    }
+    
+    return render(req,'transection.html',context)
+
+def cancle(req,pk):
+
+    booking = Booking.objects.get(booking_id = pk)
+    room = Rooms.objects.get(room_id = booking.room_id)
+    transection = Transaction.objects.get(trans_id = booking.transection.trans_id)
+
+    booking.delete()
+    room.status = "ว่าง"
+    room.save()
+
+    transection.status = "ยกเลิกการจอง"
+    transection.save()
+    
+    
+
+    return redirect('home')
+    
     

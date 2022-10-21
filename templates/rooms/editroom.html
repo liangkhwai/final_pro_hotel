@@ -8,35 +8,99 @@
 
 {% block content %}
 
-
-
-<form action="" method="post">
+<form action="" method="post" id="formform">
     {% csrf_token%}
-<div class="mb-3 border border-1 p-3">
-    <div class="row">
-        <div class="col-4">
-            <div>รายละเอียด : {{form.description}}</div>
-        </div>
-        <div class="col">
-            <div>สถานะ : {{form.status}}</div>
-        </div>
-        <div class="col">
-            <div>ประเภท : {{form.type}}</div>
-        </div>
-        <div class="col">
-            <div>
-                <input type="submit" name="submit" id="" value="บันทึก" class="btn btn-primary ">
+    <div class="container ">
+        <div style="background-color: white;" class="d-flex justify-content-center">
+            <div class=" pt-5">
+                <div class="container" style="width: 300px;">
+                    <div style="" class="">
+                        <h1>เลขที่ห้อง {{room.room_id}}</h1>
+                        <br>
+                        <br>
+                        <div>สถานะ</div>
+                        <div>
+                            {{form.status}}
+                        </div>
+                        <br>
+                        <br>
+                        <div>รายละเอียด</div>
+                        <div class="">
+                            {{form.description}}
+                        </div>
+                        <br>
+                        <br>
+
+                        <div class="text-center">
+                            <a href="/room/{{room.type_id}}" class="btn btn-outline-danger">ยกเลิก</a>
+                            <input type="button" name="" onclick="confirmedit()" id="" value="ยืนยันการแก้ไข"
+                                class="btn btn-outline-success" style="cursor:pointer">
+
+                        </div>
+                        <div style="padding-bottom: 100px;"></div>
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
-</div>
 </form>
 
 
 
 
+<!-- <form action="" method="post">
+    {% csrf_token%}
+    <div class="mb-3 border border-1 p-3">
+        <div class="row">
+            <div class="col-4">
+                <div>รายละเอียด : {{form.description}}</div>
+            </div>
+            <div class="col">
+                <div>สถานะ : {{form.status}}</div>
+            </div>
+            <div class="col">
+                <div>ประเภท : {{form.type}}</div>
+            </div>
+            <div class="col">
+                <div>
+                    <input type="submit" name="submit" id="" value="บันทึก" class="btn btn-primary ">
+                </div>
+            </div>
+        </div>
+    </div>
+</form> -->
 
 
 
+
+
+
+<script>
+    function confirmedit() {
+        Swal.fire({
+            title: 'ยืนยันการแก้ไข',
+            text: "การกระทำต่อไปนี้ ไม่สามารถย้อนคืนได้",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                try {
+                    console.log('debgu')
+                    document.getElementById("formform").submit();
+                } catch (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'เกิดข้อผิดพลาด',
+                    });
+                }
+            }
+        })
+    }
+</script>
 
 {% endblock %}

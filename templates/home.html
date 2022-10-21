@@ -16,11 +16,14 @@
         <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
 
           วันที่ออก : {{form.date_out}}
-
+          {% for i in messages%}
+          *{{i}}*
+          {%endfor%}
         </div>
         <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-2">
 
           จำนวนคน : {{form.people}}
+          
         </div>
 
         <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-2">
@@ -35,6 +38,7 @@
           <!-- {% if messages%}
           <ul class="messages">
             {% for message in messages %} -->
+            <div id="messages">
           {%if messages %}
           <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
           <script>
@@ -45,6 +49,7 @@
             )
           </script>
           {% endif %}
+        </div>
           <!-- <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
               {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
               {{ message }}
@@ -55,6 +60,9 @@
         </div>
       </div>
     </form>
+
+    
+
 
     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
       aria-label="Slide 1"></button>

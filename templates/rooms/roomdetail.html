@@ -80,7 +80,7 @@
                     <div class="pt-3"></div>
                     <div class="col-md-3">
                         <div class="text-center "
-                            style="background-color: #C4E6FA; width: 75px; height:75px; line-height: 70px;  border-radius: 50%;">
+                            style="background-color: #D1C6C9; width: 75px; height:75px; line-height: 70px;  border-radius: 50%;">
                             <h3 style="padding-top:20px"><b>8.7</b></h3>
                         </div>
 
@@ -107,15 +107,16 @@
                                 <td><i class="fa-solid fa-city"></i></td>
                                 <td>วิวเมือง</td>
 
-                                <td colspan="2" class="text-center "
-                                    style="border-top: 2px solid black; border-bottom:2px solid black;">
-                                    {% if count == 0%} <div class="text-danger">จำนวนห้องเต็มแล้ว</div> {%else %} <div
-                                        class="text-danger fs-5" style="margin:0;padding:0;"> {{count}} ห้องสุดท้าย!!
-                                    </div> {%endif%}</td>
-                            </tr>
-                            <tr>
                                 <td><i class="fa-solid fa-snowflake"></i></td>
                                 <td>มีเครื่องปรับอากาศ</td>
+                                
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="text-center "
+                                    style="">
+                                    {% if count == 0%} <div class="text-danger" style="font-size: 20px;"><b>จำนวนห้องเต็มแล้ว!!</b></div> {%else %} <div
+                                        class="text-danger fs-5" style="margin:0;padding:0;"> {{count}} ห้องสุดท้าย!!
+                                    </div> {%endif%}</td>
                             </tr>
                         </table>
                     </div>
