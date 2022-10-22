@@ -31,7 +31,10 @@ urlpatterns = [
     path('alltype',views.alltype,name='alltype'),
     path('contact',views.contact,name='contact'),
     path('transection',views.transection,name='transecton'),
-    path('cancle/<int:pk>',views.cancle,name='cancle')
+    path('cancle/<int:pk>',views.cancle,name='cancle'),
+    path('about',views.about,name='about'),
+    path('objective',views.objective,name='objective'),
+    path('source',views.source,name='source'),
     
 
 ]

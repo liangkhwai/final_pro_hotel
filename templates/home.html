@@ -4,6 +4,10 @@
 {% block title%}Home{% endblock %}
 
 {% block content %}
+<style>
+  
+</style>
+
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
 
   <div class="row carousel-indicators">
@@ -23,7 +27,7 @@
         <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-2">
 
           จำนวนคน : {{form.people}}
-          
+
         </div>
 
         <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-2">
@@ -38,18 +42,18 @@
           <!-- {% if messages%}
           <ul class="messages">
             {% for message in messages %} -->
-            <div id="messages">
-          {%if messages %}
-          <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-          <script>
-            Swal.fire(
-              '{{ user }}',
-              ' {{ message }}',
-              'error'
-            )
-          </script>
-          {% endif %}
-        </div>
+          <div id="messages">
+            {%if messages %}
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+              Swal.fire(
+                '{{ user }}',
+                ' {{ message }}',
+                'error'
+              )
+            </script>
+            {% endif %}
+          </div>
           <!-- <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
               {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
               {{ message }}
@@ -61,7 +65,7 @@
       </div>
     </form>
 
-    
+
 
 
     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
@@ -173,6 +177,8 @@
             <img src="{% static 'hero-slider-2.jpg'%}" alt="" width="auto" class="rounded img-fluid">
 
 
+
+
           </div>
           <div class="col-md col-sm"> <img src="{% static 'hero-slider-3.jpg'%}" alt="" height="200px"
               class="rounded img-fluid">
@@ -190,6 +196,9 @@
         referrerpolicy="no-referrer-when-downgrade" class="overflow-hidden"></iframe> -->
 
     </div>
+
+
+
   </div>
 
 
@@ -243,5 +252,7 @@
 <!-- </div> -->
 <!-- </div>
 </div>  -->
+
+
 {% include 'footer.html'%}
 {% endblock %}

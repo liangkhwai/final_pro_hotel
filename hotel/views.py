@@ -58,6 +58,7 @@ def register(req):
         print(cusForm,accForm)
         if cusForm.is_valid() and accForm.is_valid():
             print('asdsdsdsdsdsdsdsd')
+            accData = accForm.cleaned_data
             cusData = cusForm.cleaned_data
             cus = Customer()            
             account = accForm.save()
@@ -69,6 +70,11 @@ def register(req):
             cus.address = cusData['address']
             cus.account = account
             cus.save()
+            
+            user = authenticate(username=accData['username'],password=accData['password1'])
+            auth_login(req,user)
+            req.session['user'] = user.id
+            
             return HttpResponseRedirect(reverse('home'))        
     else:
         cusForm = CustomerClassForm()
@@ -543,4 +549,11 @@ def cancle(req,pk):
 
     return redirect('home')
     
+def about(req):
+    return render(req,'about.html')
     
+def objective(req):
+    return render(req,'objective.html')
+
+def source(req):
+    return render(req,'source.html')
