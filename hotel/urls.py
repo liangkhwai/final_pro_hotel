@@ -35,6 +35,9 @@ urlpatterns = [
     path('about',views.about,name='about'),
     path('objective',views.objective,name='objective'),
     path('source',views.source,name='source'),
+    path('editmember',views.editmember,name='editmember'),
+    path('editmember_admin/<int:pk>',views.editmember_admin,name='editmember_admin'),
+    path('delmember_admin/<int:pk>',views.delmember_admin,name='delmember_admin'),
     
 
 ]

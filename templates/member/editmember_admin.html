@@ -1,0 +1,141 @@
+{%extends 'base.html'%}
+
+
+
+{% block title%}
+แก้ไขสมาชิก
+{%endblock%}
+
+
+
+{% block content%}
+<div class="bg-primary p-5">
+    <h1 class="text-center " style="color:white;">จัดการสมาชิก</h1>
+</div>
+<div class="pt-5"></div>
+<div class="container" style="">
+    <div class="pt-3"></div>
+
+
+    <!-- <div class="d-flex justify-content-center">
+        <div style="background-color: white;" class="p-5 rounded shadow-lg">
+            <form action="" method="post">
+                {%csrf_token%}
+
+                {{memberForm.as_p}}
+
+                <div class="text-end">
+                    <input type="submit" class="btn btn-success" value="บันทึก" name="" id="">
+                </div>
+            </form>
+        </div>
+
+
+    </div> -->
+    <form class="shadow-lg rounded-5 row bg-light p-4" name="formform" id="formform" action="" method="post">
+        {% csrf_token%}
+
+        <div class="pb-4 text-black">
+            <div class="p-2">
+                <label for="firstname">ชื่อ : </label>
+                <input type="text" name="firstname" id="lastname" value="{{member.firstname}}"
+                    class="form-control">
+            </div>
+            <div class="p-2">
+                <label for="lastname">นามสกุล :</label>
+                <input type="text" name="lastname" id="lastname" value="{{member.lastname}}"
+                    class="form-control">
+            </div>
+            <input type="hidden" value="{{member.gender}}" name="" id="genderkey">
+            <div class="p-2">
+                เพศ
+                <div class="d-flex ">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="male" value="male">
+                        <label class="form-check-label" for="male">
+                            ชาย
+                        </label>
+                    </div>
+                    <div class="px-2"></div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                        <label class="form-check-label" for="female">
+                            หญิง
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="p-2">
+                <label for="age">วันเกิด</label>
+                <input type="date" name="age" id="" value="{{memDate}}" class="form-control">
+            </div>
+            <div class="p-2">
+                <label for="tel">เบอร์โทร : </label>
+                <input type="tel" name="tel" id="tel" value="{{member.tel}}" maxlength="10"
+                    class="form-control">
+            </div>
+            <div class="p-2">
+                <label for="address">ที่อยู่ : </label>
+                <textarea name="address" id="address" cols="30" rows="10"
+                    class="form-control">{{member.address}}</textarea>
+            </div>
+
+        </div>
+        <div class="row ">
+            <input onclick="confirmedit()" type="button" value="ยืนยันการแก้ไข" class="btn btn-warning">
+        </div>
+
+        <br>
+    </form>
+    <div class="pb-5"></div>
+
+
+
+
+
+
+</div>
+
+<script>
+    key = document.getElementById("genderkey").value
+    male = document.getElementById("male")
+    female = document.getElementById("female")
+
+    if (key == "male") {
+        male.checked = true
+    } else {
+        female.checked = true
+    }
+
+    function confirmedit(){
+        Swal.fire({
+            title: 'ยืนยันการแก้ไข',
+            text: "การกระทำต่อไปนี้ ไม่สามารถย้อนคืนได้",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                try{
+                 document.formform.submit();
+             }
+                catch(error)
+                    {
+                Swal.fire({
+                      icon: 'error',
+                      text: 'เกิดข้อผิดพลาด',
+                    });
+                    }
+            }
+        })
+    }
+    
+
+
+
+</script>
+
+{%endblock%}

@@ -11,7 +11,7 @@ from django.template import RequestContext, Template
 from django.shortcuts import redirect
 from datetime import date, datetime
 from django.core import serializers
-from django.db.models import Q
+from django.db.models import Q,Sum
 
 # Create your views here.
 
@@ -272,8 +272,7 @@ def edittype(req,pk):
                 obj_img.type = typeForm 
                 obj_img.save()
 
-            return HttpResponseRedirect(reverse('fetchrooms'))
-        
+            return redirect('edittype',pk=pk)
     else:
         form = AddRoomsTypeForm(instance=type)
         imgForm = MultiImageForm()
@@ -523,10 +522,26 @@ def notFound(req,exception):
     
 def transection(req):
     info = Transaction.objects.all()
-    
-    
+    all_total = Transaction.objects.all().aggregate(Sum('total')) 
+    total = Transaction.objects.filter(status = "ชำระเงินเรียบร้อย").aggregate(Sum('total'))
+    not_total = Transaction.objects.filter(status = "ยังไม่ชำระเงิน").aggregate(Sum('total'))
+    cancle = Transaction.objects.filter(status = "ยกเลิกการจอง").aggregate(Sum('total'))
+    count_paid = Transaction.objects.filter(status = "ชำระเงินเรียบร้อย").count()
+    count_not = Transaction.objects.filter(status = "ยังไม่ชำระเงิน").count()
+    count_cancle = Transaction.objects.filter(status = "ยกเลิกการจอง").count()
+    val = list(total.values())    
+    not_val = list(not_total.values())
+    cancle_total = list(cancle.values())
+    all = list(all_total.values())
     context = {
+        'count_paid':count_paid,
+        'count_not':count_not,
+        'count_cancle':count_cancle,
+        'cancle':cancle_total[0],
         'info':info,
+        'total':val[0],
+        'all':all[0],
+        'not': 0 if not not_val[0] >= 0 else not_val[0],
         
     }
     
@@ -545,8 +560,6 @@ def cancle(req,pk):
     transection.status = "ยกเลิกการจอง"
     transection.save()
     
-    
-
     return redirect('home')
     
 def about(req):
@@ -557,3 +570,47 @@ def objective(req):
 
 def source(req):
     return render(req,'source.html')
+
+    
+def editmember(req):
+
+    member = Customer.objects.all()
+    
+    context = {
+        'member':member,
+    }
+    
+    return render(req,'member/editmember.html',context)
+
+def editmember_admin(req,pk):
+    member = Customer.objects.get(cust_id=pk)
+    # user = User.objects.get(id = req.session['user'])
+    if req.method == 'POST':
+        member.firstname = req.POST.get('firstname')
+        member.lastname = req.POST.get('lastname')
+        member.age = req.POST.get('age')
+        member.gender = req.POST.get('gender')
+        member.tel = req.POST.get('tel')
+        member.address = req.POST.get('address')
+        # member.account = user
+        member.save()
+        return redirect('editmember')
+    
+        
+    else:
+        memberForm = UpdateCustomerForm(instance = member)
+
+    context = {
+        'member':member,
+        'memberForm':memberForm,
+        'memDate':str(member.age),
+    }
+    return render(req,'member/editmember_admin.html',context)
+
+def delmember_admin(req,pk):
+    member = User.objects.get(id = pk)
+    member.delete()
+
+    return redirect('editmember')
+
+

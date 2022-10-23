@@ -1,0 +1,79 @@
+{% extends 'base.html'%}
+
+
+{% block title%}
+จัดการสมาชิก
+{% endblock%}
+
+{%block content%}
+<div class="bg-primary p-5">
+    <h1 class="text-center " style="color:white;">จัดการสมาชิก</h1>
+</div>
+<div class="pt-5"></div>
+<div class="container" style="background-color: white;">
+
+<table class="table table-hover">
+    <thead>
+        <th>เลขสมาชิก</th>
+        <th>ชื่อสมาชิก</th>
+        <th>ชื่อ</th>
+        <th>นามสกุล</th>
+        <th>เบอร์โทร</th>
+        <th>ที่อยู่</th>
+        <th>จัดการ</th>
+    </thead>
+    <tbody>
+        {% for i in member%}
+        <tr>
+            <td>{{i.cust_id}}</td>
+            <th>{{i.account.username}}</th>
+            <td>{{i.firstname}}</td>
+            <td>{{i.lastname}}</td>
+            <td>{{i.tel}}</td>
+            <td>{{i.address}}</td>
+            <td>
+                <a href="/editmember_admin/{{i.cust_id}}" class="btn btn-warning">แก้ไข</a>
+                <a href="#" onclick="confirmedDelete('{{i.account_id}}')" class="btn btn-danger">ลบ</a>
+            </td>
+        </tr>
+
+        {%endfor%}
+
+    </tbody>
+</table>
+
+
+
+
+</div>
+
+
+<script>
+    function confirmedDelete(id){
+        Swal.fire({
+            title: 'ยืนยันลบ',
+            text: "การลบนี้ จะลบข้อมูลการจองทั้งหมดของ User",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                try{
+                    document.location.href = "/delmember_admin/"+id
+                    }
+                catch(error)
+                    {
+                Swal.fire({
+                      icon: 'error',
+                      text: 'เกิดข้อผิดพลาด',
+                    });
+                    }
+            }
+        })
+    }
+</script>
+
+{%endblock%}

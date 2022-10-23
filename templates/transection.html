@@ -4,6 +4,9 @@ Transection
 {%endblock%}
 
 {%block content%}
+<div class="bg-primary p-5">
+    <h1 class="text-center " style="color:white;">ประวัติการจอง</h1>
+</div>
 <div class="pt-5"></div>
 <div class="container border" style="color: white; background-color: white;">
     <table class="table table-hover">
@@ -25,9 +28,38 @@ Transection
                 <td style="line-height: 50px;">{{i.cust}}</td>
                 <td style="line-height: 50px;">{{i.room_id}}</td>
                 <td style="line-height: 50px;">{{i.total}}</td>
-                <td style="line-height: 50px;">{{i.status}}</td>
+
+                {% if i.status == "ชำระเงินเรียบร้อย"%}
+                <td style="line-height: 50px;" class="bg-success">{{i.status}}</td>
+
+                {% elif i.status == "ยกเลิกการจอง"%}
+                <td style="line-height: 50px;" class="bg-secondary">{{i.status}}</td>
+                {% else%}                
+                <td style="line-height: 50px;" class="bg-danger">{{i.status}}</td>
+                {%endif%}
+
             </tr>
             {%endfor%}
+            <tr>
+                <td colspan="5" class="text-center bg-success">จำนวนเงินที่ชำระแล้ว</td>
+                <td class="text-center">{{count_paid}} ห้อง</td>
+                <td class="text-center">{{total}} บาท</td>
+            </tr>
+            <tr>
+                <td colspan="5" class="text-center bg-danger">จำนวนเงินที่ยังไม่ชำระเงิน</td>
+                <td class="text-center">{{count_not}} ห้อง</td>
+                <td class="text-center">{{not}} บาท</td>
+            </tr>
+            <tr>
+                <td colspan="5" class="text-center bg-secondary">จำนวนห้องที่ถูกยกเลิก</td>
+                <td class="text-center">{{count_cancle}} ห้อง</td>
+                <td class="text-center">{{cancle}} บาท</td>
+            </tr>
+            <tr>
+                <td colspan="5" class="text-center bg-light">ทั้งหมด</td>
+                <td colspan="2" class="text-center">{{all}} บาท</td>
+            </tr>
+           
         </tbody>
     </table>
 

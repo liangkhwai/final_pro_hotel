@@ -3,7 +3,8 @@ from dataclasses import field
 from django import forms
 from .models import *
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm,PasswordChangeForm
+
 GENDER_CHOICEs= [
     ('male','ชาย'),
     ('female','หญิง'),
@@ -28,7 +29,7 @@ BED_CHOICES = [
 # class DateInput(forms.DateInput):
 #     input_type = 'date'
 
-    
+
 
 
 class CustomerClassForm(forms.ModelForm):
