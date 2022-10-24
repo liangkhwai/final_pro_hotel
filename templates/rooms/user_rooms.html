@@ -2,46 +2,34 @@
 {% block title%} Rooms {% endblock %}
 {% block content%}
 
-<!-- <div class="container-fluid">
-    <div class="row">
+<style>
+    .queue{
+        
+    }
+    @keyframes slide{
+        from{
+            opacity: 0;
+            transform: translateX(50vh);
+        }
+        to{
+            opacity: 1;
+            transform: translateX(0vh);
+        }
+    }
 
 
-        <div class="col-2"></div>
+</style>
 
-        <div class="col-8 ">
-            {%for i in roomss%}
 
-            <div class="w-auto ">
-                <div class="row ">
-                    <div class="col-3 h-100">
-                        <img src="media/{{i.img}}" alt="" class="img-fluid" width="400px" height="200px" />
-
-                    </div>
-                    <div class="col-9 h-100">
-                        <div class=" p-5 ">
-                            <div>ชื่อ : {{i.name}}</div>
-                            <div>รายละเอี่ยด : {{i.description}}</div>
-                            <div>ราคา : {{i.price}} บาท</div>
-                            <div>จำนวนคน : {{i.limit_people}} คน</div>
-                            <div class="d-flex justify-content-end">
-                                <a href="roomdetail/{{i.type_id}}" class="btn btn-primary">จอง</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {%endfor%}
-        </div>
-        <div class="col-2"></div>
-    </div>
-</div>
-------------------------------------------------- -->
 <div class="container p-5">
     <div class="row ">
         <div class="col-md-12 ">
+
+            {% if roomss%}
+
+
             {%for i in roomss%}
-            <div class="p-4" style="background-color: white;">
+            <div class="p-4 queue" style="background-color: white;">
                 <div class="row">
                     <div class="col-md-7 ">
                         <img src="media/{{i.img}}" alt="" class="" width="100%" height="400">
@@ -54,7 +42,8 @@
                                     <h3>ห้อง : {{i.name}}</h3>
                                     <br>
                                     <h4>รายละเอียด : </h2>
-                                        <table class="" style="border-collapse: separate; border-spacing:20px; height: 296px;">
+                                        <table class=""
+                                            style="border-collapse: separate; border-spacing:20px; height: 296px;">
                                             <tr class="">
                                                 <td width="10%"><i class="fa-solid fa-bed"></i></td>
                                                 <td>{{i.bed}}</td>
@@ -70,16 +59,16 @@
                                             <tr>
                                                 <td><i class="fa-solid fa-city"></i></td>
                                                 <td>วิวเมือง</td>
-                
+
                                                 <!-- <td colspan="2" class="text-center "
                                                     style="border-top: 2px solid black; border-bottom:2px solid black;">
                                                     {% if count == 0%} <div class="text-danger">จำนวนห้องเต็มแล้ว</div> {%else %} <div
                                                         class="text-danger fs-5" style="margin:0;padding:0;"> {{count}} ห้องสุดท้าย!!
                                                     </div> {%endif%}</td> -->
-                                                    <td><i class="fa-solid fa-snowflake"></i></td>
+                                                <td><i class="fa-solid fa-snowflake"></i></td>
                                                 <td>มีเครื่องปรับอากาศ</td>
                                             </tr>
-                                           
+
                                         </table>
                                         <!-- <textarea class="form-control h-auto" readonly disabled rows="12">{{i.description}}</textarea> -->
                                         <!-- <div class="">{{i.description}}</div> -->
@@ -93,8 +82,8 @@
                                             <div class="text-center">จำนวนคน : {{i.limit_people}} คน</div>
                                             <div class="text-center">ราคา : {{i.price}} บาท</div>
                                             <br>
-                                                <a href="roomdetail/{{i.type_id}}"
-                                                    class="btn btn-primary-original form-control">จอง</a>
+                                            <a href="roomdetail/{{i.type_id}}"
+                                                class="btn btn-primary-original form-control">จอง</a>
                                         </div>
                                     </div>
                                     <div class="" style=""></div>
@@ -109,8 +98,40 @@
             <br>
             {% endfor%}
 
+            {%else%}
+            <div class="d-flex justify-content-center">
+                <div style="padding-top:10rem;padding-bottom:10rem;">
+                    <h1 class=" text-danger" style="">ไม่มีห้องสำหรับ 2 - 4
+                        คน ในขณะนี้</h1>
+                        <div class="text-center">
+                            <br>
+                    <a href="/" class="btn btn-success">กลับหน้าหลัก</a>
+                </div>
+                </div>
+
+            </div>
+            {%endif%}
+
+
+
         </div>
+
+
+
+
     </div>
 </div>
+<script>
+    var item = document.querySelectorAll('.queue')
+    var time = 0.5
+    for(let i = 0;i<=item.length;i++){
+
+        item[i].style.cssText = "animation: slide "+time+"s;"
+        time+=1
+
+    }
+
+
+</script>
 {% include 'footer.html'%}
 {% endblock%}

@@ -22,6 +22,7 @@
                 <th class="fs-5 py-3">จัดการ</th>
             </thead>
             <tbody class="border">
+                {% if rooms%}
                 {% for room in rooms%}
                 <tr style="border:2px solid black;" class="">
                     <td>เลขที่ห้อง : {{room.room_id}}</td>
@@ -35,6 +36,13 @@
                 </tr>
 
                 {% endfor %}
+                {%else%}
+                <tr>
+                    <td colspan="4">
+                        <h1 class="text-danger">ไม่มีห้องพักสำหรับประเภทนี้</h1>
+                    </td>
+                </tr>
+                {%endif%}
             </tbody>
 
 

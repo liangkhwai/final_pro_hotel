@@ -4,7 +4,7 @@ Transection
 {%endblock%}
 
 {%block content%}
-<div class="bg-primary p-5">
+<div class="p-5" style="background-color:#61494C;">
     <h1 class="text-center " style="color:white;">ประวัติการจอง</h1>
 </div>
 <div class="pt-5"></div>
@@ -30,28 +30,28 @@ Transection
                 <td style="line-height: 50px;">{{i.total}}</td>
 
                 {% if i.status == "ชำระเงินเรียบร้อย"%}
-                <td style="line-height: 50px;" class="bg-success">{{i.status}}</td>
+                <td style="line-height: 50px; " class="bg-success text-light">{{i.status}}</td>
 
                 {% elif i.status == "ยกเลิกการจอง"%}
-                <td style="line-height: 50px;" class="bg-secondary">{{i.status}}</td>
+                <td style="line-height: 50px;" class="bg-secondary text-light">{{i.status}}</td>
                 {% else%}                
-                <td style="line-height: 50px;" class="bg-danger">{{i.status}}</td>
+                <td style="line-height: 50px;" class="bg-danger text-light">{{i.status}}</td>
                 {%endif%}
 
             </tr>
             {%endfor%}
             <tr>
-                <td colspan="5" class="text-center bg-success">จำนวนเงินที่ชำระแล้ว</td>
+                <td colspan="5" class="text-center bg-success text-light">จำนวนเงินที่ชำระแล้ว</td>
                 <td class="text-center">{{count_paid}} ห้อง</td>
                 <td class="text-center">{{total}} บาท</td>
             </tr>
             <tr>
-                <td colspan="5" class="text-center bg-danger">จำนวนเงินที่ยังไม่ชำระเงิน</td>
+                <td colspan="5" class="text-center bg-danger text-light">จำนวนเงินที่ยังไม่ชำระเงิน</td>
                 <td class="text-center">{{count_not}} ห้อง</td>
                 <td class="text-center">{{not}} บาท</td>
             </tr>
             <tr>
-                <td colspan="5" class="text-center bg-secondary">จำนวนห้องที่ถูกยกเลิก</td>
+                <td colspan="5" class="text-center bg-secondary text-light">จำนวนห้องที่ถูกยกเลิก</td>
                 <td class="text-center">{{count_cancle}} ห้อง</td>
                 <td class="text-center">{{cancle}} บาท</td>
             </tr>

@@ -5,7 +5,50 @@
 
 {% block content %}
 <style>
+  #igfeed .sc-scene{
+    z-index: 0;
+    background-size: 50% auto;
+    background-position: right top;
+    transform: translateY(-65px);
+  }
+  .sc-scene{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+  .bg-img{
+    background-repeat: no-repeat;
+  }
+
   
+
+
+
+
+
+  body{
+    margin: 0px;
+    padding: 0px;
+  }
+  @media screen and (max-width: 992px) {
+    #imgab { 
+       visibility: hidden !important;
+    }
+  }
+
+  /*  scroll fade     */
+  .tag{
+    opacity: 0;
+    transform: translate(0,20vh);
+    transition: all 3s;
+  }
+  .tag.visible{
+    opacity: 1;
+    transform: translate(0,0);
+  }
 </style>
 
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -101,18 +144,28 @@
 
 
 
-<div class="container">
-  <div class="row">
+<div class="container tag">
+  <div class="row pt-5">
     <div class="col-md-6">
+
+
       <div class="pt-5 px-5">
-        <h1 class="" style="margin-bottom: 0px;">
-          <p>Welcome to <br>Avania+ Riverside<br>KhonKaen Hotel</p>
-        </h1>
-        <!-- <div class="px-5"> -->
-        <hr class="" style="width: 60%; border: 1px solid #0000; border-radius: 5px; background-color: black;">
-        <!-- </div> -->
-        <h2>สิ่งอำนวยความสะดวก</h2><br>
+
+        <div class="d-flex justify-content-center align-self-center">
+          <div>
+            <h1 class="" style="margin-bottom: 0px;">
+              <p>Welcome to <br>Avania+ Riverside<br>KhonKaen Hotel</p>
+            </h1>
+            <!-- <div class="px-5"> -->
+            <hr class="" style="width: 60%; border: 1px solid #0000; border-radius: 5px; background-color: black;">
+            <!-- </div> -->
+            <h2>สิ่งอำนวยความสะดวก</h2><br>
+          </div>
+        </div>
       </div>
+
+
+
     </div>
     <div class="col-md-6">
       <div class="pt-5 ">
@@ -123,77 +176,110 @@
         <div class="lh-3  ">
           <p>
             “อวาเนีย” หมายถึง
-            “อวาเนีย” หมายถึง
-            “มนตร์เสน่ห์”ซึ่งสามารถอธิบายและสื่อสารได้อย่างชัดเจนจากภาพลักษณ์ของโรงแรมที่เต็มไปด้วยความสดชื่นสดใสร่มเย็นของต้นไม้ดอกไม้และยังรวมไปถึงปฏิกิริยาของลูกค้าเมื่อได้เดินทางมาถึงและตลอดระยะเวลาของการอยู่อาศัยการเข้าพักที่อวาเนียคือการเริ่มต้นการเดินทางที่น่าจดจำอย่างยิ่ง
+
+            “มนตร์เสน่ห์”
+            ซึ่งสามารถอธิบายและสื่อสารได้อย่างชัดเจนจากภาพลักษณ์ของโรงแรมที่เต็มไปด้วยความสดชื่นสดใสร่มเย็นของต้นไม้ดอกไม้และยังรวมไปถึงปฏิกิริยาของลูกค้าเมื่อได้เดินทางมาถึงและตลอดระยะเวลาของการอยู่อาศัยการเข้าพักที่อวาเนียคือการเริ่มต้นการเดินทางที่น่าจดจำอย่างยิ่ง
           </p>
         </div>
       </div>
     </div>
   </div>
-  <div class="row pt-1">
+  <div class="row pt-1 pb-5">
 
     <div class="col-md-6">
       <div class="px-5">
         <div class="">
 
-          <div class="container">
-            <table class="table table-hover" style="width:300px">
-              <tr>
-                <td><i class="fa-solid fa-wifi"></i></td>
-                <td>WIFI ฟรี</td>
-              </tr>
-              <tr>
-                <td><i class="fa-solid fa-person-swimming"></i></td>
-                <td>สระว่ายน้ำ</td>
-              </tr>
-              <tr>
-                <td><i class="fa-solid fa-utensils"></i></td>
-                <td>ห้องอาหาร</td>
-              </tr>
-              <tr>
-                <td><i class="fa-regular fa-handshake"></i></td>
-                <td>ห้องประชุม</td>
-              </tr>
-              <tr>
-                <td><i class="fa-solid fa-martini-glass"></i></td>
-                <td>บาร์</td>
-              </tr>
-              <tr>
-                <td><i class="fa-solid fa-dumbbell"></i></td>
-                <td>ยิม</td>
-              </tr>
-            </table>
+          <div class="container h-100">
+            <div class="pt-5"></div>
+
+            <!-- 
+            
+            <div class="d-flex flex-column justify-content-center">
+              <div class="text-center">
+
+                <div><i class="fa-solid fa-wifi"></i>&emsp;&emsp;&emsp;&emsp;WIFI ฟรี</div>
+                <br>
+                <div><i class="fa-solid fa-person-swimming"></i>&emsp;&emsp;&emsp;&emsp;สระว่ายน้ำ</div>
+                <br>
+                <div><i class="fa-solid fa-utensils"></i></i>&emsp;&emsp;&emsp;&emsp;ห้องอาหาร</div>
+                <br>
+                <div><i class="fa-regular fa-handshake"></i>&emsp;&emsp;&emsp;&emsp;ห้องประชุม</div>
+                <br>
+                <div><i class="fa-solid fa-martini-glass"></i>&emsp;&emsp;&emsp;&emsp;บาร์</div>
+                <br>
+                <div><i class="fa-solid fa-dumbbell"></i>&emsp;&emsp;&emsp;&emsp;ยิม</div>
+
+              </div> -->
+
+
+
+            <div class="d-flex justify-content-center">
+              <table class="table table-hover" style="width:300px">
+                <tr>
+                  <td><i class="fa-solid fa-wifi"></i></td>
+                  <td>WIFI ฟรี</td>
+                </tr>
+                <tr>
+                  <td><i class="fa-solid fa-person-swimming"></i></td>
+                  <td>สระว่ายน้ำ</td>
+                </tr>
+                <tr>
+                  <td><i class="fa-solid fa-utensils"></i></td>
+                  <td>ห้องอาหาร</td>
+                </tr>
+                <tr>
+                  <td><i class="fa-regular fa-handshake"></i></td>
+                  <td>ห้องประชุม</td>
+                </tr>
+                <tr>
+                  <td><i class="fa-solid fa-martini-glass"></i></td>
+                  <td>บาร์</td>
+                </tr>
+                <tr>
+                  <td><i class="fa-solid fa-dumbbell"></i></td>
+                  <td>ยิม</td>
+                </tr>
+              </table>
+            </div>
+
           </div>
 
         </div>
+
       </div>
     </div>
+
     <div class="col-md-6">
-      <div class="px-5">
-        <div class="row">
 
-          <div class="col-md col-sm" style="">
-
-            <img src="{% static 'hero-slider-2.jpg'%}" alt="" width="auto" class="rounded img-fluid">
-
-
-
-
+      <div id="carouselExampleInterval" class="carousel slide w-100 rounded" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="5000">
+            <img src="/media/Deluxe1/Screenshot 2022-10-14 022945.jpg" class="d-block w-100 rounded" alt="...">
           </div>
-          <div class="col-md col-sm"> <img src="{% static 'hero-slider-3.jpg'%}" alt="" height="200px"
-              class="rounded img-fluid">
+          <div class="carousel-item" data-bs-interval="5000">
+            <img src="/media/Deluxe1/Screenshot 2022-10-14 023019.jpg" class="d-block w-100 rounded" alt="...">
           </div>
-          <div class="col-md col-sm"> <img src="{% static 'hero-slider-4.jpg'%}" alt="" width="auto"
-              class="rounded img-fluid">
+          <div class="carousel-item" data-bs-interval="5000">
+            <img src="/media/Deluxe1/Screenshot 2022-10-14 023052.jpg" class="d-block w-100 rounded" alt="...">
           </div>
-
         </div>
-
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
+          data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
+          data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
-      <!-- <iframe
-        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15307.43537899137!2d102.86383369860818!3d16.431993785626663!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31228bda829566e7%3A0x24ca9da06e436ef3!2z4Lih4Lir4Liy4Lin4Li04LiX4Lii4Liy4Lil4Lix4Lii4LmA4LiX4LiE4LmC4LiZ4LmC4Lil4Lii4Li14Lij4Liy4LiK4Lih4LiH4LiE4Lil4Lit4Li14Liq4Liy4LiZIOC4p-C4tOC4l-C4ouC4suC5gOC4guC4leC4guC4reC4meC5geC4geC5iOC4mQ!5e0!3m2!1sth!2sth!4v1665685865204!5m2!1sth!2sth"
-        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade" class="overflow-hidden"></iframe> -->
+
+
+
+
+
 
     </div>
 
@@ -202,56 +288,173 @@
   </div>
 
 
+  <div class="pb-5"></div>
+
+
+
 </div>
-<br>
 
 
 
 
-<!-- <div class="container shadow-lg " style="background-color: #6998AB">
-  <div class="container text-light">
+<div class="tag" style="background-color: white; padding: 3rem;">
+  <div class="container">
+    <h2 class="text-center pt-5" style="color: #61494C;">Direct Booking Benefit</h2>
     <div class="row">
-      <h1>HOTEL</h1>
-      <div class="row ">
+      <div class="col-xl-3 col-lg-6 col-md-12 py-5">
+        <h4 style="color: #61494C;"><i class="fa-solid fa-hand-holding-dollar"></i> อัตราค่าห้องพักที่ดีที่สุด*</h4>
+        <div class="pt-3"></div>
+        <p>เพลินเพลินไปกับการพักผ่อนช่วงวันหยุดของคุณด้วยอัตราค่าห้องพักที่ดีที่สุดจาก Avania+
+          เรามั่นใจเป็นอย่างยิ่งว่าเราจะทำให้การเดินทางมาพักผ่อนที่อาวาเนียของคุณเป็นการเดินทางที่อยู่ในความทรงจำของคุณไปตลอด
+          สามารถสำรองห้องพักด้วยราคาที่ดีที่สุดจากเรา
 
-  <!-- <div class="bg-danger col-12 ">
-    <div class="row">
-      <div class="card col-4 p-5">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
+        </p>
       </div>
-      <div class="card col-4 p-5">
-        HI
+      <div class="col-xl-3 col-lg-6 col-md-12 py-5">
+        <h4 style="color: #61494C;"><i class="fa-solid fa-martini-glass-citrus"></i> Welcome drink*</h4>
+        <div class="pt-3"></div>
+        <p>เครื่องดื่มต้อนรับ เมื่อมาถึงล็อบบี้
+
+        </p>
       </div>
-      <div class="card col-4 p-5">
-        HI
+      <div class="col-xl-3 col-lg-6 col-md-12 py-5">
+        <h4 style="color: #61494C;"><i class="fa-solid fa-percent"></i> ส่วนลด 15 เปอร์เซ็นต์สำหรับอาหารและเครื่องดื่ม*
+        </h4>
+        <div class="pt-3"></div>
+        <p>ส่วนลดนี้สามารถใช้ได้ที่ WOODS Kitchen & Bar, WOODS Upper Deck และ The Marbles
+
+        </p>
       </div>
-      <div class="card col-4 p-5">
-        HI
+      <div class="col-xl-3 col-lg-6 col-md-12 py-5">
+        <h4 style="color: #61494C;"><i class="fa-regular fa-clock"></i> ความยืดหยุ่นที่มากขึ้น*</h4>
+        <div class="pt-3"></div>
+        <p>พิเศษ สามารถเข้าเช็กอินล่วงหน้าได้ตั้งแต่ 11.00 และยืดเวลาเช็กเอ้าท์ออกไปได้ถึง 15.00 น.
+
+        </p>
       </div>
+
     </div>
   </div>
 </div>
-</div> -->
 
-<!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-      <script>
-        Swal.fire(
-          '{{ user }}',
-          ' Hi ',
-          'success'
-        )
-      </script> -->
 
-<!-- <p class="">Welcome, new user. Please <a class="text-light" href="/login " onclick="show">Click log in.</a></p> -->
 
-<!-- </div> -->
-<!-- </div>
-</div>  -->
+<div class="row w-100 tag" style="position: relative;">
+  <div class="col-lg-6 col-md-12" style="background-image: url('/media/bg_cement.jpg'); background-repeat: no-repeat; background-size: cover; padding-top:10rem; padding-bottom:10rem;">
+    <div class="d-flex justify-content-end " style="padding-right: 10rem;padding-left: 10rem;">
+      <div style="width: 25rem;" class="">
+        <h1 class="py-3" style="position: relative;">Eat & Drink</h1>
+        <p style="position: relative;">
+          Avania+ นำเสนอรูปแบบการทานอาหารแบบใหม่ให้กับขอนแก่น
+          อาหารของเราได้รับการขับเคลื่อนจากท้องถิ่นและได้รับแรงบันดาลใจจากรสชาติอาหารของจังหวัดเพชรบุรีด้วยความร่วมมือกับเกษตรกรในพื้นที่และด้วยเหตุนี้ทำให้อาหารของเรามีเรื่องราวความเป็นมา
+        </p>
+        <p style="position: relative;">
+          เรามีสถานที่รองรับสำหรับทุกโอกาสไม่ว่าจะเป็นช่วงเวลาไหนของวัน คุณสามารถก้าวเข้าไปที่ WOODS Kitchen & Bar
+          ซึ่งเป็นร้านอาหารเด็ดของทางเราที่เปิดบริการในทุกมื้อของวัน หรือผ่อนคลายระหว่างวันได้ที่ The Marbles
+          บาร์ริมสระว่ายน้ำที่เสิร์ฟเครื่องดื่มค็อกเทลสุดสดชื่นรวมถึงเครื่องดื่มที่ไม่มีแอลกอฮอล์
+          หรือจะเพลิดเพลินไปกับเครื่องดื่มดับกระหายคลายร้อนได้ที่ Eden และปิดท้ายวันดีดีของคุณที่ WOODS Upper Deck
+          ที่ที่จะทำให้คุณดื่มด่ำไปกับวิวอันสวยงามของทะเลอ่าวไทยไปพร้อมๆกับจิบเครื่องดื่มค็อกเทลสูตรเด็ดของเรา
+        </p>
+        <p style="position: relative;">
+          ตั้งแต่มื้อเช้าเพื่อเริ่มต้นวันอันแสนวิเศษจนถึงมื้อค่ำก่อนการเข้านอนอย่างมีความสุข Avania+
+          มีให้คุณทั้งหมดอย่างครบครัน
+        </p>
+      </div>
+    </div>
+    <img src="/media/eatdrink.jpg" id="imgab" alt="" width="400" min-width="400" class="shadow-lg" style="position: absolute; left:44%; top:25%; overflow: auto;">
+  </div>
+
+  <div class="col-lg-6 col-md-6" style="background-image: url('/media/eatback.jpg'); background-repeat: no-repeat; ">
+  </div>
+
+  <!-- width="435" height="554" -->
+
+
+
+  <!-- <div class="col">
+      <div class="text-center" style="position: relative;">
+        <img src="/media/eatdrink.jpg" alt="" width="435" height="554" class="shadow-lg" style="position: absolute;">
+      </div>
+
+    </div> -->
+</div>
+<div class="pb-5"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container tag">
+  <div class="pt-5"></div>
+  <div class="row">
+    <div class="col">
+      <div class="text-center">
+        <img src="/media/wedding.jpg" alt="" width="435" height="554" class="shadow-lg">
+      </div>
+    </div>
+    <div class="col">
+      <div class="pt-5">
+        <h1 class="py-3">Wedding Ceremony
+        </h1>
+        <h4 class="py-2">สร้างช่วงเวลาดีดีให้กับตัวคุณเอง ที่นี่คือที่ที่จะสร้างความทรงจำอันแสนวิเศษให้กับคุณ
+        </h4>
+        <p>สถานที่จัดงานแต่งงานโดย Avania+ ขอนแก่น<br>
+          Avania+ นำเสนอตัวเลือกสถานที่จัดงานแต่งงานในโรงแรม ซึ่งเป็นการแต่งงานริมเขื่อนในประเทศไทยที่คุณใฝ่ฝัน
+          ทางโรงแรมของเรามีแพ็กเกจงานแต่งงานริมเขื่อนสำหรับทั้งพิธีแต่งงานตามประเพณีไทย
+          การแต่งงานแบบตะวันตกรวมถึงการแต่งงานแบบอินเดีย ทีมงานของ Avania+
+          พร้อมแล้วที่จะช่วยรังสรรค์วันที่พิเศษที่สุดของคุณ<br>
+
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="pb-5"></div>
+</div>
+
+
+<div class="tag" id="igfeed" style="padding-top:7rem;padding-bottom:7rem; position: relative; z-index: 0; background-position: right top;">
+  <div class="sc-scene bg-img" style="background-image: url('/media/igfoot.png');">&nbsp;</div>
+  <div class="d-flex justify-content-center">
+    <div class="text-center">
+      <h1><i class="fa-brands fa-instagram"></i></h1>
+      <h1>#avania+</h1>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+  $(document).on("scroll", function() {
+    var pageTop = $(document).scrollTop();
+    var pageBottom = pageTop + $(window).height();
+    var tags = $(".tag");
+  
+    for (var i = 0; i < tags.length; i++) {
+      var tag = tags[i];
+      if ($(tag).position().top < pageBottom) {
+        $(tag).addClass("visible");
+      } else {
+        $(tag).removeClass("visible");
+      }
+    }
+  });
+</script>
+
 
 
 {% include 'footer.html'%}

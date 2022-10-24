@@ -10,12 +10,16 @@
 
 <form action="" method="post" id="formform">
     {% csrf_token%}
+    <div class=" p-5" style="background-color: #61494C;">
+        <h1 class="text-center " style="color:white;">แก้ไขสถานะห้อง</h1>
+    </div>
     <div class="container ">
         <div style="background-color: white;" class="d-flex justify-content-center">
             <div class=" pt-5">
+                
                 <div class="container" style="width: 300px;">
                     <div style="" class="">
-                        <h1>เลขที่ห้อง {{room.room_id}}</h1>
+                        <h1 class="text-center">เลขที่ห้อง {{room.room_id}}</h1>
                         <br>
                         <br>
                         <div>สถานะ</div>

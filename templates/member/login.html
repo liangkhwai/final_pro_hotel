@@ -6,6 +6,7 @@
 
 <div class="shadow-lg " style="background-color: #61494C">
     <!-- row-1 -->
+    <input type="hidden" name="" id="error" value="{{error}}">
     <br>
     <br>
     <br><br><br>
@@ -17,20 +18,25 @@
 
         <div class="col-md-10 mx-auto col-lg-5">
             <!-- row-3 -->
-            <form class="shadow-lg rounded-5 row bg-light p-4" action="" method="post">
+            <form class="shadow-lg rounded-5 row bg-light p-4" action="" method="post" id="formform">
                 {% csrf_token%}
                 
                 <div class="pb-4 text-black ">
                     <label for="username ">ชื่อผู้ใช้</label>
-                    <input class="form-control" type="text" name="username" id="username">
+                    <input class="form-control" type="text" name="username" id="username" required>
                 </div>
                 <div class="pb-4 text-black">
                     <label for="password">รหัสผ่าน</label>
-                    <input class="form-control" type="password" name="password" id="password">
+                    <input class="form-control" type="password" name="password" id="password" required>
                 </div>
 
-                <div class="row ">
-                    <input type="submit" name="submit" id="" value="เข้าสู่ระบบ" class="btn btn-primary" onclick="">
+                <div class="pb-4 text-black" id="hide">
+                    <div>** กรุณากรอกข้อมูลให้ครบ **</div>
+                    <!-- <input type="checkbox" name="" id="check" required class="form-check-input">
+                    <label for="check">ยืนยันการเข้าสู่ระบบ</label> -->
+                </div>
+                <div class="">
+                    <input type="submit" name="submit" id="butbut" value="เข้าสู่ระบบ" class="btn btn-primary" onclick="">
                 </div>
                 
                 <br>
@@ -40,5 +46,46 @@
     </div> <!-- row-2 -->
     <br><br><br><br><br><br><br>
 </div> <!-- row-1 -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<script>
+    
+    const formEl = document.getElementById('formform')
+    var btnn = document.getElementById('butbut')
+    var check = document.getElementById('check')
+    var position
+    var hide = document.getElementById('hide')
+    const username = document.getElementById('username')
+    const password = document.getElementById('password')
+    hide.style.display = "none"
+    var err = document.getElementById('error').value
+
+    if(err == "error"){
+        console.log('error na')
+        Swal.fire({
+            icon: 'error',
+            text: 'ชื่อผู้ใช้ หรือ รหัสผ่านไม่ถูกต้อง',
+          });
+    }
+
+
+
+    
+    btnn.addEventListener("mouseover", function () {
+        //form validation callback return true or false, trigged because of built in form validation in HTML 'required'
+        if (!formEl.checkValidity()) {
+        hide.style.display = "block"
+
+          position ? (position = 0) : (position = 630);
+          //adding the css animation property
+          btnn.style.transform = `translate(${position}px, 0px)`;
+          btnn.style.transition = "all 0.3s ease";
+          
+        } else {
+            hide.style.display = "none"
+
+          return;
+        }
+      });
+</script>
 {% endblock %}

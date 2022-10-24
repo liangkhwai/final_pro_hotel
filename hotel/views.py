@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,logout,login as auth_login
@@ -12,12 +13,16 @@ from django.shortcuts import redirect
 from datetime import date, datetime
 from django.core import serializers
 from django.db.models import Q,Sum
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
 
 
 def home(req):
+    
+       
+    
     if req.method == 'POST':
         form = SearchForm(req.POST)
         if form.is_valid():
@@ -39,7 +44,13 @@ def home(req):
             response.set_cookie('people',data['people'])
             return response   
     else:
-        form = SearchForm()
+        try:
+            date_in = str(req.COOKIES['date_in'])
+            date_out = str(req.COOKIES['date_out'])
+            form = SearchForm(check_in = date_in,check_out= date_out)
+        except:
+            form = SearchForm()
+            
     
     
     return render(req,'home.html',{'form':form})
@@ -100,10 +111,11 @@ def login_user(req):
             req.session['user'] = user.id
             return HttpResponseRedirect(reverse('home'))
         else:
-            return HttpResponseRedirect(reverse('home'))
+            return render(req,'member/login.html',{'error':"error"})
         
     return render(req,'member/login.html')
 
+@login_required
 def logout_user(req):
     logout(req)
     response = redirect('home')
@@ -112,6 +124,7 @@ def logout_user(req):
     response.delete_cookie('date_out')
     return response
 
+@login_required
 def editcustomer(req,pk):
     customer = Customer.objects.get(cust_id=pk)
     user = User.objects.get(id = req.session['user'])
@@ -147,7 +160,7 @@ def editcustomer(req,pk):
     print('FLASE')
     return render(req,'member/editcustomer.html',context)
 
-
+@login_required
 def editpassword(req,pk):
     account = User.objects.get(id = pk)
     if req.method == 'POST':
@@ -163,7 +176,7 @@ def editpassword(req,pk):
     return render(req,'member/editpassword.html',context)    
 
 
-
+@login_required
 def addrooms(req):
     if req.method == 'POST':
         roomForm = AddRoomsClassForm(req.POST)
@@ -183,6 +196,7 @@ def addrooms(req):
     context = {'roomForm':roomForm}
     return render(req,'rooms/addrooms.html',context)
 
+@login_required
 def editrooms(req,pk):
     rooms = Rooms.objects.all().filter(type_id = pk)     
     type = RoomType.objects.get(type_id = pk)
@@ -205,7 +219,7 @@ def editrooms(req,pk):
         'rooms':rooms
     }
     return render(req,'rooms/editrooms.html',context)
-
+@login_required
 def editroom(req,pk,fk):
     room = Rooms.objects.get(room_id = fk)
     if req.method == 'POST':
@@ -221,14 +235,14 @@ def editroom(req,pk,fk):
         'room':room
     }
     return render(req,'rooms/editroom.html',context)
-
+@login_required
 def deleteroom(req,pk,fk):
     room = Rooms.objects.get(room_id = pk)
     room.delete()
     # return HttpResponseRedirect(reverse('fetchrooms'))
     return redirect('editrooms',pk=fk)
 
-
+@login_required
 def deletetype(req,pk):
     type = RoomType.objects.get(type_id = pk)
     type.delete()
@@ -236,7 +250,7 @@ def deletetype(req,pk):
     rooms.delete()
     return HttpResponseRedirect(reverse('fetchrooms'))
 
-
+@login_required
 def addtype(req):
     if req.method == 'POST':
         typeForm = AddRoomsTypeForm(req.POST)
@@ -252,7 +266,7 @@ def addtype(req):
     typeForm = AddRoomsTypeForm()
     context = {'typeForm':typeForm}
     return render(req,'rooms/addtype.html',context)
-
+@login_required
 def edittype(req,pk):
     type = RoomType.objects.get(type_id = pk)
     multiimg = MultiImage.objects.all().filter(type = pk)
@@ -272,7 +286,7 @@ def edittype(req,pk):
                 obj_img.type = typeForm 
                 obj_img.save()
 
-            return redirect('edittype',pk=pk)
+            return redirect('fetchrooms')
     else:
         form = AddRoomsTypeForm(instance=type)
         imgForm = MultiImageForm()
@@ -283,13 +297,13 @@ def edittype(req,pk):
         'type':type
     }
     return render(req,'rooms/edittype.html',context)
-
+@login_required
 def delMultiImg(req,id,type):
     img = MultiImage.objects.get(id = id)
     img.delete()
     
     return redirect('edittype',pk=type)
-
+@login_required
 def addanotherimg(req):
     if req.method == 'POST':
         images = req.FILES.getlist('image')
@@ -306,7 +320,7 @@ def addanotherimg(req):
     
     
     
-
+@login_required
 def fetchrooms(req):
     type = RoomType.objects.all()
     if req.method == 'POST':
@@ -361,7 +375,7 @@ def roomdetail(req,pk):
     return render(req,'rooms/roomdetail.html',context)
 
 
-
+@login_required
 def booking(req,pk):
     room_free = Rooms.objects.all().filter(type_id=pk,status = 'ว่าง').first()
     user = Customer.objects.get(account_id = req.session['user'])
@@ -430,8 +444,8 @@ def booking(req,pk):
                 'days':remain_day,
                 'multiimg':multiimg,
             }   
-            
-            return render(req,'payment/payment.html',context)
+            return redirect('bookingdetail',pk=book.booking_id)            
+            # return render(req,'payment/payment.html',context)
         
     context = {
         'multiimg':multiimg,
@@ -443,7 +457,8 @@ def booking(req,pk):
         'price':price
     }
     return render(req,'booking/booking.html',context)
-   
+
+@login_required
 def payment(req):
     if req.method == 'POST':
         user = Customer.objects.get(account_id = req.session['user'])
@@ -481,7 +496,7 @@ def payment(req):
         
     return render(req,'payment/payment.html')
     
-
+@login_required
 def bookdetail(req,pk):
     
     booking = Booking.objects.get(booking_id = pk)
@@ -519,7 +534,8 @@ def notFound(req,exception):
     response = render(req,'404page.html')
     response.status_code = 404
     return response
-    
+
+@login_required   
 def transection(req):
     info = Transaction.objects.all()
     all_total = Transaction.objects.all().aggregate(Sum('total')) 
@@ -546,7 +562,7 @@ def transection(req):
     }
     
     return render(req,'transection.html',context)
-
+@login_required
 def cancle(req,pk):
 
     booking = Booking.objects.get(booking_id = pk)
@@ -571,7 +587,7 @@ def objective(req):
 def source(req):
     return render(req,'source.html')
 
-    
+@login_required   
 def editmember(req):
 
     member = Customer.objects.all()
@@ -581,7 +597,7 @@ def editmember(req):
     }
     
     return render(req,'member/editmember.html',context)
-
+@login_required
 def editmember_admin(req,pk):
     member = Customer.objects.get(cust_id=pk)
     # user = User.objects.get(id = req.session['user'])
@@ -606,7 +622,7 @@ def editmember_admin(req,pk):
         'memDate':str(member.age),
     }
     return render(req,'member/editmember_admin.html',context)
-
+@login_required
 def delmember_admin(req,pk):
     member = User.objects.get(id = pk)
     member.delete()

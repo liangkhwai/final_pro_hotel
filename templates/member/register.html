@@ -21,6 +21,30 @@ Register
                 <form class="px-4 pt-5 text-Black" action="" method="post">
                     {% csrf_token%}
                     <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="text-black" for="username">ชื่อผู้ใช้</label>
+                                {{accForm.username}}
+                                {{accForm.username.errors}}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="text-black" for="password">รหัสผ่าน</label>
+                                {{accForm.password1}}
+                                {{accForm.password1.errors}}
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label class="text-black" for="password">ยืนยันรหัสผ่าน</label>
+                        {{accForm.password2}}
+                        {{accForm.password2.errors}}
+
+                    </div>
+                    <br>
+                    <div class="row">
                         <div class="col-md-6 ">
                             <div class="form-group">
                                 <label class="text-black " for="fname">ชื่อ</label>
@@ -62,31 +86,8 @@ Register
                         {{accForm.email.errors}}
                         <small id="emailHelp" class="form-text text-mude">เราจะไม่เผยแพร่อีเมลล์กับผู้อื่น.</small>
                     </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="text-black " for="username">ชื่อผู้ใช้</label>
-                                {{accForm.username}}
-                                {{accForm.username.errors}}
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="text-black" for="password">รหัสผ่าน</label>
-                                {{accForm.password1}}
-                                {{accForm.password1.errors}}
-                            </div>
-                        </div>
-                    </div>
-
-                    <br>
-                    <div class="form-group">
-                        <label class="text-black" for="password">ยืนยันรหัสผ่าน</label>
-                        {{accForm.password2}}
-                        {{accForm.password2.errors}}
-
-                    </div>
+                  
+                    
                     <br>
                     <div class="form-group">
                         <label class="text-black" for="address">ที่อยู่</label>

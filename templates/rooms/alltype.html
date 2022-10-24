@@ -10,6 +10,108 @@ Rooms
 
 {% block content%}
 
+<style>
+    .modal {
+        z-index:1;
+        display:none;
+        padding-top:10px;
+        position:fixed;
+        left:0;
+        top:0;
+        width:100%;
+        height:100%;
+        overflow:auto;
+        background-color:rgb(0,0,0);
+        background-color:rgba(0,0,0,0.8)
+        }
+        .modal-content{
+            margin: auto;
+            display: block;
+            width: 0px;
+            position: absolute;
+              top: 50%;
+              left: 25%;
+            transform: translate(-50%, -50%);
+            }
+            .modal-hover-opacity {
+                opacity:1;
+                filter:alpha(opacity=100);
+                -webkit-backface-visibility:hidden
+                }
+                
+                .modal-hover-opacity:hover {
+                opacity:0.60;
+                filter:alpha(opacity=60);
+                -webkit-backface-visibility:hidden
+                }
+                .close {
+                    text-decoration:none;float:right;font-size:24px;font-weight:bold;color:white
+                    }
+                    .next{
+                        text-decoration:none;float:left;font-size:500px;font-weight:bold;color:white
+
+                    }
+                    .modal-content, #caption {   
+  
+                        -webkit-animation-name: zoom;
+                        -webkit-animation-duration: 0.6s;
+                        animation-name: zoom;
+                        animation-duration: 1s;
+                    }
+                    @-webkit-keyframes zoom {
+                        from {-webkit-transform: translateY(20vh)} 
+                        to {-webkit-transform:translateY(0vh)}
+                    }
+                    
+                    @keyframes zoom {
+                        from {
+                            opacity: 0;
+                        } 
+                        to {
+                            opacity: 1;
+                        }
+                       /* from {
+                            transform: translateY(100vh)
+                        } 
+                        to {
+                            transform:translateY(0vh)
+                        }*/
+                    }.container1 {
+                        width:200px;
+                        display:inline-block;
+                        }
+    .fadeleft{
+        animation: fadeleft 1s;
+    }
+    .faderight{
+        animation: faderight 1s;
+
+    }
+    @keyframes fadeleft {
+        from {
+            transform: translateX(20vh);
+
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    @keyframes faderight {
+        from {
+            transform: translateX(-20vh);
+
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+</style>
+
+
 <div style=" background-color: white;">
     <div class="container">
         <div class="row">
@@ -37,11 +139,11 @@ Rooms
     <div class="col-6">
         <div class="row"> -->
         {% for i in alltype%}
-        <div class="col-lg-6 col-md-12 pb-4 d-flex justify-content-center">
+        <div class="col-lg-6 col-md-12 pb-4 d-flex justify-content-center queue">
             <div style="width: 500px;">
                 <div style="background-color: white;">
                     <div style="width: 100%; ">
-                        <img src="/media/{{i.img}}" alt="" width="100%" height="300px" class="shadow-lg">
+                        <img src="/media/{{i.img}}" alt="" width="100%" height="300px" class="shadow-lg modal-hover-opacity" onclick="onClick(this)">
                     </div>
                     <div class="container">
                         <h3 class="text-uppercase py-3 overflow-auto">{{i.name}}</h3>
@@ -70,6 +172,45 @@ Rooms
 </div>
 
 <div class="pb-5"></div>
+<div id="modal01" class="modal" onclick="this.style.display='none'">
+    <span class="close">&times;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <div class="modal-content">
+        <img id="img01" style="" width="800px">
+    </div>
+  </div>
+
+
+
+
+
+<script>
+
+    var col = document.querySelectorAll(".queue")
+    console.log(col.length)
+    var time = 0.5
+    for(let i = 0; i<=col.length;i+=2){
+       /* col[i].classList.add("faderight")
+        col[i+1].classList.add("fadeleft")  
+*/
+        col[i].style.cssText = "animation: faderight "+time+"s;"
+        col[i+1].style.cssText = "animation: fadeleft "+time+"s;"
+        time+=1
+
+
+    }
+
+
+
+
+    function onClick(element) {
+        document.getElementById("img01").src = element.src;
+        document.getElementById("modal01").style.display = "block";
+      }
+   
+</script>
+
+
+
 {% include 'footer.html'%}
 
 

@@ -1,9 +1,13 @@
 from ast import Mult
+
 from dataclasses import field
 from django import forms
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm,PasswordChangeForm
+from datetime import datetime,date 
+
+
 
 GENDER_CHOICEs= [
     ('male','ชาย'),
@@ -32,9 +36,10 @@ BED_CHOICES = [
 
 
 
+
 class CustomerClassForm(forms.ModelForm):
     gender = forms.ChoiceField(required=True,widget=forms.RadioSelect(attrs={}),choices=GENDER_CHOICEs,)
-    
+   
     def __init__(self,*args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['firstname'].widget.attrs.update({'class':'form-control'})
@@ -252,14 +257,19 @@ class BookingForm(forms.ModelForm):
             
         }
 
+def mydate():
+    return str(date.today())
 
 class SearchForm(forms.ModelForm):
     people = forms.ChoiceField(widget=forms.Select(attrs={'class':'form-control'}),choices=PEOPLE_CHOICES)
     
     def __init__(self,*args, **kwargs):
+        self.check_in = kwargs.pop('check_in', None)
+        self.check_out = kwargs.pop('check_out', None)
         super().__init__(*args, **kwargs)
-        self.fields['date_in'].widget.attrs.update({'class':'form-control'})
-        self.fields['date_out'].widget.attrs.update({'class':'form-control'})
+        
+        self.fields['date_in'].widget.attrs.update({'class':'form-control','min':str(date.today()),'value':self.check_in})
+        self.fields['date_out'].widget.attrs.update({'class':'form-control','min':str(date.today()),'value':self.check_out})
     class Meta:
         model = Booking
         fields = ('date_in','date_out','people')
@@ -274,7 +284,8 @@ class SearchForm(forms.ModelForm):
         attrs={'class': 'form-control', 
                'placeholder': '',
                'type': 'date'
-              }),
+              }
+        ),
             'date_out':forms.DateInput(
         format=('%d-%mm-%YYYYY'),
         attrs={'class': 'form-control', 
