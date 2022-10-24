@@ -1,6 +1,4 @@
-from ast import Mult
 
-from dataclasses import field
 from django import forms
 from .models import *
 from django.contrib.auth.models import User
@@ -29,10 +27,6 @@ BED_CHOICES = [
     ('1 เตียงเดี่ยว','1 เตียงเดี่ยว'),
     ('2 เตียงคู่','2 เตียงคู่')
 ]
-
-# class DateInput(forms.DateInput):
-#     input_type = 'date'
-
 
 
 
@@ -118,44 +112,7 @@ class UpdateCustomerForm(forms.ModelForm):
             'address':'ที่อยู่'
         }
 
-# class Login(forms.ModelForm):
-#     def __init__(self,*args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.fields['username'].widget.attrs.update({'class':'form-control'})
-#         self.fields['password'].widget.attrs.update({'class':'form-control'})
 
-#     class Meta:
-#         model = User
-#         fields = ('username','password')
-#         labels = {
-#             'username':'Username',
-#             'password':'Password'
-#         }
-
-# class AccountClassForm(forms.ModelForm):
-#     password = forms.CharField(max_length=60, required=True, label='Password',widget=forms.PasswordInput(attrs={}))
-#     confirm_password = forms.CharField(max_length=60, required=True, label='Confirm-password',widget=forms.PasswordInput(attrs={}))
-#     def __init__(self,*args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.fields['username'].widget.attrs.update({'class':'form-control'})
-#         self.fields['password'].widget.attrs.update({'class':'form-control'})
-#         self.fields['confirm_password'].widget.attrs.update({'class':'form-control'})
-#         self.fields['email'].widget.attrs.update({'class':'form-control'})
-        
-#     class Meta:
-#         model = Accounts
-#         fields = ('username','email','password','confirm_password')
-#         labels = {
-#             'username':'Username',
-#             'password':'Password'
-#         }
-        
-#     def clean(self):
-#         cleaned_data = super().clean()
-#         valpwd = self.cleaned_data['password']
-#         valrpwd = self.cleaned_data['confirm_password']
-#         if valpwd != valrpwd:
-#             raise forms.ValidationError('Password does not match')
 
     
     

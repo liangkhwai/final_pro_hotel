@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,logout,login as auth_login
@@ -11,7 +10,6 @@ from django.contrib import messages
 from django.template import RequestContext, Template
 from django.shortcuts import redirect
 from datetime import date, datetime
-from django.core import serializers
 from django.db.models import Q,Sum
 from django.contrib.auth.decorators import login_required
 

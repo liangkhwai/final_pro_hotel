@@ -1,16 +1,6 @@
-from django.core.validators import FileExtensionValidator
-from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User
 from creditcards.models import CardNumberField,CardExpiryField,SecurityCodeField
-# Create your models here.
-
-# class Accounts(models.Model):
-#     account_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)
-#     type = models.CharField(max_length=255)
-#     email = models.EmailField(max_length=255,blank=True)
-#     username = models.CharField(max_length=255)
-#     password = models.CharField(max_length=255)
 
 class Customer(models.Model):
     cust_id = models.BigAutoField(primary_key=True,auto_created=True,serialize=False)
