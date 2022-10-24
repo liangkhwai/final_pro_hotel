@@ -178,185 +178,211 @@ def editpassword(req,pk):
 
 @login_required
 def addrooms(req):
-    if req.method == 'POST':
-        roomForm = AddRoomsClassForm(req.POST)
-        print(roomForm)
-        if roomForm.is_valid():
-            data = roomForm.cleaned_data
-            room = Rooms()
-            # room.price = data['price']
-            room.description = data['description']
-            room.status = data['status']
-            room.type = data['type']
-            room.save()      
+    if req.user.is_superuser:
+        if req.method == 'POST':
+            roomForm = AddRoomsClassForm(req.POST)
+            print(roomForm)
+            if roomForm.is_valid():
+                data = roomForm.cleaned_data
+                room = Rooms()
+                # room.price = data['price']
+                room.description = data['description']
+                room.status = data['status']
+                room.type = data['type']
+                room.save()      
 
-            print('success add rooms')
-        return HttpResponseRedirect(reverse('home'))
-    roomForm = AddRoomsClassForm()
-    context = {'roomForm':roomForm}
-    return render(req,'rooms/addrooms.html',context)
+                print('success add rooms')
+            return HttpResponseRedirect(reverse('home'))
+        roomForm = AddRoomsClassForm()
+        context = {'roomForm':roomForm}
+        return render(req,'rooms/addrooms.html',context)
+    else:
+        return redirect('home')
 
 @login_required
 def editrooms(req,pk):
-    rooms = Rooms.objects.all().filter(type_id = pk)     
-    type = RoomType.objects.get(type_id = pk)
-    if req.method == 'POST':
-        form = Addroom(req.POST)
-        print(form)
-        
-        if form.is_valid():
-            data = form.cleaned_data
-            room = Rooms() 
-            room.description = data['description']
-            room.status = data['status']
-            room.type = type
-            room.save()
-            return redirect('editrooms',pk=pk)
+    if req.user.is_superuser:
+        rooms = Rooms.objects.all().filter(type_id = pk)     
+        type = RoomType.objects.get(type_id = pk)
+        if req.method == 'POST':
+            form = Addroom(req.POST)
+            print(form)
+            
+            if form.is_valid():
+                data = form.cleaned_data
+                room = Rooms() 
+                room.description = data['description']
+                room.status = data['status']
+                room.type = type
+                room.save()
+                return redirect('editrooms',pk=pk)
+        else:
+            form = Addroom()
+        context = {
+            'form':form,
+            'rooms':rooms
+        }
+        return render(req,'rooms/editrooms.html',context)
     else:
-        form = Addroom()
-    context = {
-        'form':form,
-        'rooms':rooms
-    }
-    return render(req,'rooms/editrooms.html',context)
+        return redirect('home')
 @login_required
 def editroom(req,pk,fk):
-    room = Rooms.objects.get(room_id = fk)
-    if req.method == 'POST':
-        form = Addroom(req.POST,instance=room)
-        # form = AddRoomsClassForm(req.POST,instance=room)
-        if form.is_valid():
-            form.save()
-            return redirect('editrooms',pk=pk)
-    form = Addroom(instance=room)
-    # form = AddRoomsClassForm(instance=room)
-    context = {
-        'form':form,
-        'room':room
-    }
-    return render(req,'rooms/editroom.html',context)
+    if req.user.is_superuser:
+        room = Rooms.objects.get(room_id = fk)
+        if req.method == 'POST':
+            form = Addroom(req.POST,instance=room)
+            # form = AddRoomsClassForm(req.POST,instance=room)
+            if form.is_valid():
+                form.save()
+                return redirect('editrooms',pk=pk)
+        form = Addroom(instance=room)
+        # form = AddRoomsClassForm(instance=room)
+        context = {
+            'form':form,
+            'room':room
+        }
+        return render(req,'rooms/editroom.html',context)
+    else:
+        return redirect('home')
 @login_required
 def deleteroom(req,pk,fk):
-    room = Rooms.objects.get(room_id = pk)
-    room.delete()
-    # return HttpResponseRedirect(reverse('fetchrooms'))
-    return redirect('editrooms',pk=fk)
-
+    if req.user.is_superuser:
+        room = Rooms.objects.get(room_id = pk)
+        room.delete()
+        # return HttpResponseRedirect(reverse('fetchrooms'))
+        return redirect('editrooms',pk=fk)
+    else:
+        return redirect('home')
 @login_required
 def deletetype(req,pk):
-    type = RoomType.objects.get(type_id = pk)
-    type.delete()
-    rooms = Rooms.objects.all().filter(type_id = type)
-    rooms.delete()
-    return HttpResponseRedirect(reverse('fetchrooms'))
-
+    if req.user.is_superuser:
+        type = RoomType.objects.get(type_id = pk)
+        type.delete()
+        rooms = Rooms.objects.all().filter(type_id = type)
+        rooms.delete()
+        return HttpResponseRedirect(reverse('fetchrooms'))
+    else:
+        return redirect('home')
 @login_required
 def addtype(req):
-    if req.method == 'POST':
-        typeForm = AddRoomsTypeForm(req.POST)
-        if typeForm.is_valid():
-            data = typeForm.cleaned_data
-            type = RoomType()
-            type.name = data['name']
-            type.description = data['description']
-            type.price = data['price']
-            type.save()
-            print('success add type')
-        return HttpResponseRedirect(reverse('fetchrooms'))
-    typeForm = AddRoomsTypeForm()
-    context = {'typeForm':typeForm}
-    return render(req,'rooms/addtype.html',context)
+    if req.user.is_superuser:
+        if req.method == 'POST':
+            typeForm = AddRoomsTypeForm(req.POST)
+            if typeForm.is_valid():
+                data = typeForm.cleaned_data
+                type = RoomType()
+                type.name = data['name']
+                type.description = data['description']
+                type.price = data['price']
+                type.save()
+                print('success add type')
+            return HttpResponseRedirect(reverse('fetchrooms'))
+        typeForm = AddRoomsTypeForm()
+        context = {'typeForm':typeForm}
+        return render(req,'rooms/addtype.html',context)
+    else:
+        return redirect('home')
 @login_required
 def edittype(req,pk):
-    type = RoomType.objects.get(type_id = pk)
-    multiimg = MultiImage.objects.all().filter(type = pk)
-    
-    if req.method == 'POST':
-        form = AddRoomsTypeForm(req.POST,instance=type,files=req.FILES)
-        images = req.FILES.getlist('image')
-        # imgg = req.FILES.getlist('imggg')
-        # print(imgg)
-        print(form)
-        if form.is_valid():
-            typeForm = form.save()
-            
-            for i in images:
-                obj_img = MultiImage()
-                obj_img.image = i
-                obj_img.type = typeForm 
-                obj_img.save()
+    if req.user.is_superuser:
+        type = RoomType.objects.get(type_id = pk)
+        multiimg = MultiImage.objects.all().filter(type = pk)
+        
+        if req.method == 'POST':
+            form = AddRoomsTypeForm(req.POST,instance=type,files=req.FILES)
+            images = req.FILES.getlist('image')
+            # imgg = req.FILES.getlist('imggg')
+            # print(imgg)
+            print(form)
+            if form.is_valid():
+                typeForm = form.save()
+                
+                for i in images:
+                    obj_img = MultiImage()
+                    obj_img.image = i
+                    obj_img.type = typeForm 
+                    obj_img.save()
 
-            return redirect('fetchrooms')
+                return redirect('fetchrooms')
+        else:
+            form = AddRoomsTypeForm(instance=type)
+            imgForm = MultiImageForm()
+        context = {
+            'imgForm':imgForm,
+            'multiimg':multiimg,
+            'form':form,
+            'type':type
+        }
+        return render(req,'rooms/edittype.html',context)
     else:
-        form = AddRoomsTypeForm(instance=type)
-        imgForm = MultiImageForm()
-    context = {
-        'imgForm':imgForm,
-        'multiimg':multiimg,
-        'form':form,
-        'type':type
-    }
-    return render(req,'rooms/edittype.html',context)
+        return redirect('home')
 @login_required
 def delMultiImg(req,id,type):
-    img = MultiImage.objects.get(id = id)
-    img.delete()
-    
-    return redirect('edittype',pk=type)
+    if req.user.is_superuser:
+        img = MultiImage.objects.get(id = id)
+        img.delete()
+        
+        return redirect('edittype',pk=type)
+    else:
+        return redirect('home')
 @login_required
 def addanotherimg(req):
-    if req.method == 'POST':
-        images = req.FILES.getlist('image')
-        type = req.POST.get('type')
-        room_type = RoomType.objects.get(type_id = type)
-        for i in images:
-            obj = MultiImage()
-            obj.image = i
-            obj.type = room_type
-            obj.save()
-    return redirect('edittype',pk=room_type.type_id)
-            
+    if req.user.is_superuser:
+        if req.method == 'POST':
+            images = req.FILES.getlist('image')
+            type = req.POST.get('type')
+            room_type = RoomType.objects.get(type_id = type)
+            for i in images:
+                obj = MultiImage()
+                obj.image = i
+                obj.type = room_type
+                obj.save()
+        return redirect('edittype',pk=room_type.type_id)
+    else:
+        return redirect('home')
     
     
     
     
 @login_required
 def fetchrooms(req):
-    type = RoomType.objects.all()
-    if req.method == 'POST':
-        form = AddRoomsTypeForm(req.POST,req.FILES)
-        imagess = req.FILES.getlist('image')
-        print('file : ',req.FILES)
-        print('adsasdsa',imagess)
-        if form.is_valid():
-            data = form.cleaned_data
-            print(data)
-            type_id = form.save()
-            print(type_id)
-            print(imagess)
-            print('ok')
-            for i in imagess:
-                print(i)
-                # MultiImage.objects.create(image = i,type=type_id)
-                obj_pro = MultiImage()
-                obj_pro.image = i
-                obj_pro.type = type_id
-                obj_pro.save()
+    if req.user.is_superuser:
+        type = RoomType.objects.all()
+        if req.method == 'POST':
+            form = AddRoomsTypeForm(req.POST,req.FILES)
+            imagess = req.FILES.getlist('image')
+            print('file : ',req.FILES)
+            print('adsasdsa',imagess)
+            if form.is_valid():
+                data = form.cleaned_data
+                print(data)
+                type_id = form.save()
+                print(type_id)
+                print(imagess)
+                print('ok')
+                for i in imagess:
+                    print(i)
+                    # MultiImage.objects.create(image = i,type=type_id)
+                    obj_pro = MultiImage()
+                    obj_pro.image = i
+                    obj_pro.type = type_id
+                    obj_pro.save()
 
-                print('upload success')
-                # MultiImage.objects.create(image = i,type=type_id)
+                    print('upload success')
+                    # MultiImage.objects.create(image = i,type=type_id)
 
-            return HttpResponseRedirect(reverse('fetchrooms'))
+                return HttpResponseRedirect(reverse('fetchrooms'))
 
-    form = AddRoomsTypeForm()
-    imgForm = MultiImageForm()
-    context = {
-        'type':type,
-        'form':form,
-        'imgForm':imgForm,
-    }
-    return render(req,'rooms/fetchrooms.html',context)
-
+        form = AddRoomsTypeForm()
+        imgForm = MultiImageForm()
+        context = {
+            'type':type,
+            'form':form,
+            'imgForm':imgForm,
+        }
+        return render(req,'rooms/fetchrooms.html',context)
+    else:
+        return redirect('home')
 
 
 
@@ -537,31 +563,35 @@ def notFound(req,exception):
 
 @login_required   
 def transection(req):
-    info = Transaction.objects.all()
-    all_total = Transaction.objects.all().aggregate(Sum('total')) 
-    total = Transaction.objects.filter(status = "ชำระเงินเรียบร้อย").aggregate(Sum('total'))
-    not_total = Transaction.objects.filter(status = "ยังไม่ชำระเงิน").aggregate(Sum('total'))
-    cancle = Transaction.objects.filter(status = "ยกเลิกการจอง").aggregate(Sum('total'))
-    count_paid = Transaction.objects.filter(status = "ชำระเงินเรียบร้อย").count()
-    count_not = Transaction.objects.filter(status = "ยังไม่ชำระเงิน").count()
-    count_cancle = Transaction.objects.filter(status = "ยกเลิกการจอง").count()
-    val = list(total.values())    
-    not_val = list(not_total.values())
-    cancle_total = list(cancle.values())
-    all = list(all_total.values())
-    context = {
-        'count_paid':count_paid,
-        'count_not':count_not,
-        'count_cancle':count_cancle,
-        'cancle':cancle_total[0],
-        'info':info,
-        'total':val[0],
-        'all':all[0],
-        'not': 0 if not not_val[0] >= 0 else not_val[0],
+    if req.user.is_superuser:
+
+        info = Transaction.objects.all()
+        all_total = Transaction.objects.all().aggregate(Sum('total')) 
+        total = Transaction.objects.filter(status = "ชำระเงินเรียบร้อย").aggregate(Sum('total'))
+        not_total = Transaction.objects.filter(status = "ยังไม่ชำระเงิน").aggregate(Sum('total'))
+        cancle = Transaction.objects.filter(status = "ยกเลิกการจอง").aggregate(Sum('total'))
+        count_paid = Transaction.objects.filter(status = "ชำระเงินเรียบร้อย").count()
+        count_not = Transaction.objects.filter(status = "ยังไม่ชำระเงิน").count()
+        count_cancle = Transaction.objects.filter(status = "ยกเลิกการจอง").count()
+        val = list(total.values())    
+        not_val = list(not_total.values())
+        cancle_total = list(cancle.values())
+        all = list(all_total.values())
+        context = {
+            'count_paid':count_paid,
+            'count_not':count_not,
+            'count_cancle':count_cancle,
+            'cancle':cancle_total[0],
+            'info':info,
+            'total':val[0],
+            'all':all[0],
+            'not': 0 if not not_val[0] >= 0 else not_val[0],
+            
+        }
         
-    }
-    
-    return render(req,'transection.html',context)
+        return render(req,'transection.html',context)
+    else:
+        return redirect('home')
 @login_required
 def cancle(req,pk):
 
@@ -589,44 +619,52 @@ def source(req):
 
 @login_required   
 def editmember(req):
+    if req.user.is_superuser:
 
-    member = Customer.objects.all()
-    
-    context = {
-        'member':member,
-    }
-    
-    return render(req,'member/editmember.html',context)
+        member = Customer.objects.all()
+        
+        context = {
+            'member':member,
+        }
+        
+        return render(req,'member/editmember.html',context)
+    else:
+        return redirect('home')
 @login_required
 def editmember_admin(req,pk):
-    member = Customer.objects.get(cust_id=pk)
-    # user = User.objects.get(id = req.session['user'])
-    if req.method == 'POST':
-        member.firstname = req.POST.get('firstname')
-        member.lastname = req.POST.get('lastname')
-        member.age = req.POST.get('age')
-        member.gender = req.POST.get('gender')
-        member.tel = req.POST.get('tel')
-        member.address = req.POST.get('address')
-        # member.account = user
-        member.save()
-        return redirect('editmember')
-    
+    if req.user.is_superuser:
+        member = Customer.objects.get(cust_id=pk)
+        # user = User.objects.get(id = req.session['user'])
+        if req.method == 'POST':
+            member.firstname = req.POST.get('firstname')
+            member.lastname = req.POST.get('lastname')
+            member.age = req.POST.get('age')
+            member.gender = req.POST.get('gender')
+            member.tel = req.POST.get('tel')
+            member.address = req.POST.get('address')
+            # member.account = user
+            member.save()
+            return redirect('editmember')
         
-    else:
-        memberForm = UpdateCustomerForm(instance = member)
+            
+        else:
+            memberForm = UpdateCustomerForm(instance = member)
 
-    context = {
-        'member':member,
-        'memberForm':memberForm,
-        'memDate':str(member.age),
-    }
-    return render(req,'member/editmember_admin.html',context)
+        context = {
+            'member':member,
+            'memberForm':memberForm,
+            'memDate':str(member.age),
+        }
+        return render(req,'member/editmember_admin.html',context)
+    else:
+        return redirect('home')
 @login_required
 def delmember_admin(req,pk):
-    member = User.objects.get(id = pk)
-    member.delete()
+    if req.user.is_superuser:
+        member = User.objects.get(id = pk)
+        member.delete()
 
-    return redirect('editmember')
-
+        return redirect('editmember')
+    else:
+        return redirect('home')
 
